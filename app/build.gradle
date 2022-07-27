@@ -1,0 +1,188 @@
+ plugins{
+    id 'com.android.application'
+     id 'com.google.gms.google-services'
+
+ }
+
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        applicationId "com.gitpro.gitidea"
+        minSdk 27
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
+        resConfigs  'en'
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    packagingOptions{
+        exclude 'AndroidManifest.xml'
+        exclude 'lib/arm64-v8a/libcardioDecider.so'
+        exclude 'lib/arm64-v8a/libcardioRecognizer.so'
+        exclude 'lib/arm64-v8a/libcardioRecognizer_tegra2.so'
+        exclude 'lib/arm64-v8a/libopencv_core.so'
+        exclude 'lib/arm64-v8a/libopencv_imgproc.so'
+        exclude 'lib/armeabi/libcardioDecider.so'
+        exclude 'lib/armeabi-v7a/libcardioDecider.so'
+        exclude 'lib/armeabi-v7a/libcardioRecognizer.so'
+        exclude 'lib/armeabi-v7a/libcardioRecognizer_tegra2.so'
+        exclude 'lib/armeabi-v7a/libopencv_core.so'
+        exclude 'lib/armeabi-v7a/libopencv_imgproc.so'
+        exclude 'lib/mips/libcardioDecider.so'
+        exclude 'lib/x86/libcardioDecider.so'
+        exclude 'lib/x86/libcardioRecognizer.so'
+        exclude 'lib/x86/libcardioRecognizer_tegra2.so'
+        exclude 'lib/x86/libopencv_core.so'
+        exclude 'lib/x86/libopencv_imgproc.so'
+        exclude 'lib/x86_64/libcardioDecider.so'
+        exclude 'lib/x86_64/libcardioRecognizer.so'
+        exclude 'lib/x86_64/libcardioRecognizer_tegra2.so'
+        exclude 'lib/x86_64/libopencv_core.so'
+        exclude 'lib/x86_64/libopencv_imgproc.so'
+    }
+
+
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+    compileOptions {
+        sourceCompatibility sourceCompatibility1
+        targetCompatibility targetCompatibility1
+    }
+    dataBinding.enabled = true
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    //firebase
+    implementation platform('com.google.firebase:firebase-bom:30.1.0')
+    implementation 'com.google.firebase:firebase-firestore:24.1.2'
+    implementation 'com.google.firebase:firebase-storage:20.0.1'
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.firebaseui:firebase-ui-auth:7.2.0'
+    implementation 'com.firebaseui:firebase-ui-database:2.2.0'
+    implementation 'com.google.firebase:firebase-functions:20.1.0'
+    implementation 'com.google.firebase:firebase-messaging:23.0.6'
+
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    //noinspection GradleCompatible
+    implementation("com.android.support:support-emoji:28.0.0")
+
+    //circle image
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    //represent View Pager Dots Indicator
+    implementation 'com.tbuonomo:dotsindicator:4.3'
+
+    //lottie animation views
+    implementation 'com.airbnb.android:lottie:5.0.3'
+
+    //slide activities
+    implementation 'com.r0adkll:slidableactivity:2.1.0'
+
+    //scalable size unit(support for different screen size)
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+    implementation 'com.intuit.ssp:ssp-android:1.0.6'
+
+    implementation 'androidx.core:core-ktx:1.8.0'
+    // image loading dependency
+    implementation 'io.coil-kt:coil:2.1.0'
+
+
+
+    implementation 'com.github.tiper:MaterialSpinner:1.3.3'
+    implementation 'com.wajahatkarim3.EasyFlipView:EasyFlipView:2.1.2'
+
+    implementation 'com.github.bumptech.glide:glide:4.13.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
+    implementation 'com.github.bumptech.glide:annotations:4.13.0'
+    implementation "com.github.bumptech.glide:okhttp3-integration:4.13.0"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
+
+
+//    implementation 'androidx.core:core:1.9.0-alpha04'
+
+
+    //image downloading and caching lib
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    // 2. Use Guava types in your public API:
+    api("com.google.guava:guava:31.1-jre")
+    implementation 'io.github.ponnamkarthik:richlinkpreview:1.0.9'
+    // 3. Android - Use Guava in your implementation only:
+    implementation("com.google.guava:guava:31.1-android")
+
+    // 4. Android - Use Guava types in your public API:
+    api("com.google.guava:guava:31.1-android")
+
+    //gifView
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.24'
+
+    //type-safe HTTP networking library
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    //Jackson : com.squareup.retrofit2:converter-jackson:2.1.0
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.3.0'
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
+
+    //JSoup = read html content
+    implementation'org.jsoup:jsoup:1.13.1'
+    implementation 'com.google.android.gms:play-services-ads:21.1.0'
+
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    implementation "io.reactivex.rxjava3:rxjava:3.1.5"
+
+    //Adding jackson for parser
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.11.1'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.11.1'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.1'
+
+      //custom date,time
+    implementation 'org.ocpsoft.prettytime:prettytime:4.0.4.Final'
+
+    //Adding jackson for parser
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.11.1'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.11.1'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.1'
+
+    // alternatively, just ViewModel
+    implementation "android.arch.lifecycle:viewmodel:1.1.1"
+    // alternatively, just LiveData
+    implementation "android.arch.lifecycle:livedata:1.1.1"
+    //noinspection LifecycleAnnotationProcessorWithJava8
+    annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
+
+    //shimmer layout
+    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
+
+    // material progress dialog
+    implementation 'com.github.thomper:sweet-alert-dialog:v1.4.0'
+
+    //RichLink preview
+    implementation 'com.github.OverflowArchives:AndroidLinkPreviewer:0.01'
+
+}

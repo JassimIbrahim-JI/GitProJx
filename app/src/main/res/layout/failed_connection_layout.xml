@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/_200sdp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/dark_late_gray"
+    android:gravity="center_horizontal"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+
+      <com.airbnb.lottie.LottieAnimationView
+          android:layout_width="@dimen/_100sdp"
+          android:layout_height="@dimen/_100sdp"
+          app:lottie_autoPlay="true"
+          app:lottie_loop="true"
+          android:layout_marginTop="@dimen/_10sdp"
+          app:lottie_rawRes="@raw/connection_failed"
+          />
+
+          <androidx.appcompat.widget.AppCompatButton
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:background="@color/black_soft"
+              android:text="Retry"
+              android:layout_margin="@dimen/_8ssp"
+              android:textAppearance="?attr/textAppearanceHeadline5"
+              android:textColor="@color/pale_grey"
+              android:id="@+id/btn_retry"/>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

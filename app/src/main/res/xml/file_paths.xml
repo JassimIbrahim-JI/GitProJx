@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <files-path name="my_images" path="images/" />
+    <files-path name="content" path="image/" />
+    <files-path name="files" path="." />
+    <files-path name="my_docs" path="docs/"/>
+
+    <external-path name="external_files" path="." />
+    <external-path name="images" path="Pictures" />
+    <external-path name="my_images" path="." />
+    <external-files-path name="images" path="Pictures"/>
+    <external-files-path name="camera_image" path="Pictures/"/>
+    <external-files-path name="my_images" path="my_images" />
+
+</paths>

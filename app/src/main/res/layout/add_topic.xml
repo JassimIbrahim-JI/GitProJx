@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_snacks"
+    tools:context=".activities.TopicActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mtrl_toolbar_default_height"
+        android:id="@+id/appbar"
+        android:background="@color/dark_late_gray">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        app:popupTheme="@style/CustomActionBar"
+        android:theme="@style/CustomActionBar"
+        android:background="@color/fui_transparent"
+        app:layout_scrollFlags="scroll|enterAlways"
+        android:id="@+id/toolbar_addTopic"
+        tools:ignore="PrivateResource">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cancel"
+                android:textSize="@dimen/_14ssp"
+                android:id="@+id/cancel_topic"
+                android:textColor="@color/white"
+             android:layout_gravity="start"/>
+
+           <ProgressBar
+               android:id="@+id/pb_counter"
+               android:layout_width="@dimen/_22sdp"
+               android:layout_height="@dimen/_22sdp"
+               android:layout_gravity="end"
+               android:progress="0"
+               android:max="330"
+               android:indeterminateDuration="330"
+               android:layout_marginEnd="@dimen/_12ssp"
+               style="@style/CircularDeterminateProgressBar"
+               android:interpolator="@android:interpolator/accelerate_decelerate" />
+        <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="end"
+    android:layout_marginEnd="@dimen/_10sdp"
+    android:id="@+id/txt_counter"
+    android:textColor="@color/white"
+    android:textSize="@dimen/_16ssp"/>
+
+    </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/appbar"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:layout_marginStart="5sp"
+        android:layout_marginTop="5sp"
+        android:layout_marginEnd="5sp"
+        android:layout_marginBottom="5sp"
+        android:elevation="8sp"
+        android:scrollIndicators="right"
+        android:verticalScrollbarPosition="right"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="10dp">
+
+        <RelativeLayout
+            android:id="@+id/parent_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/circle_image"
+                android:layout_width="@dimen/_29sdp"
+                android:layout_height="@dimen/_29sdp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="@dimen/_9sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                   />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/container_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/text_topic"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/_50sdp"
+                        android:layout_marginTop="@dimen/_24sdp"
+                        android:layout_marginEnd="@dimen/_28sdp"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="sans-serif"
+                        android:gravity="start"
+                        android:hint="@string/hint_topic"
+                        android:importantForAutofill="auto"
+                        android:inputType="textMultiLine|textNoSuggestions"
+                        android:maxHeight="100dp"
+                        android:maxLength="360"
+                        android:maxLines="10"
+                        android:privateImeOptions="disableSticker=true;disableGifKeyboard=true"
+                        android:scrollbars="vertical"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black_soft"
+                        android:textSize="@dimen/_14sdp"
+                        android:textStyle="bold|italic" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/vg_add_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_20ssp"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal" />
+
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </ScrollView>
+
+
+        </RelativeLayout>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:paddingHorizontal="@dimen/_7sdp"
+            android:paddingVertical="@dimen/_7sdp"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            android:id="@+id/ll_cards">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_record"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_margin="@dimen/_4ssp"
+                app:cardBackgroundColor="@color/dark_late_gray"
+                app:cardCornerRadius="@dimen/_22sdp"
+                app:cardElevation="@dimen/_8sdp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:src="@drawable/ic_voice" />
+
+            </androidx.cardview.widget.CardView>
+
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_pick"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                app:cardBackgroundColor="@color/dark_late_gray"
+                app:cardCornerRadius="@dimen/_22sdp"
+                android:layout_margin="@dimen/_4ssp"
+                app:cardElevation="@dimen/_8sdp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:src="@drawable/ic_pick" />
+
+            </androidx.cardview.widget.CardView>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/share_topic"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="@dimen/_10sdp"
+            app:tint="@color/white"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:src="@drawable/ic_baseline_send_24"
+            android:backgroundTint="@color/dark_late_gray"/>
+
+
+
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

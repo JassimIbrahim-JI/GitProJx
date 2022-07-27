@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomTextView">
+        <attr format="string" name="typeface"/>
+    </declare-styleable>
+
+    <declare-styleable name="RichContentEditText">
+        <attr name="allowedMimeTypes" format="enum">
+            <enum name="none" value="0"/>
+            <enum name="images" value="1"/>
+        </attr>
+    </declare-styleable>
+
+
+    <integer name="anim_length">500</integer>
+    <integer name="anim_length_half">250</integer>
+    <attr name="colorPrimary" format="color">@attr/dark_late_gray2</attr>
+</resources>

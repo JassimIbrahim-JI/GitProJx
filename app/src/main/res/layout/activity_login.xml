@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#556672">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="@dimen/_32sdp"
+        android:layout_height="@dimen/_32sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/_15ssp"
+        android:layout_marginEnd="@dimen/_100sdp"
+        android:id="@+id/logs"
+
+        android:src="@drawable/logos"/>
+
+    <com.gitpro.gitidea.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GitProJx"
+
+        android:layout_marginStart="@dimen/_10ssp"
+        app:typeface="montserrat_bolditalic.ttf"
+        android:layout_marginTop="@dimen/_15ssp"
+        android:textSize="@dimen/_21sdp"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/logs"/>
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/img_view"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_200sdp"
+           app:layout_constraintTop_toBottomOf="@id/logs"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/_10ssp"
+        app:lottie_autoPlay="true"
+
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/splashimg" />
+
+
+    <com.gitpro.gitidea.CustomTextView
+        android:id="@+id/sign_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/img_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="@dimen/_21sdp"
+        android:textColor="@color/white"
+        app:typeface="montserrat_extrabold.ttf"
+        android:text="Sign in with :"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/google_sign"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_40sdp"
+        app:layout_constraintTop_toBottomOf="@id/sign_in"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/google_bg"
+        android:text="Google"
+        android:textSize="@dimen/_16ssp"
+        android:textStyle="italic"
+        android:paddingStart="@dimen/_5sdp"
+        android:textColor="@color/white"
+      android:paddingEnd="@dimen/_35ssp"
+        android:elevation="@dimen/_10ssp"
+        android:drawableStart="@drawable/ic_google"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/_30sdp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/github_sign"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:background="@drawable/github_bg"
+        android:drawableStart="@drawable/ic_github"
+        android:elevation="@dimen/_10ssp"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_35ssp"
+        android:text="Github"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_16ssp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/google_sign"
+        app:layout_constraintVertical_bias="0.091" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

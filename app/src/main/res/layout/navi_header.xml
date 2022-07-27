@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="220dp"
+    android:background="@color/dark_late_gray"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="220dp"
+    android:paddingStart="@dimen/_16sdp"
+    android:paddingEnd="@dimen/_16sdp"
+    android:paddingBottom="20dp"
+    android:gravity="bottom|center_horizontal"
+    android:orientation="vertical">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_header"
+        android:layout_width="70dp"
+
+        android:layout_height="70dp" />
+
+
+        <com.gitpro.gitidea.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+             android:layout_margin="3sp"
+            android:textColor="@color/white"
+            app:typeface="cairo.ttf"
+            android:id="@+id/name_header"
+            android:textSize="@dimen/_17sdp"
+
+            />
+
+
+        <com.gitpro.gitidea.CustomTextView
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+
+            android:layout_margin="3sp"
+            android:textColor="@color/white"
+            app:typeface="cairo.ttf"
+            android:textStyle="bold"
+            android:id="@+id/email_header"
+            android:textSize="@dimen/_15sdp"
+            />
+
+</LinearLayout>
+</RelativeLayout>

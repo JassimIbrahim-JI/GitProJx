@@ -1,0 +1,63 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.GitProJx" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/dark_late_gray</item>
+        <item name="colorPrimaryVariant">@color/light_blue</item>
+        <item name="colorOnPrimary">@color/pale_grey</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorOnSecondary">#6D353232</item>
+        <item name="android:windowBackground">@color/light_gray2</item>
+        <!--ActivityAnimation-->
+        <item name="android:activityOpenEnterAnimation">@anim/open_enter_activity</item>
+        <item name="android:activityOpenExitAnimation">@anim/open_exit_activity</item>
+         <item name="android:activityCloseEnterAnimation">@anim/close_enter_activity</item>
+         <item name="android:activityCloseExitAnimation">@anim/close_exit_activity</item>
+
+        <item name="windowActionBarOverlay">true</item>
+        <item name="android:windowActionBarOverlay">true</item>
+
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">@color/dark_late_gray</item>
+        
+    </style>
+    
+    <style name="CircularDeterminateProgressBar">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/cricle_progress</item>
+        <item name="android:indeterminateDrawable">@drawable/cricle_progress</item>
+    </style>
+    
+
+
+    <style name="Theme.GitProJx.SlidrActivityTheme" >
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/light_gray2</item>
+
+    </style>
+
+    <style parent="" name="SearchView">
+        <item name="editTextColor">@color/black</item>
+        <item name="android:textColorHint">@color/black</item>
+        <item name="android:textSize">18sp</item>
+
+        <item name="tint">@color/light_gray2</item>
+
+    </style>
+
+    <style name="CustomActionBar" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:windowActionBarOverlay">true</item>
+        <!-- Support library compatibility -->
+        <item name="windowActionBarOverlay">true</item>
+    </style>
+
+    <style name="AppThemeFirebaseAuth" parent="android:Theme.Light.NoTitleBar">
+        <item name="windowActionBarOverlay">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+
+</resources>

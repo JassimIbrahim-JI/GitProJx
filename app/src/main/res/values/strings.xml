@@ -1,0 +1,162 @@
+<resources>
+
+
+    <string-array name="state_array">
+        <item>Select States</item>
+        <item>Amman</item>
+        <item>Al-petra</item>
+        <item>Irbid</item>
+        <item>Ajlon</item>
+        <item>Qatar</item>
+        <item>doha</item>
+        <item>Al-khor</item>
+        <item>Izghawa</item>
+        <item>KSA</item>
+        <item>Al-ryadih</item>
+        <item>Makkah</item>
+        <item>Al-madeena</item>
+    </string-array>
+
+    <string-array name="languages">
+        <item>Select project language</item>
+        <item>C#</item>
+        <item>C</item>
+        <item>C++</item>
+        <item>Java</item>
+        <item>JavaScript</item>
+        <item>Kotlin</item>
+        <item>Swift</item>
+        <item>Objective C</item>
+        <item>GO</item>
+        <item>Ruby</item>
+        <item>php</item>
+        <item>Pascal</item>
+        <item>Perl</item>
+        <item>Python</item>
+    </string-array>
+
+    <string-array name="ld_activityScreenTitles">
+        <item>Trending Repositories</item>
+        <item>Trending Developers</item>
+        <item>Android Topics</item>
+        <item>Web Topics</item>
+        <item>Machine Learning</item>
+    </string-array>
+
+    <array name="ld_activityScreenIcons">
+        <item>@drawable/ic_repository</item>
+        <item>@drawable/ic_developers_material_icon</item>
+        <item>@drawable/ic_android_material_icon</item>
+        <item>@drawable/ic_web</item>
+        <item>@drawable/ic_ml_material_icon</item>
+    </array>
+
+
+    <string-array name="default_state">
+        <item>Select States</item>
+    </string-array>
+
+    <string-array name="ksa_state">
+        <item>District</item>
+        <item>Qatar</item>
+        <item>doha</item>
+        <item>Al-khor</item>
+        <item>Izghawa</item>
+    </string-array>
+
+    <string name="number_of_stars">Stars</string>
+    <string name="number_of_forks">Forks</string>
+    <string name="number_of_watch">Watch</string>
+
+    <string name="app_name">GitProJx</string>
+    <string name="appbar_scrolling_view_behavior" translatable="false">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="todo">TODO</string>
+    <string name="cancel">Cancel</string>
+    <string name="hint_topic">What would you like to share ?</string>
+    <string name="add_topic">Add Topic</string>
+
+    <string name="domain">gitproject.auth.com</string>
+    <string name="write_a_comment_here">write a comment here...</string>
+    <string name="delete_topic">deleteTopic</string>
+    <string name="using">Share using:</string>
+    <string name="title_share">"\"GitProJx\" An application for developer community "</string>
+    <string name="sub_title">"Application Link : https://play.google.com/store/apps/details?id=${App.context.getPackageName()}"</string>
+
+    <string name="language">Language</string>
+    <string name="repo_name">Repo name</string>
+    <string name="repo_link">Repository Link</string>
+    <string name="username">Username</string>
+    <string name="profile_link">Profile Link</string>
+    <string name="nodata">No Data</string>
+
+
+
+    <string name="owner_name">Owner Name</string>
+    <string name="home">Home</string>
+    <string name="itemname">Item Name</string>
+    <string name="type">Type</string>
+    <string name="since">Since</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="full_name">Full Name</string>
+    <string name="no_data_message">No data , please refresh</string>
+    <string name="select_your_query">Select your query</string>
+    <string name="trending_machine_learning_libraries_heading">List of trending ML libraries</string>
+
+    <string name="welcome">Welcome</string>
+    <string name="splash_screen_moto">We are so glad that you are here</string>
+    <string name="item_details">Item Details</string>
+    <string name="description">You can build apps with Flutter using any text editor combined with our command-line tools. However, we recommend using one of our editor plugins for an even better experience.</string>
+    <string name="created_at">Created At</string>
+    <string name="updated_at">Updated At</string>
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
+    <string name="welcome_">Welcome ,</string>
+    <string name="popular_repo">Popular Repository Details</string>
+    <string name="no_followers_found">No followers found</string>
+    <string name="no_following_found">No following found</string>
+    <string name="android_list">Android Lists</string>
+    <string name="trending_repositories">Trending Repositories</string>
+    <string name="top_ml_libraries">Top ML Libraries</string>
+    <string name="trending_developers">Trending Developers</string>
+    <string name="web_repositories">Web Repositories</string>
+    <string name="repo_details">Repo Details</string>
+    <string name="the_futures">The Future Leader</string>
+    <string name="question_one">Question 1</string>
+    <string name="asnwer_one">Answer 1</string>
+    <string name="learn_new_facts_in_it_with_us">Learn new facts about IT with us</string>
+    <string name="try_again">Click Here To Try Again</string>
+    <string name="name">Name</string>
+    <string name="sponsor_link">Sponsor Link</string>
+    <string name="no_internet_title">Network Error!</string>
+    <string name="no_internet_message">Please Enable Internet Connection</string>
+    <string name="search_by_username">Search by username</string>
+    <string name="user_type">User Type</string>
+    <string name="enter_username">Enter Username</string>
+    <string name="developer_details">Developer Details</string>
+    <string name="i_am">I am</string>
+    <string name="dummy_number">100</string>
+    <string name="repos">Repos</string>
+    <string name="gists">Gists</string>
+    <string name="_username">\@Username</string>
+    <string name="hireable">Hireable</string>
+    <string name="blog_site">Blog site</string>
+    <string name="organization">Organization</string>
+    <string name="save_the_children">Save The Children</string>
+    <string name="location">Location</string>
+    <string name="dhaka_bangladesh">Dhaka, Bangladesh</string>
+    <string name="test_dot_com">test.com</string>
+    <string name="repo_full_name">Repo full name</string>
+    <string name="dummy_mail">test@gmail.com</string>
+    <string name="date_hint">DD-MM-YYYY</string>
+    <string name="all_repositories">All repositories</string>
+    <string name="tap_to_view_the_answer">Tap to view the answer</string>
+    <string name="rate_us">Rate Us!</string>
+    <string name="rate_this_app_on_play_store">Would you take a moment to rate this app in Play Store?</string>
+    <string name="rate_now">Rate Now</string>
+    <string name="developed_by">Developed By</string>
+    <string name="sakhawat_hossain">Sakhawat Hossain</string>
+    <string name="please_Enable_internet_connection">Please enable internet connection</string>
+    <string name="top_android_topic_list">Top Android Topic List</string>
+
+</resources>

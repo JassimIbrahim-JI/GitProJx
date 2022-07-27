@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:clickable="true"
+    android:focusable="true"
+    android:elevation="20sp"
+    android:layout_margin="@dimen/_8sdp"
+    app:cardCornerRadius="@dimen/_8sdp"
+    app:cardElevation="@dimen/_5ssp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_160sdp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/images"
+            android:id="@+id/featured_img"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:background="@drawable/bg_featured"/>
+
+
+
+        <com.gitpro.gitidea.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:typeface="montserrat_black.ttf"
+            android:text="Title"
+            android:maxLines="1"
+            android:id="@+id/featured_title"
+            android:singleLine="true"
+            android:textSize="18sp"
+            android:textColor="@color/light_gray"
+            android:layout_marginStart="@dimen/_8ssp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/_7ssp"
+            android:paddingVertical="@dimen/_7ssp"
+            android:layout_gravity="bottom">
+
+            <com.gitpro.gitidea.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:typeface="montserrat_semibold.ttf"
+                android:text="Source"
+                android:ems="14"
+                android:id="@+id/source"
+                android:layout_marginEnd="10dp"
+                android:singleLine="true"
+                android:textColor="@color/light_gray"
+                android:textSize="16sp"
+                />
+
+
+            <com.gitpro.gitidea.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:typeface="montserrat_semibold.ttf"
+                android:text="18/02/2022"
+                android:id="@+id/dateSource"
+                android:gravity="end"
+                android:layout_marginEnd="10dp"
+                android:singleLine="true"
+                android:textColor="@color/light_gray"
+                android:textSize="16sp"
+                />
+
+        </LinearLayout>
+
+    </FrameLayout>
+</androidx.cardview.widget.CardView>

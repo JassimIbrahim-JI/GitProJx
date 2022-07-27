@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@android:id/text1"
+    style="?android:attr/spinnerDropDownItemStyle"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:ellipsize="end"
+    android:maxLines="1"
+    android:layout_marginStart="0dp"
+    android:textColor="@color/gray"
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:singleLine="false"
+    app:drawableRightCompat="@drawable/ic_arrow_drop_down" />

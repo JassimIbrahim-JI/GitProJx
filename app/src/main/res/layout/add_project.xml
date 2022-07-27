@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_container"
+    android:orientation="vertical"
+    tools:context=".activities.ProjectActivity">
+
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mtrl_toolbar_default_height"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_scrollFlags="scroll|enterAlways"
+        android:background="@color/dark_late_gray"
+        android:id="@+id/toolbar_project"
+        tools:ignore="PrivateResource">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel"
+            android:textSize="@dimen/_14ssp"
+            android:id="@+id/cancel_project"
+            android:textColor="@color/white"
+            android:layout_gravity="start"/>
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_45ssp"
+    android:layout_margin="@dimen/_8ssp"
+    android:orientation="horizontal"
+    android:background="@drawable/dropdown_list">
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/spinner_languages"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:spinnerMode="dropdown" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:src="@drawable/ic_arrow_drop_down" />
+
+</RelativeLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:errorEnabled="true"
+        android:hint="Project url"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_margin="@dimen/_8sdp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textUri"
+            android:id="@+id/project_url"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_170sdp"
+        app:errorEnabled="true"
+        android:hint="Description"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_margin="@dimen/_8sdp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textMultiLine"
+            android:overScrollMode="always"
+            android:gravity="top"
+            android:id="@+id/project_description"
+            android:maxLines="15"
+            android:maxHeight="@dimen/_500sdp"
+            android:importantForAutofill="auto"
+
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end">
+
+        <TextView
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_30ssp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:gravity="center_horizontal|end"
+            android:layout_marginTop="13sp"
+            android:id="@+id/desc_counter"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16ssp"/>
+
+        <ProgressBar
+            android:id="@+id/pb_counter"
+            android:layout_width="@dimen/_42sdp"
+            android:layout_height="@dimen/_42sdp"
+            android:progress="0"
+            android:max="330"
+            android:indeterminateDuration="330"
+            android:layout_marginEnd="@dimen/_12ssp"
+            style="@style/CircularDeterminateProgressBar"
+            android:interpolator="@android:interpolator/accelerate_decelerate" />
+    </LinearLayout>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="@dimen/_90sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_gravity="end"
+        android:text="Share"
+        android:id="@+id/share_project"
+        android:textColor="@color/white"
+        android:background="@drawable/btn_radius"/>
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:layout_marginTop="@dimen/_8ssp"
+    android:id="@+id/rlThumbail">
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/image_row"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_100sdp"
+        android:background="@drawable/github_bg"
+        android:scaleType="fitXY"
+          android:src="@drawable/detail_home_picture"
+        android:clipToOutline="true"
+        android:visibility="gone"
+        android:outlineProvider="background"
+        android:adjustViewBounds="true"
+        tools:ignore="ImageContrastCheck" />
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/close_content"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="-35dp"
+        android:layout_marginTop="@dimen/_6sdp"
+        android:visibility="gone"
+        android:layout_toEndOf="@id/image_row"
+        android:background="@drawable/bg_close"
+        android:src="@drawable/ic_close" />
+
+
+             <VideoView
+            android:id="@+id/video_row"
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="@dimen/_100sdp"
+             android:visibility="gone"
+            />
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/close_content3"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+               android:layout_toEndOf="@id/video_row"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_marginStart="-30dp"
+                android:background="@drawable/bg_close"
+                android:src="@drawable/ic_close"
+                />
+
+    </RelativeLayout>

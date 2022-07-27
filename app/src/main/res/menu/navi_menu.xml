@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="@layout/navi_header">
+
+
+<group android:checkableBehavior="all">
+
+    <item android:id="@+id/profile_id"
+        android:title="Profile"
+        android:icon="@drawable/ic_baseline_person_24"/>
+
+    <item android:id="@+id/mark_id"
+        android:title="Bookmarks"
+        android:icon="@drawable/ic_bookmark"/>
+
+    <item android:id="@+id/explore_id"
+        android:title="Explore"
+        android:icon="@drawable/ic_baseline_explore_24"/>
+
+    <item android:icon="@drawable/ic_baseline_exit_to_app_24"
+        android:id="@+id/log_out"
+        android:title="Logout"/>
+
+</group>
+
+
+<!--    <item android:title="Others">-->
+<!--  <menu>-->
+
+<!--      <item android:id="@+id/about2_frag"-->
+<!--          android:title="About"-->
+<!--          android:icon="@drawable/ic_button___about"-->
+<!--          app:showAsAction="withText"/>-->
+
+<!--      <item android:id="@+id/collection3_frag"-->
+<!--          android:title="Collection"-->
+<!--          app:showAsAction="withText"-->
+<!--          android:icon="@drawable/ic_baseline_collections_24"/>-->
+
+<!--      <item android:id="@+id/inbox2_frag"-->
+<!--          android:title="Inbox"-->
+<!--          android:icon="@drawable/ic_baseline_inbox_24"-->
+<!--          app:showAsAction="withText"/>-->
+<!--      -->
+<!--  </menu>-->
+<!--    </item>-->
+
+</menu>

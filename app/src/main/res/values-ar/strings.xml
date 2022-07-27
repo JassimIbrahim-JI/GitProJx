@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+
+    <string name="app_name">GitProJx</string>
+    <string name="appbar_scrolling_view_behavior" translatable="false">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="todo">TODO</string>
+    <string name="cancel">Cancel</string>
+    <string name="hint_topic">What would you like to share ?</string>
+    <string name="add_topic">Add Topic</string>
+
+
+    <string name="write_a_comment_here">write a comment here...</string>
+    <string name="delete_topic">deleteTopic</string>
+    <string name="using">Share using:</string>
+    <string name="title_share">"\"GitProJx\" An application for developer community "</string>
+    <string name="sub_title">"Application Link : https://play.google.com/store/apps/details?id=${App.context.getPackageName()}"</string>
+
+</resources>

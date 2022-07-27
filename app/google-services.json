@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "734379588271",
+    "project_id": "gitidea-idea",
+    "storage_bucket": "gitidea-idea.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:734379588271:android:8f6075fb093b524e8ab25a",
+        "android_client_info": {
+          "package_name": "com.gitpro.gitidea"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "734379588271-ha3k45hih6n14e8tfepq7pekk8ue98kl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gitpro.gitidea",
+            "certificate_hash": "f4771c9ee955562721959024d7a0c0fc3acb44f6"
+          }
+        },
+        {
+          "client_id": "734379588271-bci4p2ob8pb2f08nu30up1tbokgmbecc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUa-CxiUQ9-A0TrossOqN2M7jM4-3HAnE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "734379588271-bci4p2ob8pb2f08nu30up1tbokgmbecc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
