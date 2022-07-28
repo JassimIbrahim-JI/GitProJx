@@ -39,9 +39,9 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MainActivity extends AppCompatActivity {
+public class RepoActivity extends AppCompatActivity {
 
-    private static final String TAG = "Shakil::MainActivity";
+    private static final String TAG = "Shakil::RepoActivity";
     public UX ux;
     private ArrayList<Item> androidTopicList;
     private String[] androidFilterList = new String[]{"Select Query","Layouts","Drawing",
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
     //region bind UI components
     private void bindUIWithComponents() {
         //region load first time data
-        if (!hasConnection(MainActivity.this)) {
+        if (!hasConnection(RepoActivity.this)) {
             noDataVisibility(false);
             performServerOperation("android");
         }
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
       refreshList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (hasConnection(MainActivity.this)) {
+                if (hasConnection(RepoActivity.this)) {
                     noDataVisibility(false);
                     androidTopicRecyclerView.setVisibility(View.GONE);
                     performServerOperation("android");
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 String queryString = adapterView.getItemAtPosition(position).toString();
                 if (!queryString.equals("Select Query")) {
-                    if (!hasConnection(MainActivity.this)) {
+                    if (!hasConnection(RepoActivity.this)) {
                         noDataVisibility(false);
                         androidTopicRecyclerView.setVisibility(View.GONE);
                         performServerOperation("android"+queryString);
@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
        backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,ExploreActivity.class));
+                startActivity(new Intent(RepoActivity.this,ExploreActivity.class));
             }
         });
         //endregion
@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
         allTopicAdapter.setOnItemClickListener(new AllTopicAdapter.onItemClickListener() {
             @Override
             public void respond(Item androidItem) {
-                Intent intent = new Intent(MainActivity.this , DetailsActivity.class);
+                Intent intent = new Intent(RepoActivity.this , DetailsActivity.class);
                 intent.putExtra("from","android");
                 intent.putExtra("item", androidItem);
                 startActivity(intent);
@@ -252,7 +252,7 @@ public class MainActivity extends AppCompatActivity {
     //region activity components
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(MainActivity.this, ExploreActivity.class));
+        startActivity(new Intent(RepoActivity.this, ExploreActivity.class));
     }
 
     @Override

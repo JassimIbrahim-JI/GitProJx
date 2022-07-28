@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
@@ -117,6 +116,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_13ssp"
                     app:typeface="montserrat_semibold.ttf" />
+
 
 
                 <com.overflowarchives.linkpreview.SkypePreview
