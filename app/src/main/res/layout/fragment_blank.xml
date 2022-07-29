@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="snap|scroll|exitUntilCollapsed">
+            app:layout_scrollFlags="exitUntilCollapsed">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -69,7 +69,6 @@
                     android:layout_marginTop="14dp"
                     android:layout_marginEnd="28dp"
                     android:layout_marginStart="28dp"
-
                     android:layout_height="wrap_content"
                     android:layout_below="@id/profile_image"
                     android:theme="@style/SearchView"
@@ -86,13 +85,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="146dp"
-        android:id="@+id/refresh_group"
-        app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior">
+        android:id="@+id/refresh_group">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"

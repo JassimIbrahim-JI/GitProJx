@@ -84,7 +84,7 @@ SwipeRefreshLayout swipeRefreshLayout;
 
     public List<Group>initGroupData(){
         groupList=new ArrayList<>();
-        groupList.add(new Group("Top Rated","Discover"));
+        groupList.add(new Group("Repositories","Discover"));
         groupList.add(new Group("News","Explore"));
         return groupList;
     }

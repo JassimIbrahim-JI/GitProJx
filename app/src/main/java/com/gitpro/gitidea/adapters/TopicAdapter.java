@@ -223,6 +223,7 @@ FireStoreQueries.getUser(new FireStoreQueries.FirestoreUsersCallback() {
     @Override
     public void onCallback(User user) {
  DocumentReference reference= db.collection("users").document(user.userId);
+ ArrayList<String>bookList=(ArrayList<String>)user.bookMark;
  bookMark.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
@@ -238,7 +239,6 @@ FireStoreQueries.getUser(new FireStoreQueries.FirestoreUsersCallback() {
                             db.collection("topics/"+topicId+"/books")
                                     .document(userId).set(add);
                             Map<String,Object>books=new HashMap<>();
-                            ArrayList<String>bookList=(ArrayList<String>)user.bookMark;
                             bookList.add(topicId);
                             books.put("bookMark",bookList);
                             reference.update(books);
@@ -253,7 +253,6 @@ FireStoreQueries.getUser(new FireStoreQueries.FirestoreUsersCallback() {
                                     Map<String,Object>remove=new HashMap<>();
                                     ArrayList<String>removeBookItem=(ArrayList<String>)user.bookMark;
                                     removeBookItem.remove(topicId);
-                                    removeBookItem.clear();
                                     remove.put("bookMark",removeBookItem);
                                     reference.update(remove);
                                     isExist=true;

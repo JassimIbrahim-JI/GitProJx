@@ -3,6 +3,8 @@ package com.gitpro.gitidea.adapters;
 import static com.gitpro.gitidea.models.repos.AndroidGitRepository.ALL_TOPICS_BASE_URL;
 
 import android.annotation.SuppressLint;
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +23,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.gitpro.gitidea.CustomTextView;
 import com.gitpro.gitidea.R;
+import com.gitpro.gitidea.activities.DetailsActivity;
+import com.gitpro.gitidea.activities.RepoActivity;
 import com.gitpro.gitidea.models.Articles;
 import com.gitpro.gitidea.models.Group;
 import com.gitpro.gitidea.models.News;
@@ -80,12 +84,13 @@ public class GroupAdapter  extends RecyclerView.Adapter<GroupAdapter.GroupVH> im
        if (modelGroup!=null){
            holder.groupTitle.setText(modelGroup.getGroupTitle());
            holder.groupBtn.setText(modelGroup.getGroupButtonTitle());
-/*
-           if (holder.groupTitle.getText().equals("Topics")){
-             // holder.groupBtn.setOnClickListener(view -> context.startActivity(new Intent(context,FeaturedActivity.class), ActivityOptions.makeSceneTransitionAnimation(context).toBundle()));
+
+           if (holder.groupTitle.getText().equals("Discover")){
+   holder.groupBtn.setOnClickListener(view -> context.startActivity(new Intent(context, RepoActivity.class),
+           ActivityOptions.makeSceneTransitionAnimation(context).toBundle()));
 
            }
-*/
+
        }
 
         holder.setLists(position,holder.groupItems,getCountry(),api);
@@ -208,6 +213,15 @@ public class GroupAdapter  extends RecyclerView.Adapter<GroupAdapter.GroupVH> im
                         recyclerView.setNestedScrollingEnabled(true);
                         recyclerView.setAdapter(allTopicAdapter);
                         allTopicAdapter.notifyDataSetChanged();
+                        allTopicAdapter.setOnItemClickListener(new AllTopicAdapter.onItemClickListener() {
+                            @Override
+                            public void respond(Item androidItem) {
+                                Intent intent = new Intent(context , DetailsActivity.class);
+                                intent.putExtra("from","android");
+                                intent.putExtra("item", androidItem);
+                                context.startActivity(intent);
+                            }
+                        });
 
                     }
                     else {
