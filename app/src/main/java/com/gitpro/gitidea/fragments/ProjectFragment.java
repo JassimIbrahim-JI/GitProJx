@@ -1,6 +1,7 @@
 package com.gitpro.gitidea.fragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,14 +20,16 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.gitpro.gitidea.FireStoreQueries;
 import com.gitpro.gitidea.R;
+import com.gitpro.gitidea.activities.DetailsTopicActivity;
 import com.gitpro.gitidea.adapters.ProjectAdapter;
 import com.gitpro.gitidea.models.Project;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class ProjectFragment extends Fragment {
+public class ProjectFragment extends Fragment implements ProjectAdapter.ItemClickProjectListener{
 
     RecyclerView recyclerView;
     SwipeRefreshLayout refreshLayout;
@@ -71,7 +74,7 @@ public class ProjectFragment extends Fragment {
             public void onCallback(List<Project> projects) {
                 adapter=null;
                 projectList=projects;
-                adapter=new ProjectAdapter(activity,projectList);
+                adapter=new ProjectAdapter(activity,projectList,ProjectFragment.this::onCallBackItem);
                 recyclerView.setLayoutManager(new LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false));
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
@@ -104,4 +107,24 @@ public class ProjectFragment extends Fragment {
     }
 
 
+    @Override
+    public void onCallBackItem(Project project) {
+        addTransitionEffect();
+        Intent intent=new Intent(getActivity(), DetailsTopicActivity.class);
+        Bundle bundle=new Bundle();
+        bundle.putString("usernameP",project.mUser);
+        bundle.putString("descP",project.pDescription);
+        bundle.putString("urlPreview",project.urlPreview);
+        bundle.putString("urlP",project.url);
+        bundle.putString("projectId",project.projectId);
+        bundle.putString("userIdP", ProjectAdapter.userId);
+        bundle.putString("dateP",project.pDate);
+        bundle.putInt("commentNumP", project.commentsNum);
+        bundle.putString("likeNumP", ProjectAdapter.cTag);
+        bundle.putString("ivlikeP", ProjectAdapter.mTag);
+        bundle.putString("ivCommentP",ProjectAdapter.tTag);
+        bundle.putSerializable("commentsP", (Serializable) project.comments);
+        intent.putExtras(bundle);
+        getActivity().startActivity(intent);
+    }
 }

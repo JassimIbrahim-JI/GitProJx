@@ -28,14 +28,8 @@
         android:theme="@style/Theme.GitProJx"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".activities.MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:name=".activities.RepoActivity"
+            android:exported="true"/>
 
         <activity
             android:name=".activities.DetailsActivity"
@@ -50,26 +44,26 @@
             android:exported="true"
             android:theme="@style/Theme.GitProJx.SlidrActivityTheme"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-<!--        <activity-->
-<!--            android:name=".activities.SplashActivity"-->
-<!--            android:exported="true"-->
-<!--            android:hardwareAccelerated="false">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+        <activity
+            android:name=".activities.SplashActivity"
+            android:exported="true"
+            android:hardwareAccelerated="false">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.VIEW" />-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
 
-<!--                <category android:name="android.intent.category.BROWSABLE" />-->
-<!--                <category android:name="android.intent.category.DEFAULT" />-->
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
 
-<!--                <data-->
-<!--                    android:host="@string/domain"-->
-<!--                    android:scheme="https" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
+                <data
+                    android:host="@string/domain"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activities.ExploreActivity"
             android:exported="true"

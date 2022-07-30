@@ -151,7 +151,7 @@ public class DetailsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (getIntent().getStringExtra("from").equals("android")){
-            startActivity(new Intent(DetailsActivity.this, MainActivity.class));
+            startActivity(new Intent(DetailsActivity.this, RepoActivity.class));
         }
 //        else if (getIntent().getStringExtra("from").equals("ml")){
 //            startActivity(new Intent(DetailsActivity.this, MachineLearningActivity.class));

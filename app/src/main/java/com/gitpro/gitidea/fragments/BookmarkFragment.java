@@ -100,8 +100,8 @@ public class BookmarkFragment extends Fragment implements TopicAdapter.mClickLis
                     public void onCallback(ArrayList<Topic> topics) {
                        mTopics = null;
                         mTopics = topics;
-                        ArrayList<String> userKeywords = (ArrayList<String>) mUser.bookMark;
-                        ArrayList<Topic> bookmarkTopics = new ArrayList<>();
+                        List<String> userKeywords = (List<String>) mUser.bookMark;
+                        List<Topic> bookmarkTopics = new ArrayList<>();
                         for (int i = 0; i < userKeywords.size(); i++) {
                             for (int j = 0; j < mTopics.size(); j++) {
                                    if (userKeywords.get(i).contains(topics.get(j).topicId))
