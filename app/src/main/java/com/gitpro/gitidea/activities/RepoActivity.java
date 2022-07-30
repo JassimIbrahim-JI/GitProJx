@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.gitpro.gitidea.R;
 import com.gitpro.gitidea.adapters.AllTopicAdapter;
-import com.gitpro.gitidea.models.repos.AndroidRepoViewModel;
+import com.gitpro.gitidea.models.viewmodels.AndroidRepoViewModel;
 import com.gitpro.gitidea.models.topics.Item;
 import com.gitpro.gitidea.network.UX;
 import com.google.android.gms.ads.AdListener;
@@ -196,7 +196,7 @@ public class RepoActivity extends AppCompatActivity {
         allTopicAdapter.setOnItemClickListener(new AllTopicAdapter.onItemClickListener() {
             @Override
             public void respond(Item androidItem) {
-                Intent intent = new Intent(RepoActivity.this , DetailsActivity.class);
+                Intent intent = new Intent(RepoActivity.this , DetailsRepoActivity.class);
                 intent.putExtra("from","android");
                 intent.putExtra("item", androidItem);
                 startActivity(intent);
