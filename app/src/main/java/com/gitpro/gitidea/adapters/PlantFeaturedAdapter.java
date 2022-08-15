@@ -17,8 +17,14 @@ import com.gitpro.gitidea.CustomTextView;
 import com.gitpro.gitidea.R;
 import com.gitpro.gitidea.models.Articles;
 
+import org.ocpsoft.prettytime.PrettyTime;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class PlantFeaturedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -84,7 +90,7 @@ public class PlantFeaturedAdapter extends RecyclerView.Adapter<RecyclerView.View
 
             vh.fTitle.setText(model.getTitle());
             vh.fSource.setText(model.getSource().getName());
-            vh.fDate.setText(model.getPublishedAt());
+            vh.fDate.setText("\u2022"+vh.dateTime(model.getPublishedAt()));
             Glide.with(vh.itemView.getContext()).load(model.getUrlToImage())
                     .into(vh.fImg);
 
@@ -117,7 +123,23 @@ public class PlantFeaturedAdapter extends RecyclerView.Adapter<RecyclerView.View
             v=itemView;
 
         }
-
+  public String dateTime(String s){
+      PrettyTime time=new PrettyTime(new Locale(country()));
+      String t=null;
+      try {
+          SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:",Locale.ENGLISH);
+          Date date=dateFormat.parse(s);
+          t=time.format(date);
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
+      return t;
+  }
+  public String country(){
+            Locale locale=Locale.getDefault();
+            String c= locale.getCountry();
+            return c.toLowerCase(Locale.ROOT);
+  }
 
     }
 

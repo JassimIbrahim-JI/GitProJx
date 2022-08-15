@@ -1,4 +1,4 @@
-package com.gitpro.gitidea.adapters;
+package com.gitpro.gitidea.fragments;
 
 import android.content.Context;
 
@@ -23,8 +23,19 @@ public class DetailsFragmentPagerAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
+        Fragment fragment;
+        switch (position){
 
-        return null;
+            case 0: fragment=new FollowersFragment();
+                break;
+
+            case 1:  fragment=new FollowingFragment();
+                break;
+
+            default: fragment=new FollowersFragment();
+
+        }
+        return fragment;
     }
 
     @Override

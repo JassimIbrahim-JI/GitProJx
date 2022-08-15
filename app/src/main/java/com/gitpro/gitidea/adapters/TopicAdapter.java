@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,7 +27,7 @@ import com.bumptech.glide.Glide;
 import com.gitpro.gitidea.CustomTextView;
 import com.gitpro.gitidea.FireStoreQueries;
 import com.gitpro.gitidea.R;
-import com.gitpro.gitidea.fragments.BookmarkFragment;
+import com.gitpro.gitidea.fragments.BookmarkTopic;
 import com.gitpro.gitidea.models.Topic;
 import com.gitpro.gitidea.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -70,7 +71,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicImageVH
     public boolean isSelectAll=false;
     public static String userId;
     public mClickListener mClickListener;
-    BookmarkFragment bookFragment = new BookmarkFragment();
+    BookmarkTopic bookFragment = new BookmarkTopic();
     public final ItemClickListener onCallItem;
 
     public interface ItemClickListener{
@@ -219,72 +220,70 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicImageVH
                 });
 
 
-FireStoreQueries.getUser(new FireStoreQueries.FirestoreUsersCallback() {
-    @Override
-    public void onCallback(User user) {
- DocumentReference reference= db.collection("users").document(user.userId);
- ArrayList<String>bookList=(ArrayList<String>)user.bookMark;
- bookMark.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-    isExist=true;
-    db.collection("topics/"+topicId+"/books").document(userId)
-        .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (isExist){
-                        if (!task.getResult().exists()){
-                            Map<String,Object>add=new HashMap<>();
-                            add.put("date",FieldValue.serverTimestamp());
-                            db.collection("topics/"+topicId+"/books")
-                                    .document(userId).set(add);
-                            Map<String,Object>books=new HashMap<>();
-                            bookList.add(topicId);
-                            books.put("bookMark",bookList);
-                            reference.update(books);
-                            isExist=false;
-                        }
-                        else {
-                        db.collection("topics/"+topicId+"/books").document(userId)
-                                .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()){
-                                    Map<String,Object>remove=new HashMap<>();
-                                    ArrayList<String>removeBookItem=(ArrayList<String>)user.bookMark;
-                                    removeBookItem.remove(topicId);
-                                    remove.put("bookMark",removeBookItem);
-                                    reference.update(remove);
-                                    isExist=true;
-                                    }
-                                }
-                            });
-                        }
-                    }//end of exist condition
-                        }
-                     });
-                   }
-                });
-              }
-          });//end of userQuery
-
-                db.collection("topics/"+topicId+"/books").document(userId)
-                        .addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                            @Override
-                            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                                if (error==null){
-                                    if (value.exists()){
-                                        bookMark.setImageResource(R.drawable.ic_bookmark);
-                                        bookMark.setTag("saved");
-                                    }
-                                    else {
-                                        bookMark.setImageResource(R.drawable.ic_bookmark_gery);
-                                        bookMark.setTag("removed");
-                                    }
-                                    bTag=(String) bookMark.getTag();
-                                }
+    FireStoreQueries.getUser(new FireStoreQueries.FirestoreUsersCallback() {
+        @Override
+        public void onCallback(User user) {
+     bookMark.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+        isExist=true;
+        DocumentReference reference=db.collection("users").document(user.userId);
+        db.collection("topics/"+topicId+"/books").document(userId)
+            .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (isExist){
+                            if (!task.getResult().exists()){
+                                Map<String,Object>add=new HashMap<>();
+                                add.put("date",FieldValue.serverTimestamp());
+                                db.collection("topics/"+topicId+"/books")
+                                        .document(userId).set(add);
+                                ArrayList<String>addBookList= (ArrayList<String>) user.bookMark;
+                                addBookList.add(topicId);
+                                Map<String,Object>adds=new HashMap<>();
+                                adds.put("bookMark",addBookList);
+                                Toast.makeText(fActivity,"Added topic to bookmark list",Toast.LENGTH_SHORT).show();
+                                reference.update(adds);
+                                isExist=false;
                             }
-                        });
+                            else {
+                            db.collection("topics/"+topicId+"/books").document(userId)
+                                    .delete();
+                              ArrayList<String>removeBookList= (ArrayList<String>) user.bookMark;
+                                removeBookList.remove(topicId);
+                                Map<String,Object>remove=new HashMap<>();
+                                remove.put("bookMark",removeBookList);
+                               reference.update(remove);
+                            }
+                            isExist=true;
+                        }//end of exist condition
+                            }
+                         });//endPoint onComplete listener
+                       }
+                    });
+                  }
+              });//end of userQuery
+
+
+    db.collection("topics/"+topicId+"/books").document(userId)
+            .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                @Override
+             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (error==null){
+                    if (value.exists()){
+                        bookMark.setImageResource(R.drawable.ic_bookmark);
+                        bookMark.setTag("saved");
+
+                    }
+                    else {
+                        bookMark.setImageResource(R.drawable.ic_bookmark_gery);
+                        bookMark.setTag("removed");
+                    }
+                    bTag=(String) bookMark.getTag();
+                        }
+                    }
+                });
+    ;
 
                 likeContent.setOnClickListener(new View.OnClickListener() {
                     @Override

@@ -9,11 +9,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.gitpro.gitidea.R;
+import com.gitpro.gitidea.fragments.DetailsFragmentPagerAdapter;
+import com.gitpro.gitidea.fragments.FollowersFragment;
+import com.gitpro.gitidea.fragments.FollowingFragment;
 import com.gitpro.gitidea.models.topics.Item;
+import com.google.android.material.tabs.TabLayout;
 
-public class DetailsActivity extends AppCompatActivity {
+public class DetailsRepoActivity extends AppCompatActivity {
 
     private static Item item = null;
     private ImageView backBtn,mNoDataIV;
@@ -64,14 +69,14 @@ public class DetailsActivity extends AppCompatActivity {
         //region get data from intent and perform certain operations
         getData();
         if (item != null){
-            //setViewPager();
+            setViewPager();
             setData();
             if (mNoDataIV.getVisibility() == View.VISIBLE) {
                 mNoDataIV.setVisibility(View.GONE);
             }
         }
         else{
-            Toast.makeText(DetailsActivity.this, "No Item Found",Toast.LENGTH_LONG).show();
+            Toast.makeText(DetailsRepoActivity.this, "No Item Found",Toast.LENGTH_LONG).show();
             if (mNoDataIV.getVisibility() == View.GONE) {
                 mNoDataIV.setVisibility(View.VISIBLE);
             }
@@ -115,53 +120,50 @@ public class DetailsActivity extends AppCompatActivity {
     }
     //endregion
 
-//    //region setup viewpager
-//    private void setViewPager(){
-//        ViewPager2 viewPager = findViewById(R.id.viewpager);
-//        DetailsFragmentPagerAdapter adapter = new DetailsFragmentPagerAdapter(getSupportFragmentManager(), getLifecycle(), item.getFull_name());
-//        TabLayout tabLayout =findViewById(R.id.sliding_tabs);
-//       tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-//           @Override
-//           public void onTabSelected(TabLayout.Tab tab) {
-//               viewPager.setCurrentItem(tab.getPosition());
-//           }
-//
-//           @Override
-//           public void onTabUnselected(TabLayout.Tab tab) {
-//
-//           }
-//
-//           @Override
-//           public void onTabReselected(TabLayout.Tab tab) {
-//
-//           }
-//       });
-//       viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-//           @Override
-//           public void onPageSelected(int position) {
-//               super.onPageSelected(position);
-//               tabLayout.selectTab(tabLayout.getTabAt(position));
-//           }
-//       });
-//        viewPager.setAdapter(adapter);
-//    }
-    //endregion
+    //region setup viewpager
+    private void setViewPager(){
+        ViewPager2 viewPager = findViewById(R.id.viewpager);
+        DetailsFragmentPagerAdapter adapter = new DetailsFragmentPagerAdapter(getSupportFragmentManager(), getLifecycle(), item.getFull_name());
+       adapter.addFragment(new FollowersFragment());
+       adapter.addFragment(new FollowingFragment());
+        TabLayout tabLayout =findViewById(R.id.sliding_tabs);
+        viewPager.setAdapter(adapter);
+       tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+           @Override
+           public void onTabSelected(TabLayout.Tab tab) {
+               viewPager.setCurrentItem(tab.getPosition());
+           }
+
+           @Override
+           public void onTabUnselected(TabLayout.Tab tab) {
+
+           }
+
+           @Override
+           public void onTabReselected(TabLayout.Tab tab) {
+
+           }
+       });
+       viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+           @Override
+           public void onPageSelected(int position) {
+               super.onPageSelected(position);
+               tabLayout.selectTab(tabLayout.getTabAt(position));
+           }
+       });
+    }
+   // endregion
 
     //region activity components
     @Override
     public void onBackPressed() {
         if (getIntent().getStringExtra("from").equals("android")){
-            startActivity(new Intent(DetailsActivity.this, RepoActivity.class));
+            startActivity(new Intent(DetailsRepoActivity.this, RepoActivity.class));
         }
-//        else if (getIntent().getStringExtra("from").equals("ml")){
-//            startActivity(new Intent(DetailsActivity.this, MachineLearningActivity.class));
-//        }
-//        else if (getIntent().getStringExtra("from").equals("web")){
-//            startActivity(new Intent(DetailsActivity.this, WebActivity.class));
-//        }
-//        else if (getIntent().getStringExtra("from").equals("trendingRepositories")){
-//            startActivity(new Intent(DetailsActivity.this, TrendingRepositoriesActivity.class));
-//        }
+        else if (getIntent().getStringExtra("from").equals("Home")) {
+            startActivity(new Intent(DetailsRepoActivity.this, ExploreActivity.class));
+        }
+
     }
     //endregion
 }

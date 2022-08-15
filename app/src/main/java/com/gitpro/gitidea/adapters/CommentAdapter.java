@@ -14,8 +14,9 @@ import com.gitpro.gitidea.R;
 import com.gitpro.gitidea.models.Comment;
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -45,19 +46,12 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     public void onBindViewHolder(@NonNull CommentVH holder, int position) {
         Comment comment= mComment.get(position);
 
-        holder.setCommentTime(getDate());
+        holder.setCommentTime(comment.date);
         holder.setTextComment(comment.comment);
         holder.setUserComment(comment.user);
         holder.setProfileCommentPic(comment.photoProfile);
 
 
-    }
-
-    public String getDate(){
-        Calendar calendar=Calendar.getInstance();
-        @SuppressLint("SimpleDateFormat")
-        SimpleDateFormat dateFormat=new SimpleDateFormat("dd,MM,yyyy");
-        return dateFormat.format(calendar.getTime());
     }
 
     @Override
@@ -72,9 +66,16 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             mView=itemView;
         }
 
+
+        private String getCurrentDate() {
+            long millis = System.currentTimeMillis();
+            Date date = new Date(millis);
+            @SuppressLint("SimpleDateFormat") DateFormat format = new SimpleDateFormat("dd MMMM");
+            return format.format(date);
+        }
         public void setUserComment(String userName){
             TextView userComment=mView.findViewById(R.id.comment_username);
-            userComment.setText("@"+userName+"");
+            userComment.setText("@"+ userName+"");
         }
         public void setProfileCommentPic(String imageURL){
             CircleImageView profileCommentPic=mView.findViewById(R.id.comment_profile_pic);
@@ -86,7 +87,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         }
         public void setCommentTime(String time){
           TextView cTime=mView.findViewById(R.id.comment_time);
-            cTime.setText(time);
+            cTime.setText("\u2022"+time);
         }
 
 

@@ -24,7 +24,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.gitpro.gitidea.FireStoreQueries;
 import com.gitpro.gitidea.R;
-import com.gitpro.gitidea.activities.DetailedActivity;
+import com.gitpro.gitidea.activities.DetailsTopicActivity;
 import com.gitpro.gitidea.adapters.TopicAdapter;
 import com.gitpro.gitidea.models.Topic;
 import com.google.firebase.auth.FirebaseAuth;
@@ -143,7 +143,7 @@ public class TopicFragment extends Fragment implements TopicAdapter.ItemClickLis
     @Override
     public void onCallBackItem(Topic topic) {
         addTransitionEffect();
-        Intent intent=new Intent(getActivity(), DetailedActivity.class);
+        Intent intent=new Intent(getActivity(), DetailsTopicActivity.class);
         Bundle bundle=new Bundle();
         bundle.putString("username",topic.userName);
         bundle.putString("desc",topic.pDescription);
@@ -153,9 +153,9 @@ public class TopicFragment extends Fragment implements TopicAdapter.ItemClickLis
         bundle.putString("userId",TopicAdapter.userId);
         bundle.putString("date",topic.date);
         bundle.putInt("commentNum", topic.commentsNum);
-        bundle.putString("likeNum", TopicAdapter.cTag);
-        bundle.putString("ivlike", TopicAdapter.mTag);
         bundle.putString("ivComment",TopicAdapter.tTag);
+        bundle.putString("ivlike", TopicAdapter.mTag);
+        bundle.putString("likeNum", TopicAdapter.cTag);
         bundle.putSerializable("comments", (Serializable) topic.comments);
         intent.putExtras(bundle);
         getActivity().startActivity(intent);

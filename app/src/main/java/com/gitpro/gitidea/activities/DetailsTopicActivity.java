@@ -1,14 +1,10 @@
 package com.gitpro.gitidea.activities;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -56,9 +52,9 @@ import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class DetailedActivity extends AppCompatActivity{
+public class DetailsTopicActivity extends AppCompatActivity{
 
-public static final String TAG=DetailedActivity.class.getName();
+public static final String TAG= DetailsTopicActivity.class.getName();
 
     Toolbar toolbar;
     RecyclerView commentRecyclerView;
@@ -74,6 +70,7 @@ public static final String TAG=DetailedActivity.class.getName();
     TextView tvDate,tvLike,tvComment;
     AppCompatImageView ivContent,ivLike,ivShare,ivComment;
     String topicId=null;
+
     List<Comment>comments;
     private boolean likeStatus=false;
     @SuppressLint("SetTextI18n")
@@ -82,7 +79,7 @@ public static final String TAG=DetailedActivity.class.getName();
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed);
-        Slidr.attach(DetailedActivity.this);
+        Slidr.attach(DetailsTopicActivity.this);
         attachViews();
         setToolbar();
         readData();
@@ -95,9 +92,7 @@ public static final String TAG=DetailedActivity.class.getName();
 
     }
     public void documents(){
-
-
-        //comments filtering
+        //comments filtering in topic ref
         Query queryFilter=db.collection("topics/"+topicId+"/comments").
                 orderBy("date", Query.Direction.DESCENDING);
         queryFilter.addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -119,9 +114,7 @@ public static final String TAG=DetailedActivity.class.getName();
 
                 }
             }
-        });//end of subCollection comments
-
-
+        });//end of subCollection comments in topics ref
     }
 
     public void readData(){
@@ -153,6 +146,7 @@ public static final String TAG=DetailedActivity.class.getName();
        }
         System.out.println(topicId);
 
+
     }
     public void attachViews(){
         swipeRefreshLayout=findViewById(R.id.refresh_comments);
@@ -173,19 +167,6 @@ public static final String TAG=DetailedActivity.class.getName();
 
     }
     public void listeners(){
-        commentInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    // do something, e.g. set your TextView here via .setText()
-                    InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                    return true;
-                }
-                return false;
-            }
-        });
 
         shareComment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -199,7 +180,7 @@ public static final String TAG=DetailedActivity.class.getName();
                             Map<String, Object> comment = new HashMap<>();
                             comment.put("user", user.userName);
                             comment.put("comment", commentText);
-                            comment.put("date", getCurrentDate());
+                            comment.put("date",getCurrentDate());
                             comment.put("photoProfile", user.photoUrl);
                             db.collection("topics/" + topicId + "/comments").add(comment)
                                     .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
@@ -320,8 +301,8 @@ public static final String TAG=DetailedActivity.class.getName();
     
     public void initComment(){
 
-    commentAdapter=new CommentAdapter(DetailedActivity.this,comments,topicId);
-    commentRecyclerView.setLayoutManager(new LinearLayoutManager(DetailedActivity.this,LinearLayoutManager.VERTICAL,false));
+    commentAdapter=new CommentAdapter(DetailsTopicActivity.this,comments,topicId);
+    commentRecyclerView.setLayoutManager(new LinearLayoutManager(DetailsTopicActivity.this,LinearLayoutManager.VERTICAL,false));
     commentRecyclerView.setHasFixedSize(true);
     commentRecyclerView.setAdapter(commentAdapter);
 

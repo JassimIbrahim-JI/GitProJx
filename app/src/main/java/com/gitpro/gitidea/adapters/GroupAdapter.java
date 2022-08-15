@@ -23,12 +23,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.gitpro.gitidea.CustomTextView;
 import com.gitpro.gitidea.R;
-import com.gitpro.gitidea.activities.DetailsActivity;
+import com.gitpro.gitidea.activities.DetailsRepoActivity;
 import com.gitpro.gitidea.activities.RepoActivity;
 import com.gitpro.gitidea.models.Articles;
 import com.gitpro.gitidea.models.Group;
 import com.gitpro.gitidea.models.News;
-import com.gitpro.gitidea.models.repos.AndroidRepoViewModel;
+import com.gitpro.gitidea.models.viewmodels.AndroidRepoViewModel;
 import com.gitpro.gitidea.models.topics.Item;
 import com.gitpro.gitidea.network.ApiClient;
 
@@ -216,8 +216,8 @@ public class GroupAdapter  extends RecyclerView.Adapter<GroupAdapter.GroupVH> im
                         allTopicAdapter.setOnItemClickListener(new AllTopicAdapter.onItemClickListener() {
                             @Override
                             public void respond(Item androidItem) {
-                                Intent intent = new Intent(context , DetailsActivity.class);
-                                intent.putExtra("from","android");
+                                Intent intent = new Intent(context , DetailsRepoActivity.class);
+                                intent.putExtra("from","Home");
                                 intent.putExtra("item", androidItem);
                                 context.startActivity(intent);
                             }

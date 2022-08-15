@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -11,6 +12,10 @@
         app:cardBackgroundColor="@color/pale_grey"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="7dp"
+        app:cardElevation="@dimen/_4sdp"
+        app:cardCornerRadius="@dimen/_4sdp"
+        android:padding="7dp"
         app:layout_constraintStart_toStartOf="parent"
         android:id="@+id/cards">
 
@@ -18,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_margin="7dp">
+          >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -47,7 +52,7 @@
                     android:textStyle="bold"
                     android:layout_marginTop="@dimen/_7ssp"
                     android:layout_marginEnd="@dimen/_5ssp"
-                    android:textSize="16sp"/>
+                    android:textSize="14sp"/>
 
 
                 <TextView
@@ -55,7 +60,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="viewEnd"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     android:gravity="end" />
@@ -75,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:text="Comment text will display here..."
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"/>
 
             </LinearLayout>
@@ -85,10 +90,12 @@
 </androidx.cardview.widget.CardView>
     <View
         android:layout_width="match_parent"
-        android:layout_height="3sp"
-        android:background="@color/dark_late_gray2"
+        android:layout_height="3dp"
+        android:layout_marginTop="3dp"
+        android:background="@color/dark_late_gray"
         app:layout_constraintTop_toBottomOf="@id/cards"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

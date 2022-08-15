@@ -23,21 +23,20 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.gitpro.gitidea.FireStoreQueries;
 import com.gitpro.gitidea.R;
-import com.gitpro.gitidea.activities.DetailedActivity;
+import com.gitpro.gitidea.activities.DetailsTopicActivity;
 import com.gitpro.gitidea.activities.ExploreActivity;
 import com.gitpro.gitidea.adapters.TopicAdapter;
 import com.gitpro.gitidea.models.Topic;
 import com.gitpro.gitidea.models.User;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookmarkFragment extends Fragment implements TopicAdapter.mClickListener, TopicAdapter.ItemClickListener {
+public class BookmarkTopic extends Fragment implements TopicAdapter.mClickListener, TopicAdapter.ItemClickListener {
 
 
 
-    List<Topic> mTopics = new ArrayList<>();
+    ArrayList<Topic> mTopics;
     RecyclerView mRecyclerViewRecommended;
     RecyclerView.LayoutManager mManger;
     View mView;
@@ -59,20 +58,18 @@ public class BookmarkFragment extends Fragment implements TopicAdapter.mClickLis
 
     }
 
-    public BookmarkFragment(){
+    public BookmarkTopic(){
 
     }
-
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-       mView=inflater.inflate(R.layout.fragment_bookmark,container,false);
+       mView=inflater.inflate(R.layout.fragment_bookmark_topic,container,false);
+        swipeRefreshLayout = mView.findViewById(R.id.refresh_recommended);
 
         firebase_connection();
-
-        swipeRefreshLayout = mView.findViewById(R.id.refresh_recommended);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -100,29 +97,30 @@ public class BookmarkFragment extends Fragment implements TopicAdapter.mClickLis
                     public void onCallback(ArrayList<Topic> topics) {
                        mTopics = null;
                         mTopics = topics;
-                        List<String> userKeywords = (List<String>) mUser.bookMark;
+                        ArrayList<String> userKeywords = (ArrayList<String>) mUser.bookMark;
                         List<Topic> bookmarkTopics = new ArrayList<>();
-                        for (int i = 0; i < userKeywords.size(); i++) {
+                        for (int i = 0; i <userKeywords.size(); i++) {
                             for (int j = 0; j < mTopics.size(); j++) {
-                                   if (userKeywords.get(i).contains(topics.get(j).topicId))
-                                    if (!bookmarkTopics.contains(mTopics.get(j)))
+                                   if (userKeywords.get(i).contains(mTopics.get(j).topicId))
+                                    if (!bookmarkTopics.contains(mTopics.get(j))) {
                                         bookmarkTopics.add(mTopics.get(j));
+                                    }
                             }
                         }
-                        if (bookmarkTopics.size() == 0) {
-                            textView.setVisibility(View.VISIBLE);
-                        }
-                        else {
-                            textView.setVisibility(View.INVISIBLE);
-
-                        }
-
-                        bookmarkAdapter = new TopicAdapter(mActivity,bookmarkTopics,BookmarkFragment.this::onCallBackItem, BookmarkFragment.this::longClick);
+                        bookmarkAdapter = new TopicAdapter(mActivity,bookmarkTopics, BookmarkTopic.this::onCallBackItem, BookmarkTopic.this::longClick);
                         mManger = new LinearLayoutManager(mActivity);
                         mRecyclerViewRecommended = mView.findViewById(R.id.rv_recommended);
                         mRecyclerViewRecommended.setLayoutManager(mManger);
                         mRecyclerViewRecommended.setAdapter(bookmarkAdapter);
                         bookmarkAdapter.notifyDataSetChanged();
+
+
+                        if (bookmarkTopics.size() == 0) {
+                            textView.setVisibility(View.VISIBLE);
+                        }
+                        else {
+                            textView.setVisibility(View.INVISIBLE);
+                        }
 
                         if (swipeRefreshLayout.isRefreshing()) {
                             swipeRefreshLayout.setRefreshing(false);
@@ -171,21 +169,10 @@ public class BookmarkFragment extends Fragment implements TopicAdapter.mClickLis
     @Override
     public void onCallBackItem(Topic topic) {
         addTransitionEffect();
-        Intent intent=new Intent(getActivity(), DetailedActivity.class);
-        Bundle bundle=new Bundle();
-        bundle.putString("username",topic.userName);
-        bundle.putString("desc",topic.pDescription);
-        bundle.putString("image",topic.pImage);
-        bundle.putString("url",topic.imageProfile);
-        bundle.putString("bTopicId",topic.topicId);
-        bundle.putString("date",topic.date);
-        bundle.putInt("commentNum", topic.commentsNum);
-        bundle.putString("likeNum", TopicAdapter.cTag);
-        bundle.putString("ivlike",TopicAdapter.mTag);
-        bundle.putSerializable("comments", (Serializable) topic.comments);
-        intent.putExtras(bundle);
+        Intent intent=new Intent(getActivity(), DetailsTopicActivity.class);
         getActivity().startActivity(intent);
     }
+
     private void addTransitionEffect() {
         Animation animation=new AlphaAnimation(0.3f, 1.0f);
         animation.setDuration(400);

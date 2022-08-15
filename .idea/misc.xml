@@ -21,6 +21,7 @@
         <entry key="..\:/Users/TOSHIBA/AndroidStudioProjects/GitProJx/app/src/main/res/drawable-v24/ic_plant.xml" value="0.1245" />
         <entry key="..\:/Users/TOSHIBA/AndroidStudioProjects/GitProJx/app/src/main/res/drawable-v24/ic_profile.xml" value="0.1245" />
         <entry key="..\:/Users/TOSHIBA/AndroidStudioProjects/GitProJx/app/src/main/res/drawable-v24/ic_spray.xml" value="0.168" />
+        <entry key="..\:/Users/TOSHIBA/AndroidStudioProjects/GitProJx/app/src/main/res/drawable/app_logo.xml" value="0.1665" />
         <entry key="..\:/Users/TOSHIBA/AndroidStudioProjects/GitProJx/app/src/main/res/drawable/bg_button.xml" value="0.1665" />
         <entry key="..\:/Users/TOSHIBA/AndroidStudioProjects/GitProJx/app/src/main/res/drawable/bg_close.xml" value="0.145" />
         <entry key="..\:/Users/TOSHIBA/AndroidStudioProjects/GitProJx/app/src/main/res/drawable/bg_featured.xml" value="0.132" />
@@ -88,8 +89,9 @@
         <entry key="..\:/Users/TOSHIBA/AndroidStudioProjects/GitProJx/app/src/main/res/drawable/thumbnail_background.xml" value="0.1" />
         <entry key="..\:/Users/TOSHIBA/AndroidStudioProjects/GitProJx/app/src/main/res/layout-v28/activity_explore.xml" value="0.14074074074074075" />
         <entry key="..\:/Users/TOSHIBA/AndroidStudioProjects/GitProJx/app/src/main/res/layout-v31/custom_topic1.xml" value="0.25" />
-        <entry key="..\:/Users/TOSHIBA/AndroidStudioProjects/GitProJx/app/src/main/res/layout/activity_detailed.xml" value="0.22" />
+        <entry key="..\:/Users/TOSHIBA/AndroidStudioProjects/GitProJx/app/src/main/res/layout/activity_detailed.xml" value="0.2" />
         <entry key="..\:/Users/TOSHIBA/AndroidStudioProjects/GitProJx/app/src/main/res/layout/activity_details.xml" value="0.22" />
+        <entry key="..\:/Users/TOSHIBA/AndroidStudioProjects/GitProJx/app/src/main/res/layout/activity_details_project_activitiy.xml" value="0.22" />
         <entry key="..\:/Users/TOSHIBA/AndroidStudioProjects/GitProJx/app/src/main/res/layout/activity_explore.xml" value="0.18" />
         <entry key="..\:/Users/TOSHIBA/AndroidStudioProjects/GitProJx/app/src/main/res/layout/activity_featured.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/TOSHIBA/AndroidStudioProjects/GitProJx/app/src/main/res/layout/activity_github.xml" value="0.22" />
@@ -116,6 +118,8 @@
         <entry key="..\:/Users/TOSHIBA/AndroidStudioProjects/GitProJx/app/src/main/res/layout/fragment_about_us.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/TOSHIBA/AndroidStudioProjects/GitProJx/app/src/main/res/layout/fragment_blank.xml" value="0.22" />
         <entry key="..\:/Users/TOSHIBA/AndroidStudioProjects/GitProJx/app/src/main/res/layout/fragment_bookmark.xml" value="0.20102564102564102" />
+        <entry key="..\:/Users/TOSHIBA/AndroidStudioProjects/GitProJx/app/src/main/res/layout/fragment_bookmark_project.xml" value="0.25" />
+        <entry key="..\:/Users/TOSHIBA/AndroidStudioProjects/GitProJx/app/src/main/res/layout/fragment_bookmark_topic.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/TOSHIBA/AndroidStudioProjects/GitProJx/app/src/main/res/layout/fragment_followers.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/TOSHIBA/AndroidStudioProjects/GitProJx/app/src/main/res/layout/fragment_following.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/TOSHIBA/AndroidStudioProjects/GitProJx/app/src/main/res/layout/generic_filter_layout.xml" value="0.20416666666666666" />
