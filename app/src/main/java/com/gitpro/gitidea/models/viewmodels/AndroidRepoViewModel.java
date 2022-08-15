@@ -1,4 +1,4 @@
-package com.gitpro.gitidea.models.repos;
+package com.gitpro.gitidea.models.viewmodels;
 
 import android.app.Application;
 import android.content.Context;
@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.gitpro.gitidea.models.repos.AndroidGitRepository;
 import com.gitpro.gitidea.models.topics.Item;
 
 import java.util.List;

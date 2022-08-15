@@ -10,26 +10,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-<com.google.android.material.appbar.AppBarLayout
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/mtrl_toolbar_default_height"
-    android:id="@+id/bar"
-    android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/mtrl_toolbar_default_height"
+            android:id="@+id/bar"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
-<androidx.appcompat.widget.Toolbar
-    android:id="@+id/detailed_toolbar"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:layout_scrollFlags="enterAlways|scroll"
-    app:title="Replies"
-    app:titleTextColor="@color/white"
-    app:titleMarginStart="@dimen/_90sdp"
-    app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/detailedP_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="enterAlways|scroll"
+                app:title="Replies"
+                app:titleTextColor="@color/white"
+                app:titleMarginStart="@dimen/_90sdp"
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-</com.google.android.material.appbar.AppBarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -81,7 +81,7 @@
                         android:src="@drawable/ic_avatar"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentStart="true"
-                        android:id="@+id/profile_image_detail"
+                        android:id="@+id/profile_image_detailP"
                         android:contentDescription="@string/todo" />
                 </RelativeLayout>
 
@@ -95,25 +95,24 @@
                     android:layout_marginTop="@dimen/_6sdp">
 
                     <com.gitpro.gitidea.CustomTextView
+                        android:id="@+id/detail_nameP"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="John"
-                        app:typeface="roboto.ttf"
-                        android:textSize="@dimen/_15ssp"
-                        android:singleLine="true"
                         android:layout_alignParentTop="true"
-                        android:layout_marginTop="@dimen/_13ssp"
                         android:layout_marginStart="@dimen/_6sdp"
+                        android:layout_marginTop="@dimen/_13ssp"
                         android:maxLength="20"
-                        android:id="@+id/detail_name"
+                        android:singleLine="true"
+                        android:text="John"
                         android:textColor="@color/black"
-                        />
+                        android:textSize="@dimen/_15ssp"
+                        app:typeface="roboto.ttf" />
 
                     <com.gitpro.gitidea.CustomTextView
-                        android:id="@+id/detail_desc"
+                        android:id="@+id/detail_descP"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/detail_name"
+                        android:layout_below="@id/detail_nameP"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentEnd="true"
                         android:layout_marginStart="@dimen/_7ssp"
@@ -122,99 +121,96 @@
                         android:layout_marginBottom="@dimen/_7ssp"
                         android:maxLines="4"
                         android:minHeight="43dp"
-                        android:text="Topic Content"
+                        android:text="Project Content"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12ssp"
                         app:typeface="montserrat_semibold.ttf" />
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/detail_content"
+                    <com.overflowarchives.linkpreview.SkypePreview
+                        android:id="@+id/detail_contentP"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
-                        android:scaleType="fitXY"
-                        android:maxHeight="@dimen/_100sdp"
                         android:clipToOutline="true"
-                       android:layout_alignParentEnd="true"
+                        android:maxHeight="@dimen/_100sdp"
+                        android:layout_alignParentEnd="true"
                         android:layout_alignParentStart="true"
-                        android:layout_marginEnd="@dimen/_8sdp"
-                        android:layout_marginBottom="@dimen/_8sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:layout_below="@id/detail_desc"
+                        android:layout_marginEnd="@dimen/_9sdp"
+                        android:layout_marginStart="@dimen/_9sdp"
+                        android:layout_below="@id/detail_descP"
                         />
 
                     <View
                         android:id="@+id/line"
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
-                        android:background="@color/black"
+                        android:layout_below="@id/detail_contentP"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="@dimen/_10ssp"
                         android:layout_marginTop="4sp"
                         android:layout_marginEnd="@dimen/_10ssp"
-                        android:layout_marginStart="@dimen/_10ssp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_below="@id/detail_content" />
+                        android:background="@color/black" />
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/comment_detail"
+                        android:id="@+id/comment_detailP"
                         android:layout_width="30dp"
                         android:layout_height="20dp"
-                        android:layout_below="@id/detail_content"
+                        android:layout_below="@id/detail_contentP"
                         android:layout_alignParentStart="true"
                         android:layout_marginStart="@dimen/_20sdp"
                         android:layout_marginTop="@dimen/_9sdp"
                         app:srcCompat="@drawable/ic_chat_comment_gray" />
 
                     <com.gitpro.gitidea.CustomTextView
+                        android:id="@+id/comment_num_detailP"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:typeface="roboto.ttf"
-                        android:textColor="@color/black"
-                        android:id="@+id/comment_num_detail"
+                        android:layout_below="@id/detail_contentP"
                         android:layout_marginTop="@dimen/_9sdp"
-                        android:layout_below="@id/detail_content"
-                        android:layout_toEndOf="@id/comment_detail"
-                        />
+                        android:layout_toEndOf="@id/comment_detailP"
+                        android:textColor="@color/black"
+                        app:typeface="roboto.ttf" />
 
 
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/like_detail"
+                        android:id="@+id/like_detailP"
                         android:layout_width="30dp"
                         android:layout_height="20dp"
-                        android:layout_below="@id/detail_content"
+                        android:layout_below="@id/detail_contentP"
                         android:layout_marginTop="@dimen/_9sdp"
                         android:layout_marginStart="@dimen/_60ssp"
-                        android:layout_toEndOf="@id/comment_detail"
+                        android:layout_toEndOf="@id/comment_detailP"
                         app:srcCompat="@drawable/ic_favourite" />
 
 
                     <com.gitpro.gitidea.CustomTextView
-                        android:id="@+id/like_num_detail"
+                        android:id="@+id/like_num_detailP"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         app:typeface="roboto.ttf"
                         android:layout_marginTop="@dimen/_9sdp"
-                        android:layout_below="@id/detail_content"
-                        android:layout_toEndOf="@id/like_detail"
+                        android:layout_below="@id/detail_contentP"
+                        android:layout_toEndOf="@id/like_detailP"
                         />
 
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/share_detail"
+                        android:id="@+id/share_detailP"
                         android:layout_width="30dp"
                         android:layout_height="20dp"
-                        android:layout_below="@id/detail_content"
+                        android:layout_below="@id/detail_contentP"
+                        android:layout_alignParentEnd="true"
                         android:layout_marginTop="@dimen/_9sdp"
                         android:layout_marginEnd="@dimen/_7sdp"
-                        android:layout_alignParentEnd="true"
                         app:srcCompat="@drawable/ic_baseline_share_24" />
 
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_3sdp"
-                        android:layout_below="@id/share_detail"
+                        android:layout_below="@id/share_detailP"
                         android:layout_marginTop="3sp"
                         android:background="@color/pale_grey"/>
                 </RelativeLayout>
@@ -223,16 +219,16 @@
 
 
         <View
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:id="@+id/view1"
-        android:layout_marginTop="@dimen/_30sdp"
-        android:background="@color/black_soft"
-        android:layout_below="@id/cards"
-         />
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:id="@+id/view1"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:background="@color/black_soft"
+            android:layout_below="@id/cards"
+            />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/refresh_comments"
+            android:id="@+id/refresh_commentsP"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/rl_comment"
@@ -250,7 +246,7 @@
                 android:layout_marginTop="5sp">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/comments_list"
+                    android:id="@+id/comments_listP"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:listitem="@layout/all_comments_layout" />
@@ -260,21 +256,22 @@
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <RelativeLayout
-            android:id="@+id/rl_comment"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40ssp"
+            android:background="@drawable/inputs"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="@dimen/_5ssp"
             android:layout_marginEnd="11dp"
             android:layout_marginBottom="@dimen/_5ssp"
-            android:background="@drawable/inputs"
-            android:paddingHorizontal="@dimen/_10ssp">
+            android:paddingHorizontal="@dimen/_10ssp"
+            android:id="@+id/rl_comment">
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/comment_input"
+                android:id="@+id/comment_inputP"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
                 android:layout_marginEnd="18dp"
                 android:layout_toStartOf="@+id/comment_post_button"
                 android:background="@color/fui_transparent"
@@ -286,7 +283,7 @@
                 android:textColorHint="@color/light_gray" />
 
             <ImageView
-                android:id="@+id/comment_post_button"
+                android:id="@+id/comment_post_buttonP"
                 android:layout_width="@dimen/_25ssp"
                 android:layout_height="@dimen/_40ssp"
                 android:layout_alignParentEnd="true"
@@ -297,15 +294,15 @@
 
         </RelativeLayout>
         <com.gitpro.gitidea.CustomTextView
-            android:id="@+id/detail_date"
+            android:id="@+id/detail_dateP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/view1"
-           android:layout_alignParentStart="true"
+            android:layout_alignParentStart="true"
             android:layout_marginStart="@dimen/_6sdp"
             android:layout_marginBottom="@dimen/_8sdp"
             android:maxLength="45"
-           app:typeface="roboto.ttf"
+            app:typeface="roboto.ttf"
             android:textColor="@color/black_soft"
             android:textSize="@dimen/_12ssp" />
 
@@ -317,13 +314,12 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="@dimen/_103sdp"
             android:layout_marginBottom="@dimen/_8sdp"
-            android:text="-Topic shared"
+            android:text="-Project shared"
             android:textColor="#091E6A"
             android:textSize="@dimen/_12ssp"
-            android:textStyle="italic|normal"
             app:typeface="montserrat_medium.ttf" />
 
 
     </RelativeLayout>
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

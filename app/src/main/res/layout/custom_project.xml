@@ -44,22 +44,41 @@
                 android:elevation="20sp"
                 android:layout_marginTop="13dp"
                 android:layout_marginStart="13dp"
-
                 android:id="@+id/parentRelative">
 
                 <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_image_project"
                     android:layout_width="@dimen/_30sdp"
                     android:layout_height="@dimen/_40sdp"
-                    android:src="@drawable/ic_avatar"
-                    android:layout_alignParentTop="true"
                     android:layout_alignParentStart="true"
-                    android:id="@+id/profile_image_project"
-                    android:contentDescription="@string/todo" />
+                    android:layout_alignParentTop="true"
+                    android:contentDescription="@string/todo"
+                    android:src="@drawable/ic_avatar" />
 
             </RelativeLayout>
 
 
-
+            <TextView
+                android:id="@+id/project_lang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/parentRelative"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="start"
+                android:text="Java"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto"
+                android:textSize="@dimen/_14sdp" />
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_3sdp"
+              android:layout_marginTop="@dimen/_1sdp"
+              android:layout_below="@id/project_lang"
+                android:background="@color/dark_late_gray"
+                android:layout_alignStart="@id/project_lang"
+                android:layout_alignEnd="@id/project_lang"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -122,9 +141,9 @@
                 <com.overflowarchives.linkpreview.SkypePreview
                     android:id="@+id/image_content2"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/_100sdp"
                     android:adjustViewBounds="true"
-                    android:clipToOutline="true"
+                    android:background="@drawable/bg_featured"
                     android:maxHeight="@dimen/_100sdp"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentStart="true"
@@ -132,8 +151,6 @@
                     android:layout_marginStart="@dimen/_9sdp"
                     android:layout_below="@id/project_desc2"
                     />
-
-
                 <View
                     android:id="@+id/line"
                     android:layout_width="match_parent"
@@ -198,7 +215,7 @@
                     android:layout_below="@id/image_content2"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_6sdp"
-                   android:layout_toStartOf="@id/share_iic"
+                    android:layout_toStartOf="@id/share_iic"
                     app:srcCompat="@drawable/ic_bookmark_gery" />
 
 

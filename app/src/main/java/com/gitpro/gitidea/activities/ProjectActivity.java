@@ -1,6 +1,6 @@
 package com.gitpro.gitidea.activities;
 
-import android.content.Intent;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,7 +28,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.r0adkll.slidr.Slidr;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class ProjectActivity extends AppCompatActivity {
@@ -118,6 +120,8 @@ public class ProjectActivity extends AppCompatActivity {
                 mProject=new Project(
                         newTopicRef.getId(),
                         user.userName,
+                        items,
+                        getDate(),
                         user.photoUrl,
                         0,
                        urlPreview,
@@ -136,12 +140,20 @@ public class ProjectActivity extends AppCompatActivity {
                     }
                 });
                 if (isValid(urlPreview)){
-                    Intent intent = new Intent(ProjectActivity.this, ExploreActivity.class);
-                    startActivity(intent);
+                    onBackPressed();
                 }
             }
         });
     }
+
+    public String getDate(){
+        Calendar calendar=Calendar.getInstance();
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat dateFormat=new SimpleDateFormat(" k:mm a  yyyy/MM/dd");
+        return dateFormat.format(calendar.getTime());
+
+    }
+
     public static boolean isValid(String url) {
 
         try {

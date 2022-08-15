@@ -227,7 +227,6 @@ dialog.show();
 
     }
 
-
     public void setUsers(){
 
         mFirebaseFirestore = FirebaseFirestore.getInstance();
@@ -236,6 +235,7 @@ dialog.show();
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 List<String> bookmarks = new ArrayList<>();
+                List<String> bookmarks2 = new ArrayList<>();
                 List<String> toursCommentedOn = new ArrayList<>();
                 User mUser;
                 if (queryDocumentSnapshots.isEmpty()) {
@@ -244,6 +244,7 @@ dialog.show();
                             mAuth.getCurrentUser().getEmail(),
                             mAuth.getCurrentUser().getPhotoUrl().toString()+"?height=500",
                             bookmarks,
+                            bookmarks2,
                             toursCommentedOn,
                             newUserReference.getId(),
                             false);

@@ -28,15 +28,16 @@
         android:theme="@style/Theme.GitProJx"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activities.DetailsProjectActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.RepoActivity"
-            android:exported="true"/>
-
+            android:exported="true" />
         <activity
-            android:name=".activities.DetailsActivity"
-            android:exported="true"/>
-
+            android:name=".activities.DetailsRepoActivity"
+            android:exported="true" />
         <activity
-            android:name=".activities.DetailedActivity"
+            android:name=".activities.DetailsTopicActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
@@ -96,8 +97,7 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-5071029187147320~6740297776"/>
-
+            android:value="ca-app-pub-5071029187147320~6740297776" />
     </application>
 
 </manifest>

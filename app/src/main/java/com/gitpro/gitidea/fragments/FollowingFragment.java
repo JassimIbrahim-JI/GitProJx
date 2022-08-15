@@ -35,7 +35,7 @@ import retrofit2.Response;
 public class FollowingFragment  extends Fragment {
 
     private static final FollowersFragment FOLLOWING_FRAGMENT = null;
-    private static String FOLLOWERS_AND_FOLLOWING = "https://api.github.com/users/";
+    private static String FOLLOWERS_AND_FOLLOWING = "https://api.github.com/users/USERNAME/followers";
     private static String username = "";
     private ArrayList<FollowersAndFollowing> followingList;
     private RecyclerView followersRecyclerView;

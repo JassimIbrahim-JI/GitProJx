@@ -9,6 +9,7 @@
         android:layout_height="match_parent"
         android:focusable="true"
         android:focusableInTouchMode="true"
+        android:background="@color/pale_grey"
         tools:context=".activities.details.DetailsActivity">
 
         <LinearLayout
@@ -16,46 +17,47 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
             android:elevation="1dp"
-            android:orientation="horizontal">
+            android:background="@color/dark_late_gray"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
 
             <ImageView
                 android:id="@+id/back_btn"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:layout_marginLeft="10dp"
                 android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:padding="8dp"
                 android:src="@drawable/ic_left_arrow_new"
-                app:tint="@color/md_green_800"
-                android:padding="8dp" />
+                app:tint="@color/white" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/repo_details"
+                android:layout_gravity="center"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="@string/repo_details"
+                android:textColor="@color/white"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/gray"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scrollView"
-            android:layout_below="@id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@id/app_bar"
             android:fillViewport="true">
 
             <LinearLayout
+                android:id="@+id/mainLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/mainLayout"
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
                 android:layout_marginBottom="4dp"
@@ -71,41 +73,42 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/welcome_"
-                        android:textSize="14sp"
                         android:paddingLeft="4dp"
                         android:paddingRight="4dp"
-                        android:textColor="@color/gray"/>
+                        android:text="@string/welcome_"
+                        android:textColor="@color/light_gray"
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/UserName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/username"
-                        android:textSize="16sp"
                         android:paddingLeft="4dp"
                         android:paddingRight="4dp"
-                        android:textStyle="bold"
-                        android:textColor="@color/gray"/>
+                        android:text="@string/username"
+                        android:textColor="@color/light_gray"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardUseCompatPadding="true"
-                    app:cardCornerRadius="8dp"
-                    android:paddingBottom="8dp"
-                    android:layout_marginBottom="8dp"
                     android:layout_marginTop="8dp"
-                    app:cardBackgroundColor="@color/white"
+                    android:layout_marginBottom="8dp"
                     android:elevation="4dp"
-                    android:translationZ="2dp">
+                    android:paddingBottom="8dp"
+                    android:translationZ="2dp"
+                    app:cardBackgroundColor="@color/pale_grey"
+                    app:cardCornerRadius="8dp"
+                    app:cardUseCompatPadding="true">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="4dp"
+                        android:background="@color/pale_grey"
                         android:paddingBottom="8dp">
 
                         <!--Details top layout-->
@@ -118,75 +121,76 @@
                                 android:id="@+id/RepoLink"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="14sp"
+                                android:autoLink="all"
                                 android:clickable="true"
                                 android:foreground="?attr/selectableItemBackgroundBorderless"
-                                android:text="@string/repo_link"
-                                android:autoLink="all"
                                 android:padding="4dp"
-                                android:textColor="@color/gray"/>
+                                android:text="@string/repo_link"
+                                android:textColor="@color/md_cyan_800"
+                                android:textSize="14sp" />
 
                             <TextView
                                 android:id="@+id/Description"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/description"
-                                android:textSize="14sp"
+                                android:layout_below="@id/RepoLink"
                                 android:ellipsize="end"
                                 android:maxLines="2"
                                 android:padding="4dp"
-                                android:layout_below="@id/RepoLink"
-                                android:textColor="@color/gray"/>
+                                android:text="@string/description"
+                                android:textColor="@color/light_gray"
+                                android:textSize="14sp" />
 
                         </RelativeLayout>
 
                         <!--Forks,Watching,Stars and Number of Issue layout-->
                         <LinearLayout
                             android:id="@+id/Section2"
-                            android:layout_below="@id/DetailsTopLayout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
+                            android:layout_below="@id/DetailsTopLayout"
                             android:layout_marginTop="4dp"
                             android:layout_marginBottom="4dp"
+                            android:orientation="horizontal"
                             android:weightSum="3.8">
 
                             <View
                                 android:layout_width="0dp"
-                                android:layout_weight=".2"
-                                android:layout_height="0dp"/>
+                                android:layout_height="0dp"
+                                android:layout_weight=".2" />
 
                             <androidx.cardview.widget.CardView
                                 android:layout_width="0dp"
+                                android:layout_height="wrap_content"
                                 android:layout_weight=".7"
-                                android:translationZ="4dp"
                                 android:clickable="true"
                                 android:foreground="?attr/selectableItemBackgroundBorderless"
-                                android:layout_height="wrap_content"
+                                android:translationZ="4dp"
+                                app:cardBackgroundColor="@color/pale_grey"
                                 app:cardCornerRadius="10dp"
-                                app:cardUseCompatPadding="true"
-                                app:cardBackgroundColor="@color/white">
+                                app:cardUseCompatPadding="true">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_gravity="center"
-                                    android:gravity="center"
                                     android:layout_margin="4dp"
+                                    android:gravity="center"
                                     android:orientation="vertical">
 
                                     <de.hdodenhof.circleimageview.CircleImageView
                                         android:layout_width="28dp"
                                         android:layout_height="28dp"
-                                        android:src="@drawable/ic_code_fork_symbol"/>
+                                        android:src="@drawable/ic_code_fork_symbol" />
+
                                     <TextView
                                         android:id="@+id/NumberOfForks"
-                                        android:textColor="@color/gray"
-                                        android:ellipsize="end"
-                                        android:maxLines="1"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="124"/>
+                                        android:ellipsize="end"
+                                        android:maxLines="1"
+                                        android:text="124"
+                                        android:textColor="@color/gray" />
 
                                 </LinearLayout>
 
@@ -194,40 +198,41 @@
 
                             <View
                                 android:layout_width="0dp"
-                                android:layout_weight=".2"
-                                android:layout_height="0dp"/>
+                                android:layout_height="0dp"
+                                android:layout_weight=".2" />
 
                             <androidx.cardview.widget.CardView
                                 android:layout_width="0dp"
-                                android:layout_weight=".7"
                                 android:layout_height="wrap_content"
-                                app:cardUseCompatPadding="true"
-                                android:translationZ="4dp"
+                                android:layout_weight=".7"
                                 android:clickable="true"
                                 android:foreground="?attr/selectableItemBackgroundBorderless"
+                                android:translationZ="4dp"
+                                app:cardBackgroundColor="@color/pale_grey"
                                 app:cardCornerRadius="10dp"
-                                app:cardBackgroundColor="@color/white">
+                                app:cardUseCompatPadding="true">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_gravity="center"
-                                    android:gravity="center"
                                     android:layout_margin="4dp"
+                                    android:gravity="center"
                                     android:orientation="vertical">
 
                                     <de.hdodenhof.circleimageview.CircleImageView
                                         android:layout_width="28dp"
                                         android:layout_height="28dp"
-                                        android:src="@drawable/ic_watching"/>
+                                        android:src="@drawable/ic_watching" />
+
                                     <TextView
                                         android:id="@+id/NumberOfWatch"
-                                        android:textColor="@color/gray"
-                                        android:ellipsize="end"
-                                        android:maxLines="1"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="324"/>
+                                        android:ellipsize="end"
+                                        android:maxLines="1"
+                                        android:text="324"
+                                        android:textColor="@color/gray" />
 
                                 </LinearLayout>
 
@@ -235,40 +240,41 @@
 
                             <View
                                 android:layout_width="0dp"
-                                android:layout_weight=".2"
-                                android:layout_height="0dp"/>
+                                android:layout_height="0dp"
+                                android:layout_weight=".2" />
 
                             <androidx.cardview.widget.CardView
                                 android:layout_width="0dp"
-                                android:layout_weight=".7"
                                 android:layout_height="wrap_content"
+                                android:layout_weight=".7"
                                 android:clickable="true"
                                 android:foreground="?attr/selectableItemBackgroundBorderless"
                                 android:translationZ="4dp"
+                                app:cardBackgroundColor="@color/pale_grey"
                                 app:cardCornerRadius="10dp"
-                                app:cardUseCompatPadding="true"
-                                app:cardBackgroundColor="@color/white">
+                                app:cardUseCompatPadding="true">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:layout_margin="4dp"
                                     android:layout_gravity="center"
+                                    android:layout_margin="4dp"
                                     android:gravity="center"
                                     android:orientation="vertical">
 
                                     <de.hdodenhof.circleimageview.CircleImageView
                                         android:layout_width="28dp"
                                         android:layout_height="28dp"
-                                        android:src="@drawable/ic_star_new"/>
+                                        android:src="@drawable/ic_star_new" />
+
                                     <TextView
                                         android:id="@+id/NumberOfStars"
-                                        android:textColor="@color/gray"
-                                        android:ellipsize="end"
-                                        android:maxLines="1"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="253"/>
+                                        android:ellipsize="end"
+                                        android:maxLines="1"
+                                        android:text="253"
+                                        android:textColor="@color/gray" />
 
                                 </LinearLayout>
 
@@ -276,40 +282,41 @@
 
                             <View
                                 android:layout_width="0dp"
-                                android:layout_weight=".2"
-                                android:layout_height="0dp"/>
+                                android:layout_height="0dp"
+                                android:layout_weight=".2" />
 
                             <androidx.cardview.widget.CardView
                                 android:layout_width="0dp"
+                                android:layout_height="wrap_content"
                                 android:layout_weight=".7"
                                 android:clickable="true"
                                 android:foreground="?attr/selectableItemBackgroundBorderless"
-                                android:layout_height="wrap_content"
                                 android:translationZ="4dp"
+                                app:cardBackgroundColor="@color/pale_grey"
                                 app:cardCornerRadius="10dp"
-                                app:cardUseCompatPadding="true"
-                                app:cardBackgroundColor="@color/white">
+                                app:cardUseCompatPadding="true">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:layout_margin="4dp"
                                     android:layout_gravity="center"
+                                    android:layout_margin="4dp"
                                     android:gravity="center"
                                     android:orientation="vertical">
 
                                     <de.hdodenhof.circleimageview.CircleImageView
                                         android:layout_width="28dp"
                                         android:layout_height="28dp"
-                                        android:src="@drawable/ic_bug"/>
+                                        android:src="@drawable/ic_bug" />
+
                                     <TextView
                                         android:id="@+id/NumberOfIssues"
-                                        android:textColor="@color/gray"
-                                        android:ellipsize="end"
-                                        android:maxLines="1"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="256"/>
+                                        android:ellipsize="end"
+                                        android:maxLines="1"
+                                        android:text="256"
+                                        android:textColor="@color/gray" />
 
                                 </LinearLayout>
 
@@ -317,8 +324,8 @@
 
                             <View
                                 android:layout_width="0dp"
-                                android:layout_weight=".2"
-                                android:layout_height="0dp"/>
+                                android:layout_height="0dp"
+                                android:layout_weight=".2" />
 
                         </LinearLayout>
 
@@ -327,16 +334,16 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/Section2"
+                            android:baselineAligned="false"
                             android:orientation="horizontal"
                             android:paddingBottom="2dp"
-                            android:weightSum="2"
-                            android:baselineAligned="false">
+                            android:weightSum="2">
 
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1.5"
                                 android:layout_gravity="center"
+                                android:layout_weight="1.5"
                                 android:gravity="center"
                                 android:orientation="vertical">
 
@@ -344,31 +351,31 @@
                                     android:id="@+id/Created_At"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/gray"
-                                    android:textSize="14sp"
                                     android:ellipsize="end"
                                     android:maxLines="1"
                                     android:padding="4dp"
-                                    android:text="@string/created_at"/>
+                                    android:text="@string/created_at"
+                                    android:textColor="@color/gray"
+                                    android:textSize="14sp" />
 
                                 <TextView
                                     android:id="@+id/Updated_At"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/gray"
-                                    android:textSize="14sp"
                                     android:ellipsize="end"
                                     android:maxLines="1"
                                     android:padding="4dp"
-                                    android:text="@string/updated_at"/>
+                                    android:text="@string/updated_at"
+                                    android:textColor="@color/gray"
+                                    android:textSize="14sp" />
 
                             </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight=".5"
                                 android:layout_gravity="center"
+                                android:layout_weight=".5"
                                 android:gravity="center"
                                 android:orientation="vertical">
 
@@ -376,7 +383,7 @@
                                     android:layout_width="32dp"
                                     android:layout_height="32dp"
                                     android:layout_gravity="center"
-                                    android:src="@drawable/ic_language_new_1"/>
+                                    android:src="@drawable/ic_language_new_1" />
 
                                 <TextView
                                     android:id="@+id/Language"
@@ -384,8 +391,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:gravity="center"
-                                    android:textColor="@color/gray"
-                                    android:text="@string/language"/>
+                                    android:text="@string/language"
+                                    android:textColor="@color/gray" />
 
                             </LinearLayout>
 
@@ -399,39 +406,39 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:cardUseCompatPadding="true"
-                    app:cardCornerRadius="8dp"
+                    app:cardElevation="@dimen/_5ssp"
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginBottom="8dp"
-                    android:layout_marginTop="8dp"
-                    app:cardBackgroundColor="@color/white"
-                    android:elevation="4dp"
-                    android:translationZ="2dp">
+                    android:translationZ="2dp"
+                   app:cardBackgroundColor="@color/pale_grey"
+                    app:cardCornerRadius="@dimen/_5sdp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="2dp">
+                        android:layout_margin="2dp"
+                        >
 
                         <LinearLayout
                             android:id="@+id/noDataLayout"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_margin="8dp"
-                            android:visibility="gone"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:visibility="gone">
 
                             <TextView
                                 android:id="@+id/NoDataMessage"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:gravity="center"
-                                android:textColor="@color/soft_red"
-                                android:textSize="18sp"
-                                android:textStyle="bold"
-                                android:padding="8dp"
                                 android:layout_margin="4dp"
-                                android:text="@string/nodata"/>
+                                android:gravity="center"
+                                android:padding="8dp"
+                                android:text="@string/nodata"
+                                android:textColor="@color/red"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
 
                             <ImageView
                                 android:id="@+id/NoDataIV"
@@ -439,7 +446,7 @@
                                 android:layout_height="112dp"
                                 android:layout_gravity="center"
                                 android:padding="8dp"
-                                android:src="@drawable/no_data_found"/>
+                                android:src="@drawable/no_data_found" />
 
                         </LinearLayout>
 
@@ -448,17 +455,33 @@
                             android:id="@+id/sliding_tabs"
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
-                            app:tabSelectedTextColor="@color/gray"
-                            app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
-                            app:tabMode="fixed" />
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="0dp"
+                            app:tabBackground="@color/dark_late_gray"
+                            app:tabIndicatorColor="@color/white"
+                            app:tabMode="fixed"
+                            app:tabTextColor="@color/pale_grey"
+                            app:tabSelectedTextColor="@color/white"
+                            app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget" >
+                            <com.google.android.material.tabs.TabItem
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Followers"/>
 
-                        <androidx.viewpager.widget.ViewPager
+                            <com.google.android.material.tabs.TabItem
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Following"/>
+
+
+                        </com.google.android.material.tabs.TabLayout>
+
+                        <androidx.viewpager2.widget.ViewPager2
                             android:id="@+id/viewpager"
-                            android:layout_below="@id/sliding_tabs"
-                            android:layout_marginBottom="0dp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@android:color/white" />
+                            android:layout_below="@id/sliding_tabs"
+                            android:layout_marginBottom="0dp" />
 
                     </RelativeLayout>
 

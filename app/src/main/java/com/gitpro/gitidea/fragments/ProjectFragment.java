@@ -9,7 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,11 +21,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.gitpro.gitidea.FireStoreQueries;
 import com.gitpro.gitidea.R;
-import com.gitpro.gitidea.activities.DetailsTopicActivity;
+import com.gitpro.gitidea.activities.DetailsProjectActivity;
 import com.gitpro.gitidea.adapters.ProjectAdapter;
 import com.gitpro.gitidea.models.Project;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -31,11 +36,15 @@ import java.util.List;
 
 public class ProjectFragment extends Fragment implements ProjectAdapter.ItemClickProjectListener{
 
-    RecyclerView recyclerView;
+    RecyclerView project_rv;
     SwipeRefreshLayout refreshLayout;
     List<Project> projectList=new ArrayList<>();
     RelativeLayout relativeLayout;
     ProjectAdapter adapter;
+    ShimmerFrameLayout frameLayout;
+    TextView noDataTv;
+    ImageView noDataIm;
+    private FirebaseAuth mAuth;
 
     public ProjectFragment() {
         // Required empty public constructor
@@ -65,25 +74,56 @@ public class ProjectFragment extends Fragment implements ProjectAdapter.ItemClic
 
 
     public void initProjectList(Activity activity, View view){
-        recyclerView=view.findViewById(R.id.project_rv);
+        project_rv =view.findViewById(R.id.project_rv);
         refreshLayout=view.findViewById(R.id.refresh_project);
         relativeLayout=view.findViewById(R.id.project_container);
+        noDataIm=view.findViewById(R.id.no_data_iv_p);
+        noDataTv=view.findViewById(R.id.no_data_tv_p);
+        frameLayout=view.findViewById(R.id.shimmerFrameLayout_fra_project);
+        mAuth=FirebaseAuth.getInstance();
+        frameLayout.setVisibility(View.VISIBLE);
+        frameLayout.startShimmerAnimation();
 
-        FireStoreQueries.getProjects(new FireStoreQueries.FirestoreProjectCallback() {
-            @Override
-            public void onCallback(List<Project> projects) {
-                adapter=null;
-                projectList=projects;
-                adapter=new ProjectAdapter(activity,projectList,ProjectFragment.this::onCallBackItem);
-                recyclerView.setLayoutManager(new LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false));
-                recyclerView.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
+        if (mAuth.getCurrentUser()!=null){
+            FireStoreQueries.getProjects(new FireStoreQueries.FirestoreProjectCallback() {
+                @Override
+                public void onCallback(List<Project> projects) {
+                    frameLayout.setVisibility(View.GONE);
+                    frameLayout.stopShimmerAnimation();
+                    adapter=null;
+                    projectList=projects;
+                    if (projectList!=null) {
+                        adapter = new ProjectAdapter(activity, projectList, ProjectFragment.this::onCallBackItem);
+                        project_rv.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
+                        project_rv.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                      noDataVisibility(false);
+                    }
+                    else {
+                        Toast.makeText(getActivity(), getString(R.string.no_data_message), Toast.LENGTH_LONG).show();
+                        noDataVisibility(true);
+                    }
 
-                if (refreshLayout.isRefreshing()){
-                    refreshLayout.setRefreshing(false);
+                    if (refreshLayout.isRefreshing()){
+                        refreshLayout.setRefreshing(false);
+                    }
                 }
-            }
-        });
+            });
+        }
+    }
+
+    private void noDataVisibility(boolean shouldVisible){
+        if (shouldVisible) {
+            project_rv.setVisibility(View.GONE);
+            frameLayout.setVisibility(View.GONE);
+            frameLayout.stopShimmerAnimation();
+            noDataTv.setVisibility(View.VISIBLE);
+            noDataIm.setVisibility(View.VISIBLE);
+        } else {
+            project_rv.setVisibility(View.VISIBLE);
+            noDataTv.setVisibility(View.GONE);
+            noDataIm.setVisibility(View.GONE);
+        }
     }
 
     private void addTransitionEffect() {
@@ -110,7 +150,7 @@ public class ProjectFragment extends Fragment implements ProjectAdapter.ItemClic
     @Override
     public void onCallBackItem(Project project) {
         addTransitionEffect();
-        Intent intent=new Intent(getActivity(), DetailsTopicActivity.class);
+        Intent intent=new Intent(getActivity(), DetailsProjectActivity.class);
         Bundle bundle=new Bundle();
         bundle.putString("usernameP",project.mUser);
         bundle.putString("descP",project.pDescription);
@@ -120,9 +160,9 @@ public class ProjectFragment extends Fragment implements ProjectAdapter.ItemClic
         bundle.putString("userIdP", ProjectAdapter.userId);
         bundle.putString("dateP",project.pDate);
         bundle.putInt("commentNumP", project.commentsNum);
-        bundle.putString("likeNumP", ProjectAdapter.cTag);
-        bundle.putString("ivlikeP", ProjectAdapter.mTag);
         bundle.putString("ivCommentP",ProjectAdapter.tTag);
+        bundle.putString("ivlikeP", ProjectAdapter.mTag);
+        bundle.putString("likeNumP", ProjectAdapter.cTag);
         bundle.putSerializable("commentsP", (Serializable) project.comments);
         intent.putExtras(bundle);
         getActivity().startActivity(intent);

@@ -30,7 +30,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clipToPadding="false"
-                    tools:listitem="@layout/custom_project"
                     android:isScrollContainer="true"
                     android:scrollIndicators="end"
                     android:scrollbars="vertical"
@@ -40,7 +39,52 @@
         </androidx.core.widget.NestedScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerFrameLayout_fra_project"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/shimmer_placeholder_topic_fragment" />
+
+            <include layout="@layout/shimmer_placeholder_topic_fragment" />
+
+            <include layout="@layout/shimmer_placeholder_topic_fragment" />
+
+            <include layout="@layout/shimmer_placeholder_topic_fragment" />
+
+            <include layout="@layout/shimmer_placeholder_topic_fragment" />
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <TextView
+        android:id="@+id/no_data_tv_p"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:textColor="@color/soft_red"
+        android:textSize="16sp"
+        android:padding="8dp"
+        android:layout_margin="4dp"
+        android:text="@string/nodata"/>
+
+    <ImageView
+        android:id="@+id/no_data_iv_p"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:layout_margin="8dp"
+        android:src="@drawable/no_data_found"/>
 
 
 </RelativeLayout>

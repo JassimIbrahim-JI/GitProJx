@@ -37,7 +37,7 @@ import com.gitpro.gitidea.CustomTextView;
 import com.gitpro.gitidea.FireStoreQueries;
 import com.gitpro.gitidea.R;
 import com.gitpro.gitidea.fragments.AboutUsFragment;
-import com.gitpro.gitidea.fragments.BookmarkFragment;
+import com.gitpro.gitidea.fragments.BookmarkTabs;
 import com.gitpro.gitidea.fragments.HomeFragment;
 import com.gitpro.gitidea.fragments.ProfileFragment;
 import com.gitpro.gitidea.fragments.TabsFragment;
@@ -259,7 +259,7 @@ public class ExploreActivity extends AppCompatActivity implements GoogleApiClien
                 }
                 else {
                     getSupportFragmentManager().beginTransaction().
-                            replace(R.id.fragment_container,new BookmarkFragment(),MARK_FRAGMENT_TAG).commitNow();
+                            replace(R.id.fragment_container,new BookmarkTabs(),MARK_FRAGMENT_TAG).commitNow();
                     appBar.setVisibility(View.GONE);
                 }
 
