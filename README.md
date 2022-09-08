@@ -6,10 +6,11 @@ GitProJx is an  app that enables you to share short, long updates topic and proj
 - [x] An uncompleted project
 - [ ] A completed project
 
-> Tools to build with:
+> Tools and third party api's to build with:
 
 [Firebase Consle] (https://console.firebase.google.com/)<br/>
 [Google Cloud Platform] (https://console.cloud.google.com/)<br/>
 [Retrofit Lib] (https://square.github.io/retrofit/)<br/>
-[news Api] (https://newsapi.org/docs/endpoints/top-headlines)
+[news Api] (https://newsapi.org/docs/endpoints/top-headlines)<br/>
+[github api] (https://docs.github.com/en/rest/repos/repos#get-a-repository)
 
