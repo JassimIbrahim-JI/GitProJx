@@ -47,7 +47,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     List<User>userFilters;
     Context context;
     FirebaseUser firebaseUser;
-    private static FirebaseFirestore db;
+    private static FirebaseFirestore dbFire;
     private boolean isFragment;
 
 
@@ -62,7 +62,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     @Override
     public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
-        db=FirebaseFirestore.getInstance();
+        dbFire =FirebaseFirestore.getInstance();
         return new UserViewHolder(LayoutInflater.from(context).inflate(R.layout.user_item,parent,false));
     }
 
@@ -84,7 +84,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             public void onClick(View view) {
                 String btnStatus=holder.addUser.getText().toString();
                 if (btnStatus.equals("follow+")){
-                    db.collection("users/"+firebaseUser.getUid()+"/followings")
+                    dbFire.collection("users/"+firebaseUser.getUid()+"/followings")
                             .document(user.userId)
                             .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
@@ -92,7 +92,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
                                 if (!task.getResult().exists()) {
                                     Map<String, Object> setValues = new HashMap<>();
                                     setValues.put("date", FieldValue.serverTimestamp());
-                                    db.collection("users/" + firebaseUser.getUid() + "/followings")
+                                    dbFire.collection("users/" + firebaseUser.getUid() + "/followings")
                                             .document(user.userId)
                                             .set(setValues);
                                 }
@@ -101,7 +101,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
                     addNotification(user.userId,user.photoUrl);
 
-                    db.collection("users/" + user.userId + "/followers")
+                    dbFire.collection("users/" + user.userId + "/followers")
                             .document(firebaseUser.getUid())
                             .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
@@ -109,7 +109,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
                             if (!task.getResult().exists()) {
                                 Map<String, Object> setValues = new HashMap<>();
                                 setValues.put("date", FieldValue.serverTimestamp());
-                                db.collection("users/" + user.userId + "/followers")
+                                dbFire.collection("users/" + user.userId + "/followers")
                                         .document(firebaseUser.getUid())
                                         .set(setValues);
                             }
@@ -118,10 +118,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
                 }
                 else {
-                        db.collection("users/" + firebaseUser.getUid() + "/followings")
+                        dbFire.collection("users/" + firebaseUser.getUid() + "/followings")
                                 .document(user.userId)
                                 .delete();
-                        db.collection("users/" + user.userId + "/followers")
+                        dbFire.collection("users/" + user.userId + "/followers")
                                 .document(firebaseUser.getUid())
                                 .delete();
                 }
@@ -202,7 +202,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         }
     }
     private void isFollowing(final String userId, AppCompatButton compatButton) {
-        DocumentReference userRef = db.collection("users/" + firebaseUser.getUid() + "/followings")
+        DocumentReference userRef = dbFire.collection("users/" + firebaseUser.getUid() + "/followings")
                 .document(userId);
         userRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
@@ -219,7 +219,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         });
     }
     private void addNotification(String userId,String photoUrl) {
-        DocumentReference notificationRef=db.collection("notifications")
+        DocumentReference notificationRef= dbFire.collection("notifications")
                 .document(userId);
         Notification notification=new Notification(firebaseUser.getUid(),photoUrl,"started following you..",
                 "","",false,false);

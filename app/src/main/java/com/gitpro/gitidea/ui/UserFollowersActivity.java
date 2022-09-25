@@ -28,7 +28,7 @@ public class UserFollowersActivity extends AppCompatActivity {
    private UserAdapter userAdapter;
     private List<User> mUsers;
     private FirebaseFirestore db;
-    RecyclerView recyclerView;
+    RecyclerView following_rv;
     List<String>idList;
     String id,title;
 
@@ -54,12 +54,12 @@ public class UserFollowersActivity extends AppCompatActivity {
             }
         });
 
-        recyclerView = findViewById(R.id.followers_rv);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        following_rv = findViewById(R.id.followers_rv);
+        following_rv.setHasFixedSize(true);
+        following_rv.setLayoutManager(new LinearLayoutManager(this));
         mUsers = new ArrayList<>();
         userAdapter = new UserAdapter( mUsers, this,false);
-        recyclerView.setAdapter(userAdapter);
+        following_rv.setAdapter(userAdapter);
 
         idList = new ArrayList<>();
 
