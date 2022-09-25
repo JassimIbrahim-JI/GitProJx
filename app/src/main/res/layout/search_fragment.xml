@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_60sdp"
+        android:fitsSystemWindows="true"
+        android:id="@+id/barw"
+        android:background="@drawable/bg_shape">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapse_tool"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="exitUntilCollapsed">
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/user_search"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_below="@id/view_f"
+
+                android:layout_marginStart="@dimen/_18ssp"
+                 android:layout_marginTop="@dimen/_10ssp"
+                android:layout_marginEnd="@dimen/_18ssp"
+                android:background="@drawable/bg_search"
+                android:elevation="8sp"
+                android:theme="@style/SearchView"
+                app:iconifiedByDefault="true"
+                app:queryBackground="@android:color/transparent" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/search_rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/barw"
+        android:layout_marginTop="@dimen/_6ssp"
+        tools:listitem="@layout/user_item" />
+
+</RelativeLayout>
