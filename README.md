@@ -18,7 +18,8 @@ GitProJx is an  app that enables you to share short, long updates topic and proj
 ---
 
 > Independencies
--  //scalable size unit(support for different screen size)<br/>
+
+-  *scalable size unit(support for different screen size)<br/>*
     implementation 'com.intuit.sdp:sdp-android:1.0.6'<br/>
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
 
