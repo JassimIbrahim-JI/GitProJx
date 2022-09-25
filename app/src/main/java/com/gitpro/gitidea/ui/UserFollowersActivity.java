@@ -27,7 +27,7 @@ public class UserFollowersActivity extends AppCompatActivity {
 
    private UserAdapter userAdapter;
     private List<User> mUsers;
-    private FirebaseFirestore db;
+    private FirebaseFirestore dbFire;
     RecyclerView following_rv;
     List<String>idList;
     String id,title;
@@ -37,7 +37,7 @@ public class UserFollowersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_followers);
 
-        db =FirebaseFirestore.getInstance();
+        dbFire =FirebaseFirestore.getInstance();
         Intent intent = getIntent();
         id = intent.getStringExtra("userId");
         title = intent.getStringExtra("tag");
@@ -77,7 +77,7 @@ public class UserFollowersActivity extends AppCompatActivity {
 
     private void getFollowers() {
 
-        db.collection("users/"+id+"/followers")
+        dbFire.collection("users/"+id+"/followers")
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -93,7 +93,7 @@ public class UserFollowersActivity extends AppCompatActivity {
 
     private void getFollowings() {
 
-        db.collection("users/"+id+"/followings")
+        dbFire.collection("users/"+id+"/followings")
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -108,7 +108,7 @@ public class UserFollowersActivity extends AppCompatActivity {
     }
 
     private void showUsers() {
-        db.collection("users")
+        dbFire.collection("users")
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
