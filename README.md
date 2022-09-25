@@ -71,7 +71,7 @@ GitProJx is an  app that enables you to share short, long updates topic and proj
     
     ---
     
-    ## bottomNavigationViewBar Items '*fragments*'(Discover,Topic,Notification,Search)
+      ## bottomNavigationViewBar Items *'fragments'* (Discover,Topic,Notification,Search)
      <p float="right">
     <img src= "https://user-images.githubusercontent.com/107422911/192141616-bdf2fac1-92f7-492e-b34a-0c867add085a.png" width="200" height="350" />
     <img src= "https://user-images.githubusercontent.com/107422911/192141645-745faf65-21cd-44de-8fba-7c5d4c15b279.png" width="200" height="350" />
@@ -89,7 +89,7 @@ GitProJx is an  app that enables you to share short, long updates topic and proj
     
     ---
     
-    ## Topic & Project Activities
+      ## Topic & Project Activities
     <p float=right>
     <img src="https://user-images.githubusercontent.com/107422911/192142227-4ef75fc8-1ab7-41b2-9518-0ae87ab8cb8a.png" width="200" height="350" />
     <img src="https://user-images.githubusercontent.com/107422911/192142266-b7f682cd-910e-404a-a626-d8a7b24ebbc7.png" width="200" height="350" />
