@@ -10,7 +10,12 @@ GitProJx is an  app that enables you to share short, long updates topic and proj
 
 [Firebase Consle] (https://console.firebase.google.com/)<br/>
 [Google Cloud Platform] (https://console.cloud.google.com/)<br/>
-[Retrofit Lib] (https://square.github.io/retrofit/)<br/>
+[Retrofit] (https://square.github.io/retrofit/)<br/>
 [news Api] (https://newsapi.org/docs/endpoints/top-headlines)<br/>
 [github api] (https://docs.github.com/en/rest/repos/repos#get-a-repository)
+[google AdMob] (https://admob.google.com/home/get-started/)
+
+
+> Independencies
+
 
