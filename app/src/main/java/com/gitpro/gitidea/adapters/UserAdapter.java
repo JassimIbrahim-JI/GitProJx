@@ -46,7 +46,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     List<User>uList;
     List<User>userFilters;
     Context context;
-    FirebaseUser firebaseUser;
+    FirebaseUser mUser;
     private static FirebaseFirestore dbFire;
     private boolean isFragment;
 
@@ -61,7 +61,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     @NonNull
     @Override
     public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
+        mUser = FirebaseAuth.getInstance().getCurrentUser();
         dbFire =FirebaseFirestore.getInstance();
         return new UserViewHolder(LayoutInflater.from(context).inflate(R.layout.user_item,parent,false));
     }
@@ -75,7 +75,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         Picasso.get().load(user.photoUrl)
                 .noPlaceholder().into(holder.imageUrl);
            isFollowing(user.userId,holder.addUser);
-        if (user.userId.equals(firebaseUser.getUid())){
+        if (user.userId.equals(mUser.getUid())){
             holder.addUser.setVisibility(View.GONE);
         }
 
@@ -84,7 +84,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             public void onClick(View view) {
                 String btnStatus=holder.addUser.getText().toString();
                 if (btnStatus.equals("follow+")){
-                    dbFire.collection("users/"+firebaseUser.getUid()+"/followings")
+                    dbFire.collection("users/"+ mUser.getUid()+"/followings")
                             .document(user.userId)
                             .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
@@ -92,7 +92,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
                                 if (!task.getResult().exists()) {
                                     Map<String, Object> setValues = new HashMap<>();
                                     setValues.put("date", FieldValue.serverTimestamp());
-                                    dbFire.collection("users/" + firebaseUser.getUid() + "/followings")
+                                    dbFire.collection("users/" + mUser.getUid() + "/followings")
                                             .document(user.userId)
                                             .set(setValues);
                                 }
@@ -102,7 +102,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
                     addNotification(user.userId,user.photoUrl);
 
                     dbFire.collection("users/" + user.userId + "/followers")
-                            .document(firebaseUser.getUid())
+                            .document(mUser.getUid())
                             .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -110,7 +110,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
                                 Map<String, Object> setValues = new HashMap<>();
                                 setValues.put("date", FieldValue.serverTimestamp());
                                 dbFire.collection("users/" + user.userId + "/followers")
-                                        .document(firebaseUser.getUid())
+                                        .document(mUser.getUid())
                                         .set(setValues);
                             }
                         }
@@ -118,11 +118,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
                 }
                 else {
-                        dbFire.collection("users/" + firebaseUser.getUid() + "/followings")
+                        dbFire.collection("users/" + mUser.getUid() + "/followings")
                                 .document(user.userId)
                                 .delete();
                         dbFire.collection("users/" + user.userId + "/followers")
-                                .document(firebaseUser.getUid())
+                                .document(mUser.getUid())
                                 .delete();
                 }
             }
@@ -202,7 +202,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         }
     }
     private void isFollowing(final String userId, AppCompatButton compatButton) {
-        DocumentReference userRef = dbFire.collection("users/" + firebaseUser.getUid() + "/followings")
+        DocumentReference userRef = dbFire.collection("users/" + mUser.getUid() + "/followings")
                 .document(userId);
         userRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
@@ -221,7 +221,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     private void addNotification(String userId,String photoUrl) {
         DocumentReference notificationRef= dbFire.collection("notifications")
                 .document(userId);
-        Notification notification=new Notification(firebaseUser.getUid(),photoUrl,"started following you..",
+        Notification notification=new Notification(mUser.getUid(),photoUrl,"started following you..",
                 "","",false,false);
 
         notificationRef.set(notification);
