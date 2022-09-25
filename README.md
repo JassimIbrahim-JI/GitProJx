@@ -61,14 +61,16 @@ GitProJx is an  app that enables you to share short, long updates topic and proj
     
     
     # App Content
+       ## Login Activity & Explore Activity 
     <p float="left">
-    ## Login Activity & Explore Activity 
     <img src= "https://user-images.githubusercontent.com/107422911/192141393-7890e10d-5e22-4787-8ece-d95f00a0db30.png" width="200" height="350" />
     <img src= "https://user-images.githubusercontent.com/107422911/192141504-4edf18e2-0104-4148-9efd-51fbedf305b6.png" width="200" height="300" />
     <img src= "https://user-images.githubusercontent.com/107422911/192141570-7337c082-2a05-4b21-beeb-624e72d890b9.png" width="200" height="350" />
     <img src= "https://user-images.githubusercontent.com/107422911/192141581-5e1b53a3-3079-4caa-9a2c-81723efc96ed.png" width="200" height="350" />
     </p>
     ---
+    
+    ## bottomNavigationViewBar Items(*'fragments'*)(Discover,Topic,Notification,Search)
      <p float="right">
     <img src= "https://user-images.githubusercontent.com/107422911/192141616-bdf2fac1-92f7-492e-b34a-0c867add085a.png" width="200" height="300" />
     <img src= "https://user-images.githubusercontent.com/107422911/192141645-745faf65-21cd-44de-8fba-7c5d4c15b279.png" width="200" height="300" />
