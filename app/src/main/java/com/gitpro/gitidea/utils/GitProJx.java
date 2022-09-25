@@ -12,7 +12,6 @@ import com.gitpro.gitidea.BuildConfig;
 import java.security.cert.Certificate;
 
 public class GitProJx extends Application {
-
     public GitProJx(){
         if (BuildConfig.DEBUG){
             StrictMode.enableDefaults();
@@ -23,6 +22,8 @@ public class GitProJx extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+
         FontRequest fontRequest = new FontRequest(
                 "com.gitpro.gitidea.fontprovider",
                 "com.gitpro.gitidea",

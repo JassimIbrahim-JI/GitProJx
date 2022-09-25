@@ -16,18 +16,20 @@ public class Topic implements Serializable {
     public  String pImage;
     public int commentsNum;
     public int numOfPeopleWhoLiked;
+    public String publisherBy;
     @Exclude
     public String topicId;
     @SerializedName("comments")
     public List<Comment> comments;
 
-    public Topic(String userName, String pDescription, String imageProfile, String pImage, int commentsNum, int numOfPeopleWhoLiked, String topicId, List<Comment>comments,String date) {
+    public Topic(String userName, String pDescription, String imageProfile, String pImage, int commentsNum, int numOfPeopleWhoLiked, String topicId,String publisherBy ,List<Comment>comments,String date) {
         this.userName = userName;
         this.pDescription = pDescription;
         this.pImage=pImage;
         this.commentsNum=commentsNum;
         this.numOfPeopleWhoLiked=numOfPeopleWhoLiked;
         this.topicId=topicId;
+        this.publisherBy=publisherBy;
         this.comments=comments;
         this.imageProfile=imageProfile;
         this.date=date;

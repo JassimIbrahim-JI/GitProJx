@@ -10,7 +10,7 @@
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:background="@color/pale_grey"
-        tools:context=".activities.details.DetailsActivity">
+        tools:context=".ui.details.DetailsActivity">
 
         <LinearLayout
             android:id="@+id/app_bar"

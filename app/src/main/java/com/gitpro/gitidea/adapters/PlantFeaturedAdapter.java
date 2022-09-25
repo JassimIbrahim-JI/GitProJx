@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.gitpro.gitidea.CustomTextView;
+import com.gitpro.gitidea.customs.CustomTextView;
 import com.gitpro.gitidea.R;
 import com.gitpro.gitidea.models.Articles;
 

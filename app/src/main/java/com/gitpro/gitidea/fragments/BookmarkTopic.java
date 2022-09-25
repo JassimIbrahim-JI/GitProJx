@@ -21,10 +21,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.gitpro.gitidea.FireStoreQueries;
+import com.gitpro.gitidea.utils.FireStoreQueries;
 import com.gitpro.gitidea.R;
-import com.gitpro.gitidea.activities.DetailsTopicActivity;
-import com.gitpro.gitidea.activities.ExploreActivity;
+import com.gitpro.gitidea.ui.DetailsTopicActivity;
+import com.gitpro.gitidea.ui.ExploreActivity;
 import com.gitpro.gitidea.adapters.TopicAdapter;
 import com.gitpro.gitidea.models.Topic;
 import com.gitpro.gitidea.models.User;
@@ -97,14 +97,17 @@ public class BookmarkTopic extends Fragment implements TopicAdapter.mClickListen
                     public void onCallback(ArrayList<Topic> topics) {
                        mTopics = null;
                         mTopics = topics;
+
                         ArrayList<String> userKeywords = (ArrayList<String>) mUser.bookMark;
                         List<Topic> bookmarkTopics = new ArrayList<>();
                         for (int i = 0; i <userKeywords.size(); i++) {
                             for (int j = 0; j < mTopics.size(); j++) {
-                                   if (userKeywords.get(i).contains(mTopics.get(j).topicId))
-                                    if (!bookmarkTopics.contains(mTopics.get(j))) {
-                                        bookmarkTopics.add(mTopics.get(j));
-                                    }
+                                if (userKeywords.size()!=0) {
+                                    if (userKeywords.get(i).contains(mTopics.get(j).topicId))
+                                        if (!bookmarkTopics.contains(mTopics.get(j))) {
+                                            bookmarkTopics.add(mTopics.get(j));
+                                        }
+                                }
                             }
                         }
                         bookmarkAdapter = new TopicAdapter(mActivity,bookmarkTopics, BookmarkTopic.this::onCallBackItem, BookmarkTopic.this::longClick);

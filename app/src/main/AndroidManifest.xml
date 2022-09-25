@@ -28,25 +28,34 @@
         android:theme="@style/Theme.GitProJx"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".activities.DetailsProjectActivity"
+            android:name=".ui.GalleryActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.RepoActivity"
+            android:name=".ui.EditProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.UserFollowersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.DetailsProjectActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.RepoActivity"
             android:exported="true" />
         <activity
-            android:name=".activities.DetailsRepoActivity"
+            android:name=".ui.DetailsRepoActivity"
             android:exported="true" />
         <activity
-            android:name=".activities.DetailsTopicActivity"
+            android:name=".ui.DetailsTopicActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
-            android:name=".activities.TopicActivity"
+            android:name=".ui.TopicActivity"
             android:exported="true"
             android:theme="@style/Theme.GitProJx.SlidrActivityTheme"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
-            android:name=".activities.SplashActivity"
+            android:name=".ui.SplashActivity"
             android:exported="true"
             android:hardwareAccelerated="false">
             <intent-filter>
@@ -66,15 +75,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.ExploreActivity"
+            android:name=".ui.ExploreActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.gitpro.gitidea.activities.ExploreActivity" />
+                android:value="com.gitpro.gitidea.ui.ExploreActivity" />
         </activity>
         <activity
-            android:name=".activities.ProjectActivity"
+            android:name=".ui.ProjectActivity"
             android:exported="true" />
 
         <provider
@@ -87,13 +96,21 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/logos" />
+
         <service
-            android:name=".network.NotificationServices"
+            android:name=".utils.PushNotificationUser"
             android:exported="false">
             <intent-filter>
-                <action android:name="android.intent.action.RESPOND_VIA_MESSAGE" />
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+
+
+
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"

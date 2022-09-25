@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/project_container"
     android:background="@color/light_gray2"
+    android:fitsSystemWindows="true"
     tools:context=".fragments.ProjectFragment">
 
 

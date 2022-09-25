@@ -22,15 +22,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
-import com.gitpro.gitidea.FireStoreQueries;
 import com.gitpro.gitidea.R;
-import com.gitpro.gitidea.activities.DetailsTopicActivity;
 import com.gitpro.gitidea.adapters.TopicAdapter;
 import com.gitpro.gitidea.models.Topic;
+import com.gitpro.gitidea.ui.DetailsTopicActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TopicFragment extends Fragment implements TopicAdapter.ItemClickListener, TopicAdapter.mClickListener{
 
@@ -38,11 +43,14 @@ public class TopicFragment extends Fragment implements TopicAdapter.ItemClickLis
     private TopicAdapter featuredAdapter;
     SwipeRefreshLayout swipeRefreshLayout;
     ArrayList<Topic> mTopics = new ArrayList<>();
-    RelativeLayout container;
+    RelativeLayout containers;
     ShimmerFrameLayout frameLayout;
     private FirebaseAuth mAuth;
     TextView noDataTv;
     ImageView noDataIm;
+    List<String>followingList;
+    private FirebaseFirestore fStore;
+    View v;
 
     public TopicFragment() {
         // Required empty public constructor
@@ -51,66 +59,90 @@ public class TopicFragment extends Fragment implements TopicAdapter.ItemClickLis
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+            v=inflater.inflate(R.layout.topic_fragment,container,false);
+            fStore=FirebaseFirestore.getInstance();
+             mAuth=FirebaseAuth.getInstance();
 
 
-        return inflater.inflate(R.layout.topic_fragment,container,false);
-
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        attachFeaturedItems(getActivity(),view);
-
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-
-                attachFeaturedItems(getActivity(),view);
-            }
-        });
-    }
-    public void attachFeaturedItems(Activity activity, View v){
 
         noDataIm=v.findViewById(R.id.no_data_iv);
         noDataTv=v.findViewById(R.id.no_data_tv);
         topic_rv=v.findViewById(R.id.featured_recycler);
         swipeRefreshLayout = v.findViewById(R.id.refresh_topic);
-        container=v.findViewById(R.id.topic_container);
-       frameLayout=v.findViewById(R.id.shimmerFrameLayout_fra);
-        mAuth=FirebaseAuth.getInstance();
+        containers=v.findViewById(R.id.topic_container);
+        frameLayout=v.findViewById(R.id.shimmerFrameLayout_fra);
+        followingList=new ArrayList<>();
+
+        checkFollowing();
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                checkFollowing();
+            }
+        });
+
+        return v;
+
+    }
+
+    public void checkFollowing(){
+
+        fStore.collection("users/"+mAuth.getCurrentUser().getUid()+"/followings")
+               .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                followingList.clear();
+               for (QueryDocumentSnapshot snapshot:task.getResult()){
+                   followingList.add(snapshot.getId());
+               }
+               followingList.add(mAuth.getCurrentUser().getUid());
+               attachFeaturedItems(getActivity());
+
+            }
+        });
+
+    }
+
+    public void attachFeaturedItems(Activity activity){
         frameLayout.setVisibility(View.VISIBLE);
         frameLayout.startShimmerAnimation();
 
         if (mAuth.getCurrentUser()!=null) {
-            FireStoreQueries.getTopics(new FireStoreQueries.FirestoreTopicCallback() {
+            fStore.collection("topics")
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
-                public void onCallback(ArrayList<Topic> topics) {
-                    frameLayout.setVisibility(View.GONE);
-                    frameLayout.stopShimmerAnimation();
-                    featuredAdapter = null;
-                    mTopics = topics;
-                    if (mTopics!=null){
-                        featuredAdapter = new TopicAdapter(activity, mTopics, TopicFragment.this, TopicFragment.this::longClick);
-                        topic_rv.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.VERTICAL, false));
-                        topic_rv.setAdapter(featuredAdapter);
-                        featuredAdapter.notifyDataSetChanged();
-                          noDataVisibility(false);
-                    }
-                    else {
-                        Toast.makeText(getActivity(), getString(R.string.no_data_message), Toast.LENGTH_LONG).show();
-                        noDataVisibility(true);
-                    }
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()){
+                       frameLayout.setVisibility(View.GONE);
+                       frameLayout.stopShimmerAnimation();
+                       featuredAdapter = null;
+                       mTopics.clear();
+                       for (QueryDocumentSnapshot snapshot: task.getResult()) {
+                           Topic topic = snapshot.toObject(Topic.class);
+                           mTopics.add(topic);
+                       }
 
-               if (swipeRefreshLayout.isRefreshing()) {
-                swipeRefreshLayout.setRefreshing(false);
+                       if (mTopics!=null){
+                           featuredAdapter = new TopicAdapter(activity, mTopics, TopicFragment.this, TopicFragment.this::longClick);
+                           topic_rv.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.VERTICAL, false));
+                           featuredAdapter.notifyDataSetChanged();
+                           topic_rv.setAdapter(featuredAdapter);
+                           noDataVisibility(false);
+                       }
+                       else {
+                           Toast.makeText(getActivity(), getString(R.string.no_data_message), Toast.LENGTH_LONG).show();
+                           noDataVisibility(true);
+                       }
+
+                       if (swipeRefreshLayout.isRefreshing()) {
+                           swipeRefreshLayout.setRefreshing(false);
+                       }
+                   }
                 }
-               }
             });
+
          }
       }
-
 
     @Override
     public void onStart() {
@@ -149,7 +181,7 @@ public class TopicFragment extends Fragment implements TopicAdapter.ItemClickLis
         bundle.putString("desc",topic.pDescription);
         bundle.putString("image",topic.pImage);
         bundle.putString("url",topic.imageProfile);
-        bundle.putString("bTopicId",topic.topicId);
+        bundle.putString("topicId",topic.topicId);
         bundle.putString("userId",TopicAdapter.userId);
         bundle.putString("date",topic.date);
         bundle.putInt("commentNum", topic.commentsNum);

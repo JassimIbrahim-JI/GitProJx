@@ -38,101 +38,63 @@
             android:layout_height="wrap_content">
 
             <RelativeLayout
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="@dimen/_10ssp"
-                android:layout_marginEnd="@dimen/_10ssp"
-                android:visibility="gone"
-                android:id="@+id/delete_ly"
-                android:background="@drawable/bg_close">
-
-                <ImageView
-                    android:id="@+id/circle_id"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:visibility="gone"
-                    android:src="@drawable/ic_check_circle"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
-                    />
-
-            </RelativeLayout>
-
-
-       <RelativeLayout
-           android:layout_width="80dp"
-           android:layout_height="70dp"
-           android:focusable="true"
-           android:gravity="center_vertical|center_horizontal"
-           android:elevation="20sp"
-           android:layout_marginTop="13dp"
-           android:layout_marginStart="13dp"
-
-           android:id="@+id/parentRelative">
-           
-           <de.hdodenhof.circleimageview.CircleImageView
-               android:layout_width="@dimen/_30sdp"
-               android:layout_height="@dimen/_40sdp"
-               android:src="@drawable/ic_avatar"
-               android:layout_alignParentTop="true"
-               android:layout_alignParentStart="true"
-
-               android:id="@+id/profile_image_topic"
-               android:contentDescription="@string/todo" />
-       </RelativeLayout>
-
-
-            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/parentRelative"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="@dimen/_6sdp">
 
-                <com.gitpro.gitidea.CustomTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="John"
-                    app:typeface="roboto.ttf"
-                    android:textSize="@dimen/_15ssp"
-                    android:singleLine="true"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_image_topic"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginTop="@dimen/_13ssp"
-                    android:layout_marginStart="@dimen/_6sdp"
-                    android:maxLength="20"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:contentDescription="@string/todo"
+                    android:src="@drawable/ic_avatar" />
+
+                <com.gitpro.gitidea.customs.CustomTextView
                     android:id="@+id/project_name"
-                    android:textColor="@color/black"
-                    />
-
-                <com.gitpro.gitidea.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1/6/2022\n6:21:00"
-                    android:textSize="@dimen/_12ssp"
+                    android:layout_toEndOf="@id/profile_image_topic"
                     android:layout_alignParentTop="true"
-                    android:layout_marginTop="@dimen/_13ssp"
                     android:layout_marginStart="@dimen/_6sdp"
-                    android:maxLength="30"
-                    app:typeface="roboto.ttf"
-                    android:visibility="gone"
-                    android:id="@+id/topic_date"
+                    android:layout_marginTop="@dimen/_9ssp"
+                    android:maxLength="20"
+                    android:singleLine="true"
+                    android:text="John"
                     android:textColor="@color/black"
-                    />
+                    android:textSize="@dimen/_15ssp"
+                    app:typeface="roboto.ttf" />
 
-                <com.gitpro.gitidea.CustomTextView
+                <com.gitpro.gitidea.customs.CustomTextView
+                    android:id="@+id/topic_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:layout_marginTop="@dimen/_13ssp"
+                    android:maxLength="30"
+                    android:text="1/6/2022\n6:21:00"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp"
+                    android:visibility="gone"
+                    app:typeface="roboto.ttf" />
+
+                <com.gitpro.gitidea.customs.CustomTextView
                     android:id="@+id/project_desc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/project_name"
-                    android:layout_alignParentStart="true"
+
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="@dimen/_7ssp"
-                    android:layout_marginTop="@dimen/_7ssp"
+                    android:layout_marginTop="@dimen/_5ssp"
                     android:layout_marginEnd="@dimen/_7ssp"
                     android:layout_marginBottom="@dimen/_7ssp"
+                    android:layout_toEndOf="@id/profile_image_topic"
                     android:maxLines="4"
                     android:minHeight="43dp"
                     android:text="Topic Content"
@@ -140,22 +102,21 @@
                     android:textSize="@dimen/_13ssp"
                     app:typeface="montserrat_semibold.ttf" />
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/image_content"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:adjustViewBounds="true"
-                        android:scaleType="fitXY"
-                        android:maxHeight="@dimen/_100sdp"
-                        android:clipToOutline="true"
-                        android:background="@drawable/circular"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginEnd="@dimen/_8sdp"
-                        android:layout_marginBottom="@dimen/_8sdp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:layout_below="@id/project_desc"
-                        />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/project_desc"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/circular"
+                    android:clipToOutline="true"
+                    android:maxHeight="@dimen/_100sdp"
+                    android:scaleType="fitXY" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -164,13 +125,13 @@
                     android:layout_below="@id/project_desc"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/_8sdp"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_marginBottom="@dimen/_8sdp"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:clipToOutline="true"
-
                     android:adjustViewBounds="true"
+
                     android:background="@drawable/bg_featured"
+                    android:clipToOutline="true"
                     android:maxHeight="@dimen/_100sdp"
                     android:scaleType="fitXY" />
 
@@ -179,12 +140,12 @@
                     android:id="@+id/line"
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:background="@color/black"
-                   android:layout_marginTop="4sp"
-                    android:layout_marginEnd="@dimen/_10ssp"
-                    android:layout_marginStart="@dimen/_10ssp"
+                    android:layout_below="@id/image_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_below="@id/image_content" />
+                    android:layout_marginStart="@dimen/_10ssp"
+                    android:layout_marginTop="4sp"
+                    android:layout_marginEnd="@dimen/_10ssp"
+                    android:background="@color/black" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/comment_topic"
@@ -197,16 +158,14 @@
                     app:srcCompat="@drawable/ic_chat_comment_gray" />
 
                 <TextView
+                    android:id="@+id/comment_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto"
-                    android:textColor="@color/black"
-                    android:id="@+id/comment_num"
-                    android:layout_marginTop="@dimen/_9sdp"
                     android:layout_below="@id/image_content"
+                    android:layout_marginTop="@dimen/_9sdp"
                     android:layout_toEndOf="@id/comment_topic"
-                    />
-
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/black" />
 
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -214,8 +173,8 @@
                     android:layout_width="30dp"
                     android:layout_height="20dp"
                     android:layout_below="@id/image_content"
-                    android:layout_marginTop="@dimen/_9sdp"
                     android:layout_marginStart="@dimen/_50ssp"
+                    android:layout_marginTop="@dimen/_9sdp"
                     android:layout_toEndOf="@id/comment_topic"
                     app:srcCompat="@drawable/ic_favourite" />
 
@@ -224,12 +183,11 @@
                     android:id="@+id/like_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textStyle="bold|italic"
-                    android:layout_marginTop="@dimen/_9sdp"
                     android:layout_below="@id/image_content"
+                    android:layout_marginTop="@dimen/_9sdp"
                     android:layout_toEndOf="@id/like_topic"
-                    />
+                    android:textColor="@color/black"
+                    android:textStyle="bold|italic" />
 
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -248,9 +206,9 @@
                     android:layout_width="30dp"
                     android:layout_height="20dp"
                     android:layout_below="@id/image_content"
+                    android:layout_alignParentEnd="true"
                     android:layout_marginTop="@dimen/_9sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    android:layout_alignParentEnd="true"
                     app:srcCompat="@drawable/ic_baseline_share_24" />
 
                 <View
@@ -258,7 +216,7 @@
                     android:layout_height="@dimen/_3sdp"
                     android:layout_below="@id/share_top"
                     android:layout_marginTop="2sp"
-                    android:background="@color/pale_grey"/>
+                    android:background="@color/pale_grey" />
             </RelativeLayout>
 
 

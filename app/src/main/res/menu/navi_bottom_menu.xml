@@ -19,6 +19,12 @@
         android:icon="@drawable/ic_baseline_favorite_24"
         app:showAsAction="ifRoom"/>
 
+    <item android:id="@+id/search_id"
+        android:title="Search"
+        android:icon="@drawable/ic_search"
+        android:iconTint="@color/white"
+        app:showAsAction="ifRoom"/>
+
 
 
 

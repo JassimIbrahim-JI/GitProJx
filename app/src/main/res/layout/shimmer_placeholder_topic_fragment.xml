@@ -95,7 +95,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="@dimen/_6sdp">
 
-                <com.gitpro.gitidea.CustomTextView
+                <com.gitpro.gitidea.customs.CustomTextView
                     android:layout_width="@dimen/_150sdp"
                     android:layout_height="wrap_content"
 
@@ -111,7 +111,7 @@
                     android:textColor="@color/black"
                     />
 
-                <com.gitpro.gitidea.CustomTextView
+                <com.gitpro.gitidea.customs.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1/6/2022\n6:21:00"
@@ -126,7 +126,7 @@
                     android:textColor="@color/black"
                     />
 
-                <com.gitpro.gitidea.CustomTextView
+                <com.gitpro.gitidea.customs.CustomTextView
                     android:id="@+id/project_desc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

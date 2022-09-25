@@ -18,7 +18,7 @@
 
         android:src="@drawable/logos"/>
 
-    <com.gitpro.gitidea.CustomTextView
+    <com.gitpro.gitidea.customs.CustomTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="GitProJx"
@@ -46,7 +46,7 @@
         app:lottie_rawRes="@raw/splashimg" />
 
 
-    <com.gitpro.gitidea.CustomTextView
+    <com.gitpro.gitidea.customs.CustomTextView
         android:id="@+id/sign_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

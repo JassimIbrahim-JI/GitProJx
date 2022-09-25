@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rl_snacks"
-    tools:context=".activities.TopicActivity">
+    tools:context=".ui.TopicActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -90,7 +90,7 @@
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:id="@+id/container_id"
@@ -132,8 +132,17 @@
 
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
-
             </ScrollView>
+
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/topic_pg"
+                android:layout_centerInParent="true"
+                android:visibility="gone"
+                android:indeterminateTint="@color/dark_late_gray" />
+
 
 
         </RelativeLayout>

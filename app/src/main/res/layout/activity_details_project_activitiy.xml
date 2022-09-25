@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".activities.DetailsTopicActivity">
+    tools:context=".ui.DetailsTopicActivity">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -94,7 +94,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="@dimen/_6sdp">
 
-                    <com.gitpro.gitidea.CustomTextView
+                    <com.gitpro.gitidea.customs.CustomTextView
                         android:id="@+id/detail_nameP"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -108,7 +108,7 @@
                         android:textSize="@dimen/_15ssp"
                         app:typeface="roboto.ttf" />
 
-                    <com.gitpro.gitidea.CustomTextView
+                    <com.gitpro.gitidea.customs.CustomTextView
                         android:id="@+id/detail_descP"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -161,7 +161,7 @@
                         android:layout_marginTop="@dimen/_9sdp"
                         app:srcCompat="@drawable/ic_chat_comment_gray" />
 
-                    <com.gitpro.gitidea.CustomTextView
+                    <com.gitpro.gitidea.customs.CustomTextView
                         android:id="@+id/comment_num_detailP"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -184,7 +184,7 @@
                         app:srcCompat="@drawable/ic_favourite" />
 
 
-                    <com.gitpro.gitidea.CustomTextView
+                    <com.gitpro.gitidea.customs.CustomTextView
                         android:id="@+id/like_num_detailP"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -233,11 +233,13 @@
             android:layout_height="match_parent"
             android:layout_above="@+id/rl_comment"
             android:layout_below="@id/view1"
-            android:layout_margin="@dimen/_4sdp"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
 
-            >
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:layout_marginBottom="@dimen/_4sdp">
 
             <ScrollView
                 android:id="@+id/nested"
@@ -293,7 +295,7 @@
                 android:src="@drawable/ic_baseline_send_24" />
 
         </RelativeLayout>
-        <com.gitpro.gitidea.CustomTextView
+        <com.gitpro.gitidea.customs.CustomTextView
             android:id="@+id/detail_dateP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -303,20 +305,23 @@
             android:layout_marginBottom="@dimen/_8sdp"
             android:maxLength="45"
             app:typeface="roboto.ttf"
+           android:layout_marginEnd="@dimen/_3sdp"
             android:textColor="@color/black_soft"
             android:textSize="@dimen/_12ssp" />
 
-        <com.gitpro.gitidea.CustomTextView
+        <com.gitpro.gitidea.customs.CustomTextView
             android:id="@+id/detail_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/view1"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="@dimen/_103sdp"
+            android:layout_marginStart="@dimen/_3sdp"
+            android:layout_marginEnd="@dimen/_86sdp"
             android:layout_marginBottom="@dimen/_8sdp"
-            android:text="-Project shared"
+            android:text=" - Project shared"
             android:textColor="#091E6A"
             android:textSize="@dimen/_12ssp"
+            android:textStyle="bold|italic"
             app:typeface="montserrat_medium.ttf" />
 
 
