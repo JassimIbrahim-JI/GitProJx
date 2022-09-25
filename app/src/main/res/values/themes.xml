@@ -20,6 +20,7 @@
         <item name="android:windowActionBarOverlay">true</item>
 
         <!-- Status bar color. -->
+
         <item name="android:statusBarColor" tools:targetApi="l">@color/dark_late_gray</item>
         
     </style>
@@ -57,6 +58,10 @@
         <item name="windowActionBarOverlay">true</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.App.CornerSize50Percent" parent="">
+        <item name="cornerSize">4%</item>
     </style>
 
 
