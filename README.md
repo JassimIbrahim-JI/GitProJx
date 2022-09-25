@@ -61,4 +61,7 @@ GitProJx is an  app that enables you to share short, long updates topic and proj
     
     
     ## App Content
+    <p float="left">
+    <img src= "![Screenshot_1662897896]https://user-images.githubusercontent.com/107422911/192141393-7890e10d-5e22-4787-8ece-d95f00a0db30.png" />
+    </p>
     
