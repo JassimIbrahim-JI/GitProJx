@@ -17,15 +17,17 @@ import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.gitpro.gitidea.CustomTextView;
-import com.gitpro.gitidea.FireStoreQueries;
+import com.gitpro.gitidea.customs.CustomTextView;
+import com.gitpro.gitidea.utils.FireStoreQueries;
 import com.gitpro.gitidea.R;
+import com.gitpro.gitidea.models.Notification;
 import com.gitpro.gitidea.models.Project;
 import com.gitpro.gitidea.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -158,6 +160,8 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectV
 
         public void bind(Project project) {
             if (project != null) {
+
+
                 imageContent.loadUrl(project.urlPreview, new ViewListener() {
                     @Override
                     public void onPreviewSuccess(boolean b) {
@@ -169,17 +173,19 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectV
                         Log.d("OnUrlLoad:", e.getMessage());
                     }
                 });
-
+                FirebaseUser mUser=mAuth.getCurrentUser();
+                if (mUser!=null){
+                    pTitle.setText(mUser.getDisplayName());
+                    Picasso.get().load(mUser.getPhotoUrl()).placeholder(android.R.color.transparent)
+                            .into(pPicture);
+                }
                 String projectId = project.projectId;
                 userId = mAuth.getCurrentUser().getUid();
                 mLikes.setText(project.numOfPeopleWhoLiked + "");
                 mComments.setText(project.commentsNum + "");
                 pDate.setText(project.pDate);
                 pDesc.setText(project.pDescription);
-                pTitle.setText(project.mUser);
                 projectLanguage.setText(project.projectLanguage);
-                Picasso.get().load(project.url).placeholder(android.R.color.transparent)
-                        .into(pPicture);
         commentContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -270,6 +276,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectV
                                         like.put("date", FieldValue.serverTimestamp());
                                         mFirebase.collection("projects/" + projectId+ "/likes").document(userId)
                                                 .set(like);
+                                        addNotification(userId,project.url,projectId);
                                         likeStatus = false;
                                     } else {
                                         mFirebase.collection("projects/" + projectId + "/likes").document(userId)
@@ -411,7 +418,16 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectV
                 }
             });
             deleteMenu.show();
-
         }
     }
+
+    private void addNotification(String userId,String photoUrl,String projectId) {
+        DocumentReference notificationRef=mFirebase.collection("notifications")
+                .document(userId);
+        Notification notification=new Notification(mAuth.getCurrentUser().getUid(),photoUrl,"liked your project..",
+                "",projectId,false,true);
+
+        notificationRef.set(notification);
+    }
+
 }

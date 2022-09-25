@@ -2,7 +2,6 @@ package com.gitpro.gitidea.adapters;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,19 +20,24 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.gitpro.gitidea.CustomTextView;
-import com.gitpro.gitidea.FireStoreQueries;
+import com.gitpro.gitidea.customs.CustomTextView;
+import com.gitpro.gitidea.fragments.TopicFragment;
+import com.gitpro.gitidea.utils.FireStoreQueries;
 import com.gitpro.gitidea.R;
 import com.gitpro.gitidea.fragments.BookmarkTopic;
+import com.gitpro.gitidea.fragments.ProfileFragment;
+import com.gitpro.gitidea.models.Notification;
 import com.gitpro.gitidea.models.Topic;
 import com.gitpro.gitidea.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -58,20 +62,21 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicImageVH
     List<Topic>positionItemList;
     List<String>bookmark_HashSet;
     public static Topic model;
-    FirebaseFirestore db;
+    private FirebaseFirestore db;
+
     View view;
     int id = 0;
     public static String mTag;
     public static String cTag;
     public static String bTag;
     public static String tTag;
-    FirebaseAuth mAuth;
     public boolean likeStatus=false;
     public boolean isExist=false;
     public boolean isSelectAll=false;
-    public static String userId;
+    private FirebaseUser user;
     public mClickListener mClickListener;
     BookmarkTopic bookFragment = new BookmarkTopic();
+    public static String userId;
     public final ItemClickListener onCallItem;
 
     public interface ItemClickListener{
@@ -96,7 +101,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicImageVH
     @Override
     public TopicImageVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         db = FirebaseFirestore.getInstance();
-        mAuth = FirebaseAuth.getInstance();
+        user= FirebaseAuth.getInstance().getCurrentUser();
         LayoutInflater layoutInflater = LayoutInflater.from(fActivity);
            view = layoutInflater.inflate(R.layout.custom_topic1, parent, false);
            TopicImageVH topicImageVH = new TopicImageVH(view, onCallItem);
@@ -111,9 +116,9 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicImageVH
         model = getMyList(position);
         vh.bind(model);
 
-        FireStoreQueries.getUser(new FireStoreQueries.FirestoreUsersCallback() {
-            @Override
-            public void onCallback(User user) {
+      FireStoreQueries.getUser(new FireStoreQueries.FirestoreUsersCallback() {
+          @Override
+          public void onCallback(User user) {
                 if (user.isAdmin) {
                     vh.arrowDown.setVisibility(View.VISIBLE);
                     vh.arrowDown.setOnClickListener(new View.OnClickListener() {
@@ -126,7 +131,6 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicImageVH
                     vh.arrowDown.setVisibility(View.INVISIBLE);
                 }
                 bookmark_HashSet.addAll(user.bookMark);
-
             }
         });
         Animation animation = AnimationUtils.loadAnimation(fActivity, R.anim.slide_left_to_right);
@@ -200,17 +204,226 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicImageVH
         }
 
         public void bind(Topic topic) {
-
-            if (topic != null) {
-                fTitle.setText(topic.userName);
+                Glide.with(fActivity).load(topic.pImage).into(imageContent);
                 fDesc.setText(topic.pDescription);
                 tDate.setText(topic.date);
-                Picasso.get().load(topic.imageProfile).placeholder(android.R.color.transparent).fit()
-                        .into(fPicture);
-                    Glide.with(fActivity).load(topic.pImage).into(imageContent);
+                fTitle.setText(topic.userName);
+            Picasso.get().load(topic.imageProfile)
+                    .noPlaceholder().into(fPicture);
+                String topicId = topic.topicId;
 
-                String topicId= topic.topicId;
-                 userId=mAuth.getCurrentUser().getUid();
+                if (topic.pImage == null) {
+                    imageContent.setVisibility(View.GONE);
+                } else {
+                    imageContent.setVisibility(View.VISIBLE);
+                    Glide.with(itemView.getContext()).load(topic.pImage)
+                            .placeholder(android.R.color.transparent).into(imageContent);
+                }
+                fTitle.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        fActivity.getSharedPreferences("PROFILE", Context.MODE_PRIVATE).edit().putString("profileId", topic.publisherBy).apply();
+
+                        ((FragmentActivity)fActivity).getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.fragment_container, new ProfileFragment()).commit();
+                    }
+                });
+                fPicture.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        fActivity.getSharedPreferences("PROFILE", Context.MODE_PRIVATE).edit().putString("profileId", topic.publisherBy).apply();
+
+                        ((FragmentActivity)fActivity).getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.fragment_container, new ProfileFragment()).commit();
+                    }
+                });
+
+            imageContent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    fActivity.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit().putString("topicId", topicId).apply();
+                    ((FragmentActivity)fActivity).getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, new TopicFragment()).commit();
+                }
+            });
+
+                   db.collection("users").document(user.getUid())
+                           .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                       @Override
+                       public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                               User user=task.getResult().toObject(User.class);
+                               if (user!=null)
+                               userId=user.userId;
+
+                        bookMark.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                isExist = true;
+                                DocumentReference reference = db.collection("users").document(userId);
+                                db.collection("topics/" + topicId + "/books").document(userId)
+                                        .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        if (isExist) {
+                                            if (!task.getResult().exists()) {
+                                                Map<String, Object> add = new HashMap<>();
+                                                add.put("date", FieldValue.serverTimestamp());
+                                                db.collection("topics/" + topicId + "/books")
+                                                        .document(userId).set(add);
+                                                ArrayList<String> addBookList = (ArrayList<String>) user.bookMark;
+                                                addBookList.add(topicId);
+                                                Map<String, Object> adds = new HashMap<>();
+                                                adds.put("bookMark", addBookList);
+                                                Toast.makeText(fActivity, "Added topic to bookmark list", Toast.LENGTH_SHORT).show();
+                                                reference.update(adds);
+                                                isExist = false;
+                                            } else {
+                                                db.collection("topics/" + topicId + "/books").document(userId)
+                                                        .delete();
+                                                ArrayList<String> removeBookList = (ArrayList<String>) user.bookMark;
+                                                removeBookList.remove(topicId);
+                                                Map<String, Object> remove = new HashMap<>();
+                                                remove.put("bookMark", removeBookList);
+                                                reference.update(remove);
+                                            }
+                                            isExist = true;
+                                        }//end of exist condition
+                                    }
+                                });//endPoint onComplete listener
+                            }
+                        });
+
+                        likeContent.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                likeStatus = true;
+                                db.collection("topics/" + topicId + "/likes").document(userId)
+                                        .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        if (likeStatus) {
+                                            if (!task.getResult().exists()) {
+                                                Map<String, Object> like = new HashMap<>();
+                                                like.put("date", FieldValue.serverTimestamp());
+                                                db.collection("topics/" + topicId + "/likes").document(userId)
+                                                        .set(like);
+                                                addNotification(userId,user.photoUrl,topicId);
+                                                likeStatus = false;
+                                            } else {
+                                                db.collection("topics/" + topicId + "/likes").document(userId)
+                                                        .delete();
+                                                likeStatus = true;
+                                            }
+                                        }
+                                    }
+                                });
+                            }
+                        });
+
+
+                        db.collection("topics/" + topicId + "/books").document(userId)
+                                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                                        if (error == null) {
+                                            if (value.exists()) {
+                                                bookMark.setImageResource(R.drawable.ic_bookmark);
+                                                bookMark.setTag("saved");
+
+                                            } else {
+                                                bookMark.setImageResource(R.drawable.ic_bookmark_gery);
+                                                bookMark.setTag("removed");
+                                            }
+                                            bTag = (String) bookMark.getTag();
+                                        }
+                                    }
+                                });
+
+                        db.collection("topics/" + topicId + "/likes").document(userId)
+                                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                                        if (error == null) {
+                                            if (value.exists()) {
+                                                likeContent.setImageResource(R.drawable.ic_fill_favorite);
+                                                likeContent.setTag("clicked");
+                                            } else {
+                                                likeContent.setImageResource(R.drawable.ic_favourite);
+                                                likeContent.setTag("unclicked");
+                                            }
+                                            mTag = (String) likeContent.getTag();
+
+                                        }
+                                    }
+                                });
+
+
+                        DocumentReference topicRef = db.collection("topics").document(topicId);
+                        db.collection("topics/" + topicId + "/likes").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                            @Override
+                            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                                if (error == null) {
+                                    if (value != null) {
+                                        int count = value.size();
+                                        setTopicLike(count);
+                                        likeContent.setTag(count + "");
+                                    } else {
+                                        setTopicLike(0);
+                                        likeContent.setTag(0 + "");
+                                    }
+                                    cTag = (String) likeContent.getTag();
+
+                                    Map<String, Object> mapLike = new HashMap<>();
+                                    mapLike.put("numOfPeopleWhoLiked", value.size());
+                                    topicRef.update(mapLike).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+
+                                        }
+                                    });
+                                }
+                            }
+                        });
+
+
+                        db.collection("topics/" + topicId + "/comments").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                            @Override
+                            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                                if (error == null) {
+                                    if (!value.isEmpty()) {
+                                        int count = value.size();
+                                        setTopicComments(count);
+                                        commentContent.setImageResource(R.drawable.ic_chat_comment_blue);
+                                        commentContent.setTag("comment");
+                                    } else {
+                                        setTopicComments(0);
+                                        commentContent.setImageResource(R.drawable.ic_chat_comment_gray);
+                                        commentContent.setTag("no comment");
+                                    }
+                                    tTag = (String) commentContent.getTag();
+
+                                    Map<String, Object> mapLike = new HashMap<>();
+                                    mapLike.put("commentsNum", value.size());
+                                    topicRef.update(mapLike).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+
+                                        }
+                                    });
+                                }
+                            }
+                        });
+
+                       }
+                   });
+
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        onCallItem.onCallBackItem(topic);
+                    }
+                });
 
                 commentContent.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -219,225 +432,23 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicImageVH
                     }
                 });
 
-
-    FireStoreQueries.getUser(new FireStoreQueries.FirestoreUsersCallback() {
-        @Override
-        public void onCallback(User user) {
-     bookMark.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-        isExist=true;
-        DocumentReference reference=db.collection("users").document(user.userId);
-        db.collection("topics/"+topicId+"/books").document(userId)
-            .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (isExist){
-                            if (!task.getResult().exists()){
-                                Map<String,Object>add=new HashMap<>();
-                                add.put("date",FieldValue.serverTimestamp());
-                                db.collection("topics/"+topicId+"/books")
-                                        .document(userId).set(add);
-                                ArrayList<String>addBookList= (ArrayList<String>) user.bookMark;
-                                addBookList.add(topicId);
-                                Map<String,Object>adds=new HashMap<>();
-                                adds.put("bookMark",addBookList);
-                                Toast.makeText(fActivity,"Added topic to bookmark list",Toast.LENGTH_SHORT).show();
-                                reference.update(adds);
-                                isExist=false;
-                            }
-                            else {
-                            db.collection("topics/"+topicId+"/books").document(userId)
-                                    .delete();
-                              ArrayList<String>removeBookList= (ArrayList<String>) user.bookMark;
-                                removeBookList.remove(topicId);
-                                Map<String,Object>remove=new HashMap<>();
-                                remove.put("bookMark",removeBookList);
-                               reference.update(remove);
-                            }
-                            isExist=true;
-                        }//end of exist condition
-                            }
-                         });//endPoint onComplete listener
-                       }
-                    });
-                  }
-              });//end of userQuery
-
-
-    db.collection("topics/"+topicId+"/books").document(userId)
-            .addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                @Override
-             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                if (error==null){
-                    if (value.exists()){
-                        bookMark.setImageResource(R.drawable.ic_bookmark);
-                        bookMark.setTag("saved");
-
-                    }
-                    else {
-                        bookMark.setImageResource(R.drawable.ic_bookmark_gery);
-                        bookMark.setTag("removed");
-                    }
-                    bTag=(String) bookMark.getTag();
-                        }
-                    }
-                });
-    ;
-
-                likeContent.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        likeStatus = true;
-                            db.collection("topics/" + topicId + "/likes").document(userId)
-                                    .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                    if (likeStatus) {
-                                        if (!task.getResult().exists()) {
-                                            Map<String, Object> like = new HashMap<>();
-                                            like.put("date", FieldValue.serverTimestamp());
-                                            db.collection("topics/" + topicId + "/likes").document(userId)
-                                                    .set(like);
-                                            likeStatus = false;
-                                        } else {
-                                            db.collection("topics/" + topicId + "/likes").document(userId)
-                                                    .delete();
-                                            likeStatus = true;
-                                        }
-                                    }
-                                }
-                            });
-                        }
-                });
-
-                db.collection("topics/" + topicId + "/likes").document(userId)
-                        .addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                            @Override
-                            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-
-                              if (error==null){
-                                  if (value.exists()){
-                                      likeContent.setImageResource(R.drawable.ic_fill_favorite);
-                                      likeContent.setTag("clicked");
-                                  }
-                                  else {
-                                      likeContent.setImageResource(R.drawable.ic_favourite);
-                                      likeContent.setTag("unclicked");
-                                  }
-                                    mTag=(String) likeContent.getTag();
-
-                              }
-                            }
-                        });
-
-                DocumentReference topicRef=db.collection("topics").document(topicId);
-                db.collection("topics/" + topicId + "/likes").addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        if (error==null){
-                            if (!value.isEmpty()){
-                                int count= value.size();
-                                setTopicLike(count);
-                                likeContent.setTag(count+"");
-                            }
-                            else {
-                                setTopicLike(0);
-                                likeContent.setTag(0+"");
-                            }
-                            cTag=(String)likeContent.getTag();
-
-                            Map<String,Object>mapLike=new HashMap<>();
-                            mapLike.put("numOfPeopleWhoLiked",value.size());
-                            topicRef.update(mapLike).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
-
-                                }
-                            });
-
-                        }
-                    }
-                });
-        db.collection("topics/"+topicId+"/comments").addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                    if (error==null){
-                        if (!value.isEmpty()){
-                            int count=value.size();
-                            setTopicComments(count);
-                            commentContent.setImageResource(R.drawable.ic_chat_comment_blue);
-                            commentContent.setTag("comment");
-                        }
-                        else {
-                            setTopicComments(0);
-                            commentContent.setImageResource(R.drawable.ic_chat_comment_gray);
-                            commentContent.setTag("no comment");
-                        }
-                        tTag=(String)commentContent.getTag();
-
-                        Map<String,Object>mapLike=new HashMap<>();
-                        mapLike.put("commentsNum",value.size());
-                        topicRef.update(mapLike).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-
-                            }
-                        });
-                    }
-                    }
-                });
-                if (topic.pImage == null) {
-                    imageContent.setVisibility(View.GONE);
-                } else {
-                    imageContent.setVisibility(View.VISIBLE);
-                    Glide.with(itemView.getContext()).load(topic.pImage)
-                            .placeholder(android.R.color.transparent).into(imageContent);
-                }
-                shareContent.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        Intent myIntent = new Intent(Intent.ACTION_SEND);
-                        myIntent.setType("text/plain");
-                        String shareSub = fActivity.getString(R.string.sub_title);
-                        String shareBody = fActivity.getString(R.string.title_share) + "\n";
-                        myIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub);
-                        myIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
-                        fActivity.startActivity(Intent.createChooser(myIntent, fActivity.getString(R.string.using)));
-
-                    }
-                });
-
-
-                itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        onCallItem.onCallBackItem(topic);
-                    }
-                });
+       }
+}
+            public Topic getMyList(int position) {
+                return myList.get(position);
             }
-        }
-    }
 
 
-    public Topic getMyList(int position) {
-        return myList.get(position);
-    }
-
-
-
-    public void createOptionMenu(Topic topic, View v, final Context context){
+    public void createOptionMenu(Topic topic, View v, final Context context) {
         //initialize
-
-        PopupMenu deleteMenu=new PopupMenu(context,v);
+        PopupMenu deleteMenu = new PopupMenu(context, v);
         deleteMenu.getMenuInflater().inflate(id, deleteMenu.getMenu());
         //callback menuItemListener
         deleteMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-              //getMenu id;
-                switch (menuItem.getItemId()){
+                //getMenu id;
+                switch (menuItem.getItemId()) {
                     case R.id.delete_topic:
                         db.collection("topics").document(topic.getTopicId()).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
@@ -445,21 +456,28 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicImageVH
 
                                 if (task.isSuccessful()) {
                                     Log.d(TAG, "Deleted Topic.");
-                                       myList.remove(topic);
-                                       notifyDataSetChanged();
-                                }
-                                else
+                                    myList.remove(topic);
+                                    notifyDataSetChanged();
+                                } else
                                     Log.d(TAG, "Failed!!");
                             }
                         });
                         break;
-                   }
+                }
 
                 return true;
             }
-        });
-              deleteMenu.show();
+                });
+                deleteMenu.show();
+            }
 
+    private void addNotification(String userId,String photoUrl,String topicId) {
+        DocumentReference notificationRef=db.collection("notifications")
+                .document(userId);
+        Notification notification=new Notification(user.getUid(),photoUrl,"liked your topic..",
+                topicId,"",true,false);
+
+        notificationRef.set(notification);
     }
 
-}
+        }
