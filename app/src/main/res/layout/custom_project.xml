@@ -6,30 +6,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_8ssp"
+        app:cardBackgroundColor="@color/pale_grey"
         app:cardCornerRadius="@dimen/_8ssp"
         app:cardElevation="@dimen/_4sdp"
-        app:cardBackgroundColor="@color/pale_grey"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/arrow_down"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:visibility="invisible"
             android:layout_marginTop="@dimen/_10ssp"
             android:layout_marginEnd="@dimen/_10ssp"
             android:background="@android:color/transparent"
+            android:contentDescription="@string/delete_topic"
             android:minWidth="48dp"
             android:minHeight="48dp"
+            android:src="@android:drawable/arrow_down_float"
             android:tint="@color/black"
-            android:contentDescription="@string/delete_topic"
-            android:src="@android:drawable/arrow_down_float" />
+            android:visibility="invisible" />
 
 
         <RelativeLayout
@@ -37,14 +38,14 @@
             android:layout_height="wrap_content">
 
             <RelativeLayout
+                android:id="@+id/parentRelative"
                 android:layout_width="80dp"
                 android:layout_height="70dp"
-                android:focusable="true"
-                android:gravity="center_vertical|center_horizontal"
-                android:elevation="20sp"
-                android:layout_marginTop="13dp"
                 android:layout_marginStart="13dp"
-                android:id="@+id/parentRelative">
+                android:layout_marginTop="13dp"
+                android:elevation="20sp"
+                android:focusable="true"
+                android:gravity="center_vertical|center_horizontal">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/profile_image_project"
@@ -58,67 +59,76 @@
             </RelativeLayout>
 
 
-            <TextView
-                android:id="@+id/project_lang"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/parentRelative"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:gravity="start"
-                android:text="Java"
-                android:textColor="@color/black"
-                android:fontFamily="@font/roboto"
-                android:textSize="@dimen/_14sdp" />
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/_3sdp"
-              android:layout_marginTop="@dimen/_1sdp"
-              android:layout_below="@id/project_lang"
-                android:background="@color/dark_late_gray"
-                android:layout_alignStart="@id/project_lang"
-                android:layout_alignEnd="@id/project_lang"/>
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/parentRelative"
+                android:layout_below="@id/parentRelative"
+                android:layout_toStartOf="@+id/childRelative"
+                android:layout_marginTop="@dimen/_40sdp"
+                android:layout_marginStart="3sp"
+                android:gravity="center_vertical|center_horizontal"
+                >
+                <TextView
+                    android:id="@+id/project_lang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center_vertical"
+                    android:text="Java"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14sdp" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_3sdp"
+                    android:layout_below="@id/project_lang"
+                    android:layout_alignStart="@id/project_lang"
+                    android:layout_alignEnd="@id/project_lang"
+                    android:layout_marginTop="@dimen/_1sdp"
+                    android:background="@color/dark_late_gray" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/childRelative"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="@dimen/_6sdp">
+                android:layout_marginTop="@dimen/_6sdp"
+                android:layout_toEndOf="@id/parentRelative">
 
-                <com.gitpro.gitidea.CustomTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="John"
-                    app:typeface="roboto.ttf"
-                    android:textSize="@dimen/_15ssp"
-                    android:singleLine="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginTop="@dimen/_10ssp"
-                    android:layout_marginStart="@dimen/_6sdp"
-                    android:maxLength="20"
+                <com.gitpro.gitidea.customs.CustomTextView
                     android:id="@+id/project_name2"
-                    android:textColor="@color/black"
-                    />
-
-                <com.gitpro.gitidea.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1/6/2022\n6:21:00"
-                    android:textSize="@dimen/_12ssp"
                     android:layout_alignParentTop="true"
-                    android:layout_marginTop="@dimen/_13ssp"
                     android:layout_marginStart="@dimen/_6sdp"
-                    android:maxLength="30"
-                    android:visibility="gone"
-                    app:typeface="roboto.ttf"
-                    android:id="@+id/project_date"
+                    android:layout_marginTop="@dimen/_10ssp"
+                    android:maxLength="20"
+                    android:singleLine="true"
+                    android:text="John"
                     android:textColor="@color/black"
-                    />
+                    android:textSize="@dimen/_15ssp"
+                    app:typeface="roboto.ttf" />
 
-                <com.gitpro.gitidea.CustomTextView
+                <com.gitpro.gitidea.customs.CustomTextView
+                    android:id="@+id/project_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:layout_marginTop="@dimen/_13ssp"
+                    android:maxLength="30"
+                    android:text="1/6/2022\n6:21:00"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp"
+                    android:visibility="gone"
+                    app:typeface="roboto.ttf" />
+
+                <com.gitpro.gitidea.customs.CustomTextView
                     android:id="@+id/project_desc2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -137,30 +147,29 @@
                     app:typeface="montserrat_semibold.ttf" />
 
 
-
                 <com.overflowarchives.linkpreview.SkypePreview
                     android:id="@+id/image_content2"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_100sdp"
-                    android:adjustViewBounds="true"
-                    android:background="@drawable/bg_featured"
-                    android:maxHeight="@dimen/_100sdp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginEnd="@dimen/_9sdp"
-                    android:layout_marginStart="@dimen/_9sdp"
                     android:layout_below="@id/project_desc2"
-                    />
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/_9sdp"
+                    android:layout_marginEnd="@dimen/_9sdp"
+                    android:adjustViewBounds="true"
+
+                    android:maxHeight="@dimen/_100sdp" />
+
                 <View
                     android:id="@+id/line"
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:background="@color/black"
+                    android:layout_below="@id/image_content2"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/_10ssp"
                     android:layout_marginTop="4sp"
                     android:layout_marginEnd="@dimen/_10ssp"
-                    android:layout_marginStart="@dimen/_10ssp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_below="@id/image_content2" />
+                    android:background="@color/black" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/comment_ic"
@@ -172,17 +181,15 @@
                     android:layout_marginTop="@dimen/_9sdp"
                     app:srcCompat="@drawable/ic_chat_comment_gray" />
 
-                <com.gitpro.gitidea.CustomTextView
+                <com.gitpro.gitidea.customs.CustomTextView
+                    android:id="@+id/comment_num2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:id="@+id/comment_num2"
-                    app:typeface="roboto.ttf"
-                    android:layout_marginTop="@dimen/_9sdp"
                     android:layout_below="@id/image_content2"
+                    android:layout_marginTop="@dimen/_9sdp"
                     android:layout_toEndOf="@id/comment_ic"
-                    />
-
+                    android:textColor="@color/black"
+                    app:typeface="roboto.ttf" />
 
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -190,22 +197,21 @@
                     android:layout_width="30dp"
                     android:layout_height="20dp"
                     android:layout_below="@id/image_content2"
-                    android:layout_marginTop="@dimen/_9sdp"
                     android:layout_marginStart="@dimen/_50ssp"
+                    android:layout_marginTop="@dimen/_9sdp"
                     android:layout_toEndOf="@id/comment_ic"
                     app:srcCompat="@drawable/ic_favourite" />
 
 
-                <com.gitpro.gitidea.CustomTextView
+                <com.gitpro.gitidea.customs.CustomTextView
                     android:id="@+id/like_num_project"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    app:typeface="roboto.ttf"
-                    android:layout_marginTop="@dimen/_9sdp"
                     android:layout_below="@id/image_content2"
+                    android:layout_marginTop="@dimen/_9sdp"
                     android:layout_toEndOf="@id/like_iic"
-                    />
+                    android:textColor="@color/black"
+                    app:typeface="roboto.ttf" />
 
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -224,9 +230,9 @@
                     android:layout_width="30dp"
                     android:layout_height="20dp"
                     android:layout_below="@id/image_content2"
+                    android:layout_alignParentEnd="true"
                     android:layout_marginTop="@dimen/_9sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    android:layout_alignParentEnd="true"
                     app:srcCompat="@drawable/ic_baseline_share_24" />
 
 
@@ -235,13 +241,11 @@
                     android:layout_height="@dimen/_5sdp"
                     android:layout_below="@id/share_iic"
                     android:layout_marginTop="2sp"
-                    android:background="@color/pale_grey"/>
+                    android:background="@color/pale_grey" />
             </RelativeLayout>
 
 
         </RelativeLayout>
-
-
 
 
     </androidx.cardview.widget.CardView>

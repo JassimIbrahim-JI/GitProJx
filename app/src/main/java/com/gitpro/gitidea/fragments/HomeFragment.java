@@ -5,21 +5,23 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.gitpro.gitidea.R;
-import com.gitpro.gitidea.activities.ExploreActivity;
 import com.gitpro.gitidea.adapters.GroupAdapter;
 import com.gitpro.gitidea.models.Articles;
 import com.gitpro.gitidea.models.Group;
 import com.gitpro.gitidea.models.topics.Item;
+import com.gitpro.gitidea.ui.ExploreActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,14 +29,15 @@ import java.util.List;
 
 public class HomeFragment extends Fragment implements GroupAdapter.itemClickListener {
 
-RecyclerView recyclerView;
-List<Group>groupList;
-GroupAdapter groupAdapter;
-ArrayList<Item>recommendedList;
-List<Articles>featuredList;
-SearchView searchView;
-ExploreActivity exploreActivity;
-SwipeRefreshLayout swipeRefreshLayout;
+    RecyclerView recyclerView;
+   private List<Group>groupList;
+    private GroupAdapter groupAdapter;
+    ArrayList<Item>recommendedList;
+    private List<Articles>featuredList;
+    ExploreActivity exploreActivity;
+    SwipeRefreshLayout swipeRefreshLayout;
+    TextView textDev;
+    private FirebaseUser mUsr;
 
 
     public HomeFragment() {
@@ -46,6 +49,7 @@ SwipeRefreshLayout swipeRefreshLayout;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        mUsr= FirebaseAuth.getInstance().getCurrentUser();
         return inflater.inflate(R.layout.fragment_blank, container, false);
     }
 
@@ -54,7 +58,6 @@ SwipeRefreshLayout swipeRefreshLayout;
         super.onViewCreated(view, savedInstanceState);
 
      setGroupAdapterType(view);
-     setSearchView(view);
 
     swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
          @Override
@@ -72,7 +75,13 @@ SwipeRefreshLayout swipeRefreshLayout;
 
         swipeRefreshLayout=view.findViewById(R.id.refresh_group);
        recyclerView=view.findViewById(R.id.home_rv);
+       textDev=view.findViewById(R.id.texDev);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                  if (mUsr!=null) {
+                 textDev.setText("Hi " + mUsr.getDisplayName());
+                    }
+
 
         groupAdapter=new GroupAdapter(exploreActivity,initGroupData(),initFeaturedData(),initRecommendedData(),this);
         recyclerView.setAdapter(groupAdapter);
@@ -104,28 +113,6 @@ SwipeRefreshLayout swipeRefreshLayout;
         super.onAttach(context);
         exploreActivity =(ExploreActivity) context;
     }
-
-    public void setSearchView(View view){
-
-        searchView=view.findViewById(R.id.search_items);
-              searchView.setQueryHint("Search Here... ");
-              searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                  @Override
-                  public boolean onQueryTextSubmit(String query) {
-                      return false;
-                  }
-
-                  @Override
-                  public boolean onQueryTextChange(String newText) {
-                      groupAdapter.getFilter().filter(newText);
-                      return false;
-                  }
-              });
-    }
-
-
-
-
 
     @Override
     public void itemSelected(Articles groupModel) {

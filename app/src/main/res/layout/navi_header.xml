@@ -21,7 +21,7 @@
         android:layout_height="70dp" />
 
 
-        <com.gitpro.gitidea.CustomTextView
+        <com.gitpro.gitidea.customs.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
@@ -34,7 +34,7 @@
             />
 
 
-        <com.gitpro.gitidea.CustomTextView
+        <com.gitpro.gitidea.customs.CustomTextView
             android:layout_width="match_parent"
             android:gravity="center"
             android:layout_height="wrap_content"

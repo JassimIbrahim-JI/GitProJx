@@ -2,15 +2,12 @@ package com.gitpro.gitidea.adapters;
 
 import static com.gitpro.gitidea.models.repos.AndroidGitRepository.ALL_TOPICS_BASE_URL;
 
-import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,16 +18,16 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.gitpro.gitidea.CustomTextView;
+import com.gitpro.gitidea.customs.CustomTextView;
 import com.gitpro.gitidea.R;
-import com.gitpro.gitidea.activities.DetailsRepoActivity;
-import com.gitpro.gitidea.activities.RepoActivity;
 import com.gitpro.gitidea.models.Articles;
 import com.gitpro.gitidea.models.Group;
 import com.gitpro.gitidea.models.News;
-import com.gitpro.gitidea.models.viewmodels.AndroidRepoViewModel;
 import com.gitpro.gitidea.models.topics.Item;
+import com.gitpro.gitidea.models.viewmodels.AndroidRepoViewModel;
 import com.gitpro.gitidea.network.ApiClient;
+import com.gitpro.gitidea.ui.DetailsRepoActivity;
+import com.gitpro.gitidea.ui.RepoActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,19 +38,17 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class GroupAdapter  extends RecyclerView.Adapter<GroupAdapter.GroupVH> implements Filterable {
+public class GroupAdapter  extends RecyclerView.Adapter<GroupAdapter.GroupVH> {
 
     AppCompatActivity context;
     List<Group>groupList;
     List<Articles> featuredList;
-    List<Articles>filterList;
     itemClickListener itemClickListener;
     PlantFeaturedAdapter plantFeaturedAdapter;
     AllTopicAdapter allTopicAdapter;
     ArrayList<Item>recommendedList;
     private AndroidRepoViewModel androidRepoViewModel;
     private final String api="109a9b6a1ad3488eaabb246a97f70d1e";
-
 
     public interface itemClickListener {
         void itemSelected(Articles groupModel);
@@ -67,7 +62,6 @@ public class GroupAdapter  extends RecyclerView.Adapter<GroupAdapter.GroupVH> im
         this.featuredList = featuredList;
         this.recommendedList = recommendedList;
         this.itemClickListener=itemClickListener;
-        filterList=featuredList;
     }
 
     @NonNull
@@ -108,42 +102,6 @@ public class GroupAdapter  extends RecyclerView.Adapter<GroupAdapter.GroupVH> im
         return groupList.size();
     }
 
-    @Override
-    public Filter getFilter() {
-
-        return new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence charSequence) {
-
-              FilterResults results=new FilterResults();
-           if (charSequence.length()==0&&charSequence.toString().isEmpty()){
-                   results.values=filterList;
-                   results.count=filterList.size();
-           }
-           else {
-             String searchText=charSequence.toString().toLowerCase();
-             List<Articles>searchList=new ArrayList<>();
-             for (Articles pLists:filterList){
-                 if (pLists.getTitle().toLowerCase().contains(searchText)||
-                         pLists.getDescription().toLowerCase().contains(searchText)){
-                     searchList.add(pLists);
-                 }
-
-             }
-             results.values=searchList;
-             results.count=searchList.size();
-           }
-                return results;
-            }
-
-            @SuppressLint("NotifyDataSetChanged")
-            @Override
-            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-              featuredList= (List<Articles>) filterResults.values;
-              notifyDataSetChanged();
-            }
-        };
-    }
 
     public class GroupVH extends RecyclerView.ViewHolder {
         CustomTextView groupTitle;

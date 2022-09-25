@@ -19,10 +19,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.gitpro.gitidea.FireStoreQueries;
+import com.gitpro.gitidea.utils.FireStoreQueries;
 import com.gitpro.gitidea.R;
-import com.gitpro.gitidea.activities.DetailsProjectActivity;
-import com.gitpro.gitidea.activities.ExploreActivity;
+import com.gitpro.gitidea.ui.DetailsProjectActivity;
+import com.gitpro.gitidea.ui.ExploreActivity;
 import com.gitpro.gitidea.adapters.ProjectAdapter;
 import com.gitpro.gitidea.models.Project;
 import com.gitpro.gitidea.models.User;

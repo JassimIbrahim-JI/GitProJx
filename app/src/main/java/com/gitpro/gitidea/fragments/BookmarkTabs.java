@@ -29,11 +29,11 @@ public class BookmarkTabs extends Fragment {
         tabLayout=view.findViewById(R.id.book_tabs);
         mViewPager=view.findViewById(R.id.bm_view_pager);
 
-        BookmarkFragmentPager pager=new BookmarkFragmentPager(getActivity().getSupportFragmentManager()
+        BookmarkViewPager pager=new BookmarkViewPager(getActivity().getSupportFragmentManager()
         , getActivity().getLifecycle());
         pager.addFragments(new BookmarkTopic());
         pager.addFragments(new BookmarkProject());
-
+        mViewPager.setAdapter(pager);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -53,7 +53,6 @@ public class BookmarkTabs extends Fragment {
             }
         });
 
-        mViewPager.setAdapter(pager);
         mViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {

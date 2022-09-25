@@ -29,7 +29,7 @@
 
 
 
-        <com.gitpro.gitidea.CustomTextView
+        <com.gitpro.gitidea.customs.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:typeface="montserrat_black.ttf"
@@ -50,7 +50,7 @@
             android:paddingVertical="@dimen/_7ssp"
             android:layout_gravity="bottom">
 
-        <com.gitpro.gitidea.CustomTextView
+        <com.gitpro.gitidea.customs.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:typeface="montserrat_semibold.ttf"
@@ -64,7 +64,7 @@
             />
 
 
-            <com.gitpro.gitidea.CustomTextView
+            <com.gitpro.gitidea.customs.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:typeface="montserrat_semibold.ttf"

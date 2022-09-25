@@ -43,6 +43,7 @@ public class FollowersFragment extends Fragment {
     private ImageView NoDataIV;
     private ProgressBar progressBar;
 
+
     public FollowersFragment() {
         // Required empty public constructor
     }

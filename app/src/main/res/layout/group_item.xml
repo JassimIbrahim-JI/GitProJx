@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
 
-    <com.gitpro.gitidea.CustomTextView
+    <com.gitpro.gitidea.customs.CustomTextView
         android:id="@+id/group_title"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
@@ -49,7 +49,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/view_rv"

@@ -1,6 +1,5 @@
 package com.gitpro.gitidea.adapters;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,13 +9,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.gitpro.gitidea.utils.FireStoreQueries;
 import com.gitpro.gitidea.R;
 import com.gitpro.gitidea.models.Comment;
+import com.gitpro.gitidea.models.User;
 import com.squareup.picasso.Picasso;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -25,7 +23,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
     List<Comment> mComment;
     Context context;
-        String topicPosition;
+    String topicPosition;
 
 
     public CommentAdapter(Context context,List<Comment>mComment,String topicPosition){
@@ -50,6 +48,13 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         holder.setTextComment(comment.comment);
         holder.setUserComment(comment.user);
         holder.setProfileCommentPic(comment.photoProfile);
+        FireStoreQueries.getUser(new FireStoreQueries.FirestoreUsersCallback() {
+            @Override
+            public void onCallback(User user) {
+                holder.setUserReply(user.userName);
+            }
+        });
+
 
 
     }
@@ -66,15 +71,12 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             mView=itemView;
         }
 
-
-        private String getCurrentDate() {
-            long millis = System.currentTimeMillis();
-            Date date = new Date(millis);
-            @SuppressLint("SimpleDateFormat") DateFormat format = new SimpleDateFormat("dd MMMM");
-            return format.format(date);
-        }
         public void setUserComment(String userName){
             TextView userComment=mView.findViewById(R.id.comment_username);
+            userComment.setText("@"+ userName+"");
+        }
+        public void setUserReply(String userName){
+            TextView userComment=mView.findViewById(R.id.reply_tv);
             userComment.setText("@"+ userName+"");
         }
         public void setProfileCommentPic(String imageURL){

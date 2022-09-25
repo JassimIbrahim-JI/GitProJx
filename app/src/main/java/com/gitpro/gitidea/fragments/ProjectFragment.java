@@ -22,9 +22,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
-import com.gitpro.gitidea.FireStoreQueries;
+import com.gitpro.gitidea.utils.FireStoreQueries;
 import com.gitpro.gitidea.R;
-import com.gitpro.gitidea.activities.DetailsProjectActivity;
+import com.gitpro.gitidea.ui.DetailsProjectActivity;
 import com.gitpro.gitidea.adapters.ProjectAdapter;
 import com.gitpro.gitidea.models.Project;
 import com.google.firebase.auth.FirebaseAuth;

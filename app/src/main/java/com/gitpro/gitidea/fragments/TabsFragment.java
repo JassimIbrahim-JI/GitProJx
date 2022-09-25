@@ -12,8 +12,8 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.gitpro.gitidea.R;
-import com.gitpro.gitidea.activities.ProjectActivity;
-import com.gitpro.gitidea.activities.TopicActivity;
+import com.gitpro.gitidea.ui.ProjectActivity;
+import com.gitpro.gitidea.ui.TopicActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
@@ -36,7 +36,7 @@ public class TabsFragment extends Fragment {
         mViewPager = mView.findViewById(R.id.tour_view_pager);
         fabAddTopic =mView.findViewById(R.id.add_topic);
 
-        TopicFragmentPager pager=new TopicFragmentPager(mView.getContext(),
+        TopicViewPager pager=new TopicViewPager(mView.getContext(),
         getActivity().getSupportFragmentManager(),getLifecycle());
 
         pager.addFragment(new TopicFragment());
