@@ -17,9 +17,9 @@ import java.util.ArrayList;
 
 public class FollowersAndFollowingAdapter extends RecyclerView.Adapter<FollowersAndFollowingAdapter.ViewHolder> {
 
-    private Context context;
-    private ArrayList<FollowersAndFollowing> followersAndFollowingList;
-    private onItemClickListener onItemClickListener;
+    private final Context context;
+    private final ArrayList<FollowersAndFollowing> followersAndFollowingList;
+    private final onItemClickListener onItemClickListener;
 
     public FollowersAndFollowingAdapter(Context context, ArrayList<FollowersAndFollowing> followersAndFollowingList, onItemClickListener onItemClickListener) {
         this.context = context;
@@ -52,6 +52,10 @@ public class FollowersAndFollowingAdapter extends RecyclerView.Adapter<Followers
         return followersAndFollowingList.size();
     }
 
+    public interface onItemClickListener {
+        void respond(FollowersAndFollowing followersAndFollowing);
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView UserName, ProfileLink;
         CardView cardView;
@@ -62,9 +66,5 @@ public class FollowersAndFollowingAdapter extends RecyclerView.Adapter<Followers
             ProfileLink = itemView.findViewById(R.id.ProfileLink);
             cardView = itemView.findViewById(R.id.item_card_view);
         }
-    }
-
-    public interface onItemClickListener {
-        void respond(FollowersAndFollowing followersAndFollowing);
     }
 }

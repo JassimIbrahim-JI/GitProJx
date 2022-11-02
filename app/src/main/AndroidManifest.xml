@@ -29,7 +29,7 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".ui.GalleryActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".ui.EditProfileActivity"
             android:exported="false" />
@@ -108,8 +108,6 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
-
 
 
         <meta-data

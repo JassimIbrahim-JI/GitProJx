@@ -18,9 +18,9 @@ import java.util.ArrayList;
 
 public class AllTopicAdapter extends RecyclerView.Adapter<AllTopicAdapter.ViewHolder> {
     private onItemClickListener onItemClickListener;
-    private ArrayList<Item> androidItemList;
-    private int layoutRes;
-    private Context context;
+    private final ArrayList<Item> androidItemList;
+    private final int layoutRes;
+    private final Context context;
 
     public AllTopicAdapter(ArrayList<Item> androidItemList, Context context, int layoutRes) {
         this.androidItemList = androidItemList;
@@ -31,7 +31,7 @@ public class AllTopicAdapter extends RecyclerView.Adapter<AllTopicAdapter.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(layoutRes,viewGroup,false);
+        View view = LayoutInflater.from(context).inflate(layoutRes, viewGroup, false);
         return new ViewHolder(view);
     }
 
@@ -45,9 +45,9 @@ public class AllTopicAdapter extends RecyclerView.Adapter<AllTopicAdapter.ViewHo
         } else {
             viewHolder.Language.setText("No Language Found");
         }
-        viewHolder.NumberOfStars.setText(""+androidItem.getStargazers_count());
-        viewHolder.NumberOfForks.setText(""+androidItem.getForks_count());
-        viewHolder.NumberOfWatch.setText(""+androidItem.getWatchers_count());
+        viewHolder.NumberOfStars.setText("" + androidItem.getStargazers_count());
+        viewHolder.NumberOfForks.setText("" + androidItem.getForks_count());
+        viewHolder.NumberOfWatch.setText("" + androidItem.getWatchers_count());
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,9 +65,14 @@ public class AllTopicAdapter extends RecyclerView.Adapter<AllTopicAdapter.ViewHo
         this.onItemClickListener = onItemClickListener;
     }
 
+    public interface onItemClickListener {
+        void respond(Item androidItem);
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
-        TextView FullName , RepoLink , Language , NumberOfStars , NumberOfWatch , NumberOfForks;
+        TextView FullName, RepoLink, Language, NumberOfStars, NumberOfWatch, NumberOfForks;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             cardView = itemView.findViewById(R.id.item_card_view);
@@ -78,9 +83,5 @@ public class AllTopicAdapter extends RecyclerView.Adapter<AllTopicAdapter.ViewHo
             NumberOfForks = itemView.findViewById(R.id.NumberOfForks);
             NumberOfWatch = itemView.findViewById(R.id.NumberOfWatch);
         }
-    }
-
-    public interface onItemClickListener{
-        void respond(Item androidItem);
     }
 }

@@ -26,23 +26,23 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     String topicPosition;
 
 
-    public CommentAdapter(Context context,List<Comment>mComment,String topicPosition){
+    public CommentAdapter(Context context, List<Comment> mComment, String topicPosition) {
 
-        this.context=context;
-        this.mComment=mComment;
-        this.topicPosition=topicPosition;
+        this.context = context;
+        this.mComment = mComment;
+        this.topicPosition = topicPosition;
     }
 
     @NonNull
     @Override
     public CommentVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new CommentVH(LayoutInflater.from(context).
-                inflate(R.layout.all_comments_layout,parent,false));
+                inflate(R.layout.all_comments_layout, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull CommentVH holder, int position) {
-        Comment comment= mComment.get(position);
+        Comment comment = mComment.get(position);
 
         holder.setCommentTime(comment.date);
         holder.setTextComment(comment.comment);
@@ -56,7 +56,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         });
 
 
-
     }
 
     @Override
@@ -64,32 +63,37 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         return mComment.size();
     }
 
-    public static class CommentVH extends RecyclerView.ViewHolder{
+    public static class CommentVH extends RecyclerView.ViewHolder {
         View mView;
-        public CommentVH(View itemView){
+
+        public CommentVH(View itemView) {
             super(itemView);
-            mView=itemView;
+            mView = itemView;
         }
 
-        public void setUserComment(String userName){
-            TextView userComment=mView.findViewById(R.id.comment_username);
-            userComment.setText("@"+ userName+"");
+        public void setUserComment(String userName) {
+            TextView userComment = mView.findViewById(R.id.comment_username);
+            userComment.setText("@" + userName + "");
         }
-        public void setUserReply(String userName){
-            TextView userComment=mView.findViewById(R.id.reply_tv);
-            userComment.setText("@"+ userName+"");
+
+        public void setUserReply(String userName) {
+            TextView userComment = mView.findViewById(R.id.reply_tv);
+            userComment.setText("@" + userName + "");
         }
-        public void setProfileCommentPic(String imageURL){
-            CircleImageView profileCommentPic=mView.findViewById(R.id.comment_profile_pic);
+
+        public void setProfileCommentPic(String imageURL) {
+            CircleImageView profileCommentPic = mView.findViewById(R.id.comment_profile_pic);
             Picasso.get().load(imageURL).fit().into(profileCommentPic);
         }
-        public void setTextComment(String textComment){
-         TextView mComment=mView.findViewById(R.id.comment_text);
+
+        public void setTextComment(String textComment) {
+            TextView mComment = mView.findViewById(R.id.comment_text);
             mComment.setText(textComment);
         }
-        public void setCommentTime(String time){
-          TextView cTime=mView.findViewById(R.id.comment_time);
-            cTime.setText("\u2022"+time);
+
+        public void setCommentTime(String time) {
+            TextView cTime = mView.findViewById(R.id.comment_time);
+            cTime.setText("\u2022" + time);
         }
 
 
