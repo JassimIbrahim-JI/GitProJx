@@ -201,9 +201,9 @@ public class TopicActivity extends AppCompatActivity  {
                                                 myImages.add(0,myUri);
                                                 DocumentReference reference1=mFirebaseFirestore.collection("users")
                                                         .document(user.userId);
-                                                Map<String,Object>myImage=new HashMap<>();
-                                                myImage.put("userImages",myImages);
-                                                reference1.update(myImage);
+                                                Map<String,Object>images=new HashMap<>();
+                                                images.put("userImages",myImages);
+                                                reference1.update(images);
                                             }
                                         }
                                     });

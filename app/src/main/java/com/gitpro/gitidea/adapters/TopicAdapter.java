@@ -62,7 +62,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicImageVH
     List<Topic>positionItemList;
     List<String>bookmark_HashSet;
     public static Topic model;
-    private FirebaseFirestore db;
+    private FirebaseFirestore dbs;
 
     View view;
     int id = 0;
@@ -100,7 +100,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicImageVH
     @NonNull
     @Override
     public TopicImageVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        db = FirebaseFirestore.getInstance();
+        dbs = FirebaseFirestore.getInstance();
         user= FirebaseAuth.getInstance().getCurrentUser();
         LayoutInflater layoutInflater = LayoutInflater.from(fActivity);
            view = layoutInflater.inflate(R.layout.custom_topic1, parent, false);
@@ -247,7 +247,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicImageVH
                 }
             });
 
-                   db.collection("users").document(user.getUid())
+                   dbs.collection("users").document(user.getUid())
                            .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                        @Override
                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -259,8 +259,8 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicImageVH
                             @Override
                             public void onClick(View view) {
                                 isExist = true;
-                                DocumentReference reference = db.collection("users").document(userId);
-                                db.collection("topics/" + topicId + "/books").document(userId)
+                                DocumentReference reference = dbs.collection("users").document(userId);
+                                dbs.collection("topics/" + topicId + "/books").document(userId)
                                         .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -268,7 +268,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicImageVH
                                             if (!task.getResult().exists()) {
                                                 Map<String, Object> add = new HashMap<>();
                                                 add.put("date", FieldValue.serverTimestamp());
-                                                db.collection("topics/" + topicId + "/books")
+                                                dbs.collection("topics/" + topicId + "/books")
                                                         .document(userId).set(add);
                                                 ArrayList<String> addBookList = (ArrayList<String>) user.bookMark;
                                                 addBookList.add(topicId);
@@ -278,7 +278,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicImageVH
                                                 reference.update(adds);
                                                 isExist = false;
                                             } else {
-                                                db.collection("topics/" + topicId + "/books").document(userId)
+                                                dbs.collection("topics/" + topicId + "/books").document(userId)
                                                         .delete();
                                                 ArrayList<String> removeBookList = (ArrayList<String>) user.bookMark;
                                                 removeBookList.remove(topicId);
@@ -297,7 +297,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicImageVH
                             @Override
                             public void onClick(View view) {
                                 likeStatus = true;
-                                db.collection("topics/" + topicId + "/likes").document(userId)
+                                dbs.collection("topics/" + topicId + "/likes").document(userId)
                                         .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -305,12 +305,12 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicImageVH
                                             if (!task.getResult().exists()) {
                                                 Map<String, Object> like = new HashMap<>();
                                                 like.put("date", FieldValue.serverTimestamp());
-                                                db.collection("topics/" + topicId + "/likes").document(userId)
+                                                dbs.collection("topics/" + topicId + "/likes").document(userId)
                                                         .set(like);
                                                 addNotification(userId,user.photoUrl,topicId);
                                                 likeStatus = false;
                                             } else {
-                                                db.collection("topics/" + topicId + "/likes").document(userId)
+                                                dbs.collection("topics/" + topicId + "/likes").document(userId)
                                                         .delete();
                                                 likeStatus = true;
                                             }
@@ -321,7 +321,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicImageVH
                         });
 
 
-                        db.collection("topics/" + topicId + "/books").document(userId)
+                        dbs.collection("topics/" + topicId + "/books").document(userId)
                                 .addSnapshotListener(new EventListener<DocumentSnapshot>() {
                                     @Override
                                     public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -339,7 +339,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicImageVH
                                     }
                                 });
 
-                        db.collection("topics/" + topicId + "/likes").document(userId)
+                        dbs.collection("topics/" + topicId + "/likes").document(userId)
                                 .addSnapshotListener(new EventListener<DocumentSnapshot>() {
                                     @Override
                                     public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -359,8 +359,8 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicImageVH
                                 });
 
 
-                        DocumentReference topicRef = db.collection("topics").document(topicId);
-                        db.collection("topics/" + topicId + "/likes").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                        DocumentReference topicRef = dbs.collection("topics").document(topicId);
+                        dbs.collection("topics/" + topicId + "/likes").addSnapshotListener(new EventListener<QuerySnapshot>() {
                             @Override
                             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                                 if (error == null) {
@@ -387,7 +387,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicImageVH
                         });
 
 
-                        db.collection("topics/" + topicId + "/comments").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                        dbs.collection("topics/" + topicId + "/comments").addSnapshotListener(new EventListener<QuerySnapshot>() {
                             @Override
                             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                                 if (error == null) {
@@ -450,7 +450,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicImageVH
                 //getMenu id;
                 switch (menuItem.getItemId()) {
                     case R.id.delete_topic:
-                        db.collection("topics").document(topic.getTopicId()).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        dbs.collection("topics").document(topic.getTopicId()).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
 
@@ -472,7 +472,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicImageVH
             }
 
     private void addNotification(String userId,String photoUrl,String topicId) {
-        DocumentReference notificationRef=db.collection("notifications")
+        DocumentReference notificationRef= dbs.collection("notifications")
                 .document(userId);
         Notification notification=new Notification(user.getUid(),photoUrl,"liked your topic..",
                 topicId,"",true,false);
