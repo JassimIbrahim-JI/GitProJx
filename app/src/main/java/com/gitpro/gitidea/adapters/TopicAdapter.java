@@ -62,7 +62,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicImageVH
     List<Topic>positionItemList;
     List<String>bookmark_HashSet;
     public static Topic model;
-    private FirebaseFirestore dbs;
+    private FirebaseFirestore db;
 
     View view;
     int id = 0;
