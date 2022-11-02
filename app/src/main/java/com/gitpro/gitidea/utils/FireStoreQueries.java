@@ -136,32 +136,6 @@ public static void getProjects(final FirestoreProjectCallback firestoreProjectCa
     });
 }
 
-    public static void getImages(final FirestoreImagesCallback firestoreImagesCallback){
-        mFirebaseAuth = FirebaseAuth.getInstance();
-        mFirebaseFirestore = FirebaseFirestore.getInstance();
-        galleries = mFirebaseFirestore.collection("gallery");
-        //getting places
-        galleries.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    List<Gallery> mImages = new ArrayList<>();
-
-                    for (QueryDocumentSnapshot document :  task.getResult()) {
-                        Log.d("Images =",document.getData()+"");
-                        mImages.add(document.toObject(Gallery.class));
-                    }
-
-                    firestoreImagesCallback.onCallback(mImages);
-                }else
-                    Log.d(TAG, "Error getting documents: ", task.getException());
-            }
-        });
-    }
-
-
-
-
     public interface FirestoreUsersCallback {
         void onCallback(User user);
     }

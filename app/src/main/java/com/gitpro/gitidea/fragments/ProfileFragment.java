@@ -303,6 +303,7 @@ public class ProfileFragment  extends Fragment {
                    Picasso.get().load(user.photoUrl)
                            .noPlaceholder().into(profileImage);
 
+                   Glide.with(activity2).load(user.userHeader).into(headerTabImage);
                    eMail.setText(user.email);
                    userName.setText(user.userName);
                    userBio.setText(user.userBio);

@@ -21,15 +21,15 @@ import com.google.android.material.tabs.TabLayout;
 public class DetailsRepoActivity extends AppCompatActivity {
 
     private static Item item = null;
-    private ImageView backBtn,mNoDataIV;
+    private ImageView backBtn, mNoDataIV;
     private TextView mUserName, mRepoLink, mDescription, mNumberOfForks, mNumberOfWatch,
-            mNumberOfStars, mNumberOfIssues, mCreated_At, mUpdate_At, mLanguage, mNoDataMessage;
+            mNumberOfStars, mNumberOfIssues, mCreated_At, mUpdate_At, mLanguage;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       setContentView( R.layout.activity_details);
+        setContentView(R.layout.activity_details);
 
         //region init UI and bind those UI to perform UI interactions
         init();
@@ -39,19 +39,18 @@ public class DetailsRepoActivity extends AppCompatActivity {
 
     //region init UI
     private void init() {
-     backBtn=findViewById(R.id.back_btn);
-     mUserName=findViewById(R.id.UserName);
-     mDescription=findViewById(R.id.Description);
-     mRepoLink=findViewById(R.id.RepoLink);
-     mNumberOfForks=findViewById(R.id.NumberOfForks);
-     mNumberOfIssues=findViewById(R.id.NumberOfIssues);
-     mNumberOfStars=findViewById(R.id.NumberOfStars);
-     mNumberOfWatch=findViewById(R.id.NumberOfWatch);
-     mLanguage=findViewById(R.id.Language);
-     mNoDataMessage=findViewById(R.id.NoDataMessage);
-     mCreated_At=findViewById(R.id.Created_At);
-     mUpdate_At=findViewById(R.id.Updated_At);
-     mNoDataIV=findViewById(R.id.NoDataIV);
+        backBtn = findViewById(R.id.back_btn);
+        mUserName = findViewById(R.id.UserName);
+        mDescription = findViewById(R.id.Description);
+        mRepoLink = findViewById(R.id.RepoLink);
+        mNumberOfForks = findViewById(R.id.NumberOfForks);
+        mNumberOfIssues = findViewById(R.id.NumberOfIssues);
+        mNumberOfStars = findViewById(R.id.NumberOfStars);
+        mNumberOfWatch = findViewById(R.id.NumberOfWatch);
+        mLanguage = findViewById(R.id.Language);
+        mCreated_At = findViewById(R.id.Created_At);
+        mUpdate_At = findViewById(R.id.Updated_At);
+        mNoDataIV = findViewById(R.id.NoDataIV);
     }
     //endregion
 
@@ -68,15 +67,14 @@ public class DetailsRepoActivity extends AppCompatActivity {
 
         //region get data from intent and perform certain operations
         getData();
-        if (item != null){
+        if (item != null) {
             setViewPager();
             setData();
             if (mNoDataIV.getVisibility() == View.VISIBLE) {
                 mNoDataIV.setVisibility(View.GONE);
             }
-        }
-        else{
-            Toast.makeText(DetailsRepoActivity.this, "No Item Found",Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(DetailsRepoActivity.this, "No Item Found", Toast.LENGTH_LONG).show();
             if (mNoDataIV.getVisibility() == View.GONE) {
                 mNoDataIV.setVisibility(View.VISIBLE);
             }
@@ -86,28 +84,30 @@ public class DetailsRepoActivity extends AppCompatActivity {
     //endregion
 
     //region get intent parcelable object
-    private void getData(){
-        if (getIntent().getExtras().getParcelable("item") != null){
+    private void getData() {
+        if (getIntent().getExtras().getParcelable("item") != null) {
             item = (Item) getIntent().getExtras().getParcelable("item");
-            Log.v("Shakil : ", "ScholarshipDetailsActivity : getIntentData: "+item.getFull_name());
+            Log.v("Shakil : ", "ScholarshipDetailsActivity : getIntentData: " + item.getFull_name());
         }
     }
     //endregion
 
     //region set data after getting intent data
-    private void setData(){
+    private void setData() {
         mUserName.setText(item.getFull_name());
         mRepoLink.setText(item.getHtml_url());
 
-        if (item.getDescription() == null) mDescription.setText("No description for this repository.");
+        if (item.getDescription() == null)
+            mDescription.setText("No description for this repository.");
         else mDescription.setText(item.getDescription());
 
-        mNumberOfForks.setText(""+item.getForks_count());
-        mNumberOfStars.setText(""+item.getStargazers_count());
-        mNumberOfWatch.setText(""+item.getWatchers_count());
+        mNumberOfForks.setText("" + item.getForks_count());
+        mNumberOfStars.setText("" + item.getStargazers_count());
+        mNumberOfWatch.setText("" + item.getWatchers_count());
 
-        if (item.getOpen_issues() == null || item.getOpen_issues() == 0) mNumberOfIssues.setText("0");
-        else mNumberOfIssues.setText(""+item.getOpen_issues());
+        if (item.getOpen_issues() == null || item.getOpen_issues() == 0)
+            mNumberOfIssues.setText("0");
+        else mNumberOfIssues.setText("" + item.getOpen_issues());
 
         if (item.getLanguage() == null) mLanguage.setText("No language");
         else mLanguage.setText(item.getLanguage());
@@ -121,46 +121,45 @@ public class DetailsRepoActivity extends AppCompatActivity {
     //endregion
 
     //region setup viewpager
-    private void setViewPager(){
+    private void setViewPager() {
         ViewPager2 viewPager = findViewById(R.id.viewpager);
         DetailsViewPager adapter = new DetailsViewPager(getSupportFragmentManager(), getLifecycle(), item.getFull_name());
-       adapter.addFragment(new FollowersFragment());
-       adapter.addFragment(new FollowingFragment());
-        TabLayout tabLayout =findViewById(R.id.sliding_tabs);
+        adapter.addFragment(new FollowersFragment());
+        adapter.addFragment(new FollowingFragment());
+        TabLayout tabLayout = findViewById(R.id.sliding_tabs);
         viewPager.setAdapter(adapter);
-       tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-           @Override
-           public void onTabSelected(TabLayout.Tab tab) {
-               viewPager.setCurrentItem(tab.getPosition());
-           }
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
 
-           @Override
-           public void onTabUnselected(TabLayout.Tab tab) {
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
 
-           }
+            }
 
-           @Override
-           public void onTabReselected(TabLayout.Tab tab) {
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
 
-           }
-       });
-       viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-           @Override
-           public void onPageSelected(int position) {
-               super.onPageSelected(position);
-               tabLayout.selectTab(tabLayout.getTabAt(position));
-           }
-       });
+            }
+        });
+        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                tabLayout.selectTab(tabLayout.getTabAt(position));
+            }
+        });
     }
-   // endregion
+    // endregion
 
     //region activity components
     @Override
     public void onBackPressed() {
-        if (getIntent().getStringExtra("from").equals("android")){
+        if (getIntent().getStringExtra("from").equals("android")) {
             startActivity(new Intent(DetailsRepoActivity.this, RepoActivity.class));
-        }
-        else if (getIntent().getStringExtra("from").equals("Home")) {
+        } else if (getIntent().getStringExtra("from").equals("Home")) {
             startActivity(new Intent(DetailsRepoActivity.this, ExploreActivity.class));
         }
 

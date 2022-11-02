@@ -37,6 +37,12 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
         this.urls=urls;
     }
 
+    public void setUrls(List<Gallery>urls){
+        this.urls=urls;
+        notifyDataSetChanged();
+    }
+
+
     public static class GalleryVH extends RecyclerView.ViewHolder{
       ShapeableImageView galleryImage;
       ProgressBar progressBar;
@@ -62,7 +68,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
     public void onBindViewHolder(@NonNull GalleryAdapter.GalleryVH holder, int position) {
        Gallery pos= urls.get(position);
 
-        Glide.with(holder.itemView.getContext()).load(pos.imageUri).placeholder(android.R.color.transparent)
+        Glide.with(holder.itemView.getContext()).load(pos.getLargeImageURL()).placeholder(android.R.color.transparent)
         .into(holder.galleryImage);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -75,9 +81,9 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
                         holder.progressBar.setVisibility(View.VISIBLE);
                         SharedPreferences.Editor editor=holder.itemView.getContext().getSharedPreferences("PREFS", Context.MODE_PRIVATE)
                                 .edit();
-                        editor.putString("imageHeader",pos.imageUri);
+                        editor.putString("imageHeader",pos.getLargeImageURL());
                         editor.apply();
-                        updatedData.put("userHeader",pos.imageUri);
+                        updatedData.put("userHeader",pos.getLargeImageURL());
                         DocumentReference userRef=db.collection("users").document(user.userId);
                         userRef.update(updatedData).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override

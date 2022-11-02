@@ -13,19 +13,18 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.gitpro.gitidea.utils.FireStoreQueries;
 import com.gitpro.gitidea.R;
-import com.gitpro.gitidea.ui.DetailsProjectActivity;
-import com.gitpro.gitidea.ui.ExploreActivity;
 import com.gitpro.gitidea.adapters.ProjectAdapter;
 import com.gitpro.gitidea.models.Project;
 import com.gitpro.gitidea.models.User;
+import com.gitpro.gitidea.ui.DetailsProjectActivity;
+import com.gitpro.gitidea.ui.ExploreActivity;
+import com.gitpro.gitidea.utils.FireStoreQueries;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,33 +35,28 @@ public class BookmarkProject extends Fragment implements ProjectAdapter.ItemClic
     RecyclerView mRecyclerViewRecommended;
     RecyclerView.LayoutManager mManger;
     View mView;
-    int countNum=0;
     TextView textView;
     ProjectAdapter bookmarkAdapter;
     SwipeRefreshLayout swipeRefreshLayout;
     ExploreActivity mActivity;
-    Toolbar toolbar;
     User mUser;
     TextView itemCounter;
-    public boolean isActionModeEnabled=false;
+
+    public BookmarkProject() {
+
+    }
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        mActivity=(ExploreActivity) getActivity();
+        mActivity = (ExploreActivity) getActivity();
 
     }
-
-    public BookmarkProject(){
-
-    }
-
-
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView=inflater.inflate(R.layout.fragment_bookmark_project,container,false);
+        mView = inflater.inflate(R.layout.fragment_bookmark_project, container, false);
         swipeRefreshLayout = mView.findViewById(R.id.refresh_recommendedp);
 
         firebase_connection();
@@ -79,11 +73,11 @@ public class BookmarkProject extends Fragment implements ProjectAdapter.ItemClic
 
     private void firebase_connection() {
 
-        textView=mView.findViewById(R.id.test_project);
+        textView = mView.findViewById(R.id.test_project);
         FireStoreQueries.getUser(new FireStoreQueries.FirestoreUsersCallback() {
             @Override
             public void onCallback(User user) {
-                mUser=user;
+                mUser = user;
             }
         });
 
@@ -93,9 +87,9 @@ public class BookmarkProject extends Fragment implements ProjectAdapter.ItemClic
             public void onCallback(List<Project> projects) {
                 mProjects = null;
                 mProjects = projects;
-                ArrayList<String> userKeywords =(ArrayList<String>) mUser.bookMark2;
+                ArrayList<String> userKeywords = (ArrayList<String>) mUser.bookMark2;
                 List<Project> bookmarkTopics = new ArrayList<>();
-                for (int i = 0; i <userKeywords.size(); i++) {
+                for (int i = 0; i < userKeywords.size(); i++) {
                     for (int j = 0; j < mProjects.size(); j++) {
                         if (userKeywords.get(i).contains(mProjects.get(j).projectId))
                             if (!bookmarkTopics.contains(mProjects.get(j))) {
@@ -104,7 +98,7 @@ public class BookmarkProject extends Fragment implements ProjectAdapter.ItemClic
 
                     }
                 }
-                bookmarkAdapter = new ProjectAdapter(mActivity,bookmarkTopics,BookmarkProject.this);
+                bookmarkAdapter = new ProjectAdapter(mActivity, bookmarkTopics, BookmarkProject.this);
                 mManger = new LinearLayoutManager(mActivity);
                 mRecyclerViewRecommended = mView.findViewById(R.id.rv_recommendedp);
                 mRecyclerViewRecommended.setLayoutManager(mManger);
@@ -114,8 +108,7 @@ public class BookmarkProject extends Fragment implements ProjectAdapter.ItemClic
 
                 if (bookmarkTopics.size() == 0) {
                     textView.setVisibility(View.VISIBLE);
-                }
-                else {
+                } else {
                     textView.setVisibility(View.INVISIBLE);
                 }
 
@@ -127,20 +120,17 @@ public class BookmarkProject extends Fragment implements ProjectAdapter.ItemClic
 
     }
 
-    public  void  upDateText(int counter){
-        if (counter==0){
+    public void upDateText(int counter) {
+        if (counter == 0) {
             itemCounter.setText(0 + "  Selected");
-        }
-        else {
+        } else {
             itemCounter.setText(counter + "  Selected");
         }
     }
 
 
-
-
     private void addTransitionEffect() {
-        Animation animation=new AlphaAnimation(0.3f, 1.0f);
+        Animation animation = new AlphaAnimation(0.3f, 1.0f);
         animation.setDuration(400);
         getView().startAnimation(animation);
     }
@@ -148,7 +138,7 @@ public class BookmarkProject extends Fragment implements ProjectAdapter.ItemClic
     @Override
     public void onCallBackItem(Project project) {
         addTransitionEffect();
-        Intent intent=new Intent(getActivity(), DetailsProjectActivity.class);
+        Intent intent = new Intent(getActivity(), DetailsProjectActivity.class);
         getActivity().startActivity(intent);
     }
 }

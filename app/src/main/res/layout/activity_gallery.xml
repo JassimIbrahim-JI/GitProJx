@@ -6,10 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.GalleryActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
@@ -22,23 +18,27 @@
         android:theme="@style/Widget.Design.AppBarLayout"/>
 
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/refresh_gallery">
-
-        <androidx.core.widget.NestedScrollView
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/refresh_gallery"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_below="@id/gallery_tb"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="?actionBarSize"
+            android:layout_marginEnd="0dp">
 
-            <androidx.recyclerview.widget.RecyclerView
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:listitem="@layout/gallery_item"
-                android:id="@+id/gallery_rv"/>
+                android:layout_height="match_parent">
 
-        </androidx.core.widget.NestedScrollView>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/gallery_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:listitem="@layout/gallery_item"
+                    />
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-    </LinearLayout>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+            </androidx.core.widget.NestedScrollView>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>

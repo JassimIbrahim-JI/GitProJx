@@ -58,22 +58,22 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class DetailsProjectActivity extends AppCompatActivity {
 
     String userIdP;
-    String projectId=null;
+    String projectId = null;
     FirebaseFirestore db;
     AppCompatEditText commentInput;
     CommentAdapter commentAdapter;
     ImageView shareComment;
     CircleImageView imageProfile;
-    CustomTextView username,desc;
-    TextView tvDate,tvLike,tvComment;
-    AppCompatImageView ivLike,ivShare,ivComment;
+    CustomTextView username, desc;
+    TextView tvDate, tvLike, tvComment;
+    AppCompatImageView ivLike, ivShare, ivComment;
     SkypePreview ivContent;
     Toolbar toolbar;
     RecyclerView commentRecyclerView;
     SwipeRefreshLayout swipeRefreshLayout;
     List<Comment> comments;
     FirebaseAuth mAuth;
-    private boolean likeStatus=false;
+    private boolean likeStatus = false;
 
 
     @Override
@@ -86,31 +86,30 @@ public class DetailsProjectActivity extends AppCompatActivity {
         readData();
         comments = new ArrayList<>();
         db = FirebaseFirestore.getInstance();
-        mAuth= FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         initComment();
         documents();
         listeners();
 
     }
 
-    public void documents(){
+    public void documents() {
         //comments filtering in project ref
-        Query queryFilter2=db.collection("projects/"+projectId+"/comments").
+        Query queryFilter2 = db.collection("projects/" + projectId + "/comments").
                 orderBy("date", Query.Direction.DESCENDING);
         queryFilter2.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                for (DocumentChange change:value.getDocumentChanges()){
-                    if (change.getType() == DocumentChange.Type.ADDED){
-                        Comment comment=change.getDocument().toObject(Comment.class);
+                for (DocumentChange change : value.getDocumentChanges()) {
+                    if (change.getType() == DocumentChange.Type.ADDED) {
+                        Comment comment = change.getDocument().toObject(Comment.class);
                         comments.add(comment);
                         ivComment.setImageResource(R.drawable.ic_chat_comment_blue);
-                        tvComment.setText(value.size()+"");
+                        tvComment.setText(value.size() + "");
                         commentAdapter.notifyDataSetChanged();
-                    }
-                    else {
+                    } else {
                         ivComment.setImageResource(R.drawable.ic_chat_comment_gray);
-                        tvComment.setText(0+"");
+                        tvComment.setText(0 + "");
                         commentAdapter.notifyDataSetChanged();
                     }
                 }
@@ -118,7 +117,7 @@ public class DetailsProjectActivity extends AppCompatActivity {
         });//end of subCollection comments in projects ref
     }
 
-    public void setToolbar(){
+    public void setToolbar() {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
@@ -132,186 +131,180 @@ public class DetailsProjectActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        swipeRefreshLayout=findViewById(R.id.refresh_commentsP);
-        commentRecyclerView=findViewById(R.id.comments_listP);
-        toolbar=findViewById(R.id.detailedP_toolbar);
-        shareComment=findViewById(R.id.comment_post_buttonP);
-        commentInput=findViewById(R.id.comment_inputP);
-        imageProfile=findViewById(R.id.profile_image_detailP);
-        tvDate=findViewById(R.id.detail_dateP);
-        username=findViewById(R.id.detail_nameP);
-        desc=findViewById(R.id.detail_descP);
-        tvComment=findViewById(R.id.comment_num_detailP);
-        tvLike=findViewById(R.id.like_num_detailP);
-        ivComment=findViewById(R.id.comment_detailP);
-        ivContent=findViewById(R.id.detail_contentP);
-        ivLike=findViewById(R.id.like_detailP);
-        ivShare=findViewById(R.id.share_detailP);
+        swipeRefreshLayout = findViewById(R.id.refresh_commentsP);
+        commentRecyclerView = findViewById(R.id.comments_listP);
+        toolbar = findViewById(R.id.detailedP_toolbar);
+        shareComment = findViewById(R.id.comment_post_buttonP);
+        commentInput = findViewById(R.id.comment_inputP);
+        imageProfile = findViewById(R.id.profile_image_detailP);
+        tvDate = findViewById(R.id.detail_dateP);
+        username = findViewById(R.id.detail_nameP);
+        desc = findViewById(R.id.detail_descP);
+        tvComment = findViewById(R.id.comment_num_detailP);
+        tvLike = findViewById(R.id.like_num_detailP);
+        ivComment = findViewById(R.id.comment_detailP);
+        ivContent = findViewById(R.id.detail_contentP);
+        ivLike = findViewById(R.id.like_detailP);
+        ivShare = findViewById(R.id.share_detailP);
 
     }
 
-    public void readData(){
-        projectId=getIntent().getExtras().getString("projectId");
-        String nameP=getIntent().getExtras().getString("usernameP");
-        String descP=getIntent().getExtras().getString("descP");
-        String urlPreview=getIntent().getExtras().getString("urlPreview");
-        String urlP=getIntent().getExtras().getString("urlP");
-        String date=getIntent().getExtras().getString("dateP");
-        userIdP=getIntent().getExtras().getString("userIdP");
-        int commentNumP=getIntent().getExtras().getInt("commentNumP");
-        String ivCommentP=getIntent().getExtras().getString("ivCommentP");
+    public void readData() {
+        projectId = getIntent().getExtras().getString("projectId");
+        String nameP = getIntent().getExtras().getString("usernameP");
+        String descP = getIntent().getExtras().getString("descP");
+        String urlPreview = getIntent().getExtras().getString("urlPreview");
+        String urlP = getIntent().getExtras().getString("urlP");
+        String date = getIntent().getExtras().getString("dateP");
+        userIdP = getIntent().getExtras().getString("userIdP");
+        int commentNumP = getIntent().getExtras().getInt("commentNumP");
+        String ivCommentP = getIntent().getExtras().getString("ivCommentP");
         username.setText(nameP);
         desc.setText(descP);
         tvDate.setText(date);
-       ivContent.loadUrl(urlPreview, new ViewListener() {
-           @Override
-           public void onPreviewSuccess(boolean b) {
+        ivContent.loadUrl(urlPreview, new ViewListener() {
+            @Override
+            public void onPreviewSuccess(boolean b) {
 
-           }
+            }
 
-           @Override
-           public void onFailedToLoad(@Nullable Exception e) {
+            @Override
+            public void onFailedToLoad(@Nullable Exception e) {
 
-           }
-       });
-        tvComment.setText(commentNumP+"");
+            }
+        });
+        tvComment.setText(commentNumP + "");
         Picasso.get().load(urlP).into(imageProfile);
 
-        if (ivCommentP.equals("comment")){
+        if (ivCommentP.equals("comment")) {
             ivComment.setImageResource(R.drawable.ic_chat_comment_blue);
-        }
-        else {
+        } else {
             ivComment.setImageResource(R.drawable.ic_chat_comment_gray);
         }
     }
 
 
-    public void listeners(){
+    public void listeners() {
 
 
-    shareComment.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            FireStoreQueries.getUser(new FireStoreQueries.FirestoreUsersCallback() {
-                @Override
-                public void onCallback(User user) {
+        shareComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FireStoreQueries.getUser(new FireStoreQueries.FirestoreUsersCallback() {
+                    @Override
+                    public void onCallback(User user) {
 
-                    String commentText = commentInput.getText().toString();
-                    if (!commentText.isEmpty()) {
-                        Map<String, Object> comment = new HashMap<>();
+                        String commentText = commentInput.getText().toString();
+                        if (!commentText.isEmpty()) {
+                            Map<String, Object> comment = new HashMap<>();
 
 
-                        comment.put("user", user.userName);
-                        comment.put("comment", commentText);
-                        comment.put("date",getCurrentDate());
-                        comment.put("photoProfile", user.photoUrl);
-                        db.collection("projects/" + projectId + "/comments").add(comment)
-                                .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<DocumentReference> task) {
-                                        if (task.isSuccessful()) {
-                                            Log.d(TAG, "onComplete: Comment Added ");
-                                        } else {
-                                            Log.d(TAG, "onFailure: Comment Failed");
+                            comment.put("user", user.userName);
+                            comment.put("comment", commentText);
+                            comment.put("date", getCurrentDate());
+                            comment.put("photoProfile", user.photoUrl);
+                            db.collection("projects/" + projectId + "/comments").add(comment)
+                                    .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<DocumentReference> task) {
+                                            if (task.isSuccessful()) {
+                                                Log.d(TAG, "onComplete: Comment Added ");
+                                            } else {
+                                                Log.d(TAG, "onFailure: Comment Failed");
+                                            }
                                         }
-                                    }
-                                });
+                                    });
 
-                        Map<String, Object> userUpdate = new HashMap<>();
-                        List<String> toursCommentedOn = user.toursCommentedOn;
-                        toursCommentedOn.add(projectId);
-                        userUpdate.put("toursCommentedOn", toursCommentedOn);
+                            Map<String, Object> userUpdate = new HashMap<>();
+                            List<String> toursCommentedOn = user.toursCommentedOn;
+                            toursCommentedOn.add(projectId);
+                            userUpdate.put("toursCommentedOn", toursCommentedOn);
 
-                        DocumentReference userRefernce = db.collection("users").document(user.userId);
-                        userRefernce.update(userUpdate).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Log.d(TAG, "onSuccess: user info updated");
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.e(TAG, "onFailure: ", e);
-                            }
-                        });
+                            DocumentReference userRefernce = db.collection("users").document(user.userId);
+                            userRefernce.update(userUpdate).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d(TAG, "onSuccess: user info updated");
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.e(TAG, "onFailure: ", e);
+                                }
+                            });
 
-                    }
-                    commentInput.setText("");
-                }
-
-            });
-        }
-    });
-
-    ivShare.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Intent myIntent = new Intent(Intent.ACTION_SEND);
-            myIntent.setType("text/plain");
-            String shareSub = getString(R.string.sub_title);
-            String shareBody = getString(R.string.title_share) + "\n";
-            myIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub);
-            myIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
-            startActivity(Intent.createChooser(myIntent, getString(R.string.using)));
-        }
-    });
-
-    db.collection("projects/"+projectId+"/likes").document(userIdP)
-         .addSnapshotListener(new EventListener<DocumentSnapshot>() {
-             @Override
-             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                 if (value.exists()) {
-                     ivLike.setImageResource(R.drawable.ic_fill_favorite);
-                    }
-
-                 else{
-                     ivLike.setImageResource(R.drawable.ic_favourite);
-                     }
-                }
-            });
-
-    db.collection("projects/"+projectId+"/likes")
-         .addSnapshotListener(new EventListener<QuerySnapshot>() {
-             @Override
-             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                 if (!value.isEmpty()) {
-                  tvLike.setText(value.size()+"");
-                     }
-
-                    else {
-                    tvLike.setText(0 + "");
-                         }
-                }
-            });
-
-    ivLike.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            likeStatus=true;
-            db.collection("projects/"+projectId+"/likes").document(userIdP)
-                    .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (likeStatus) {
-                        if (!task.getResult().exists()) {
-                            Map<String, Object> maps = new HashMap<>();
-                            maps.put("date", FieldValue.serverTimestamp());
-                            db.collection("projects/" + projectId + "/likes")
-                                    .document(userIdP).set(maps);
-                            likeStatus=false;
                         }
-                        else {
-                            db.collection("projects/"+projectId+"/likes")
-                                    .document(userIdP).delete();
-                            likeStatus=true;
+                        commentInput.setText("");
+                    }
+
+                });
+            }
+        });
+
+        ivShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(Intent.ACTION_SEND);
+                myIntent.setType("text/plain");
+                String shareSub = getString(R.string.sub_title);
+                String shareBody = getString(R.string.title_share) + "\n";
+                myIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub);
+                myIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+                startActivity(Intent.createChooser(myIntent, getString(R.string.using)));
+            }
+        });
+
+        db.collection("projects/" + projectId + "/likes").document(userIdP)
+                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if (value.exists()) {
+                            ivLike.setImageResource(R.drawable.ic_fill_favorite);
+                        } else {
+                            ivLike.setImageResource(R.drawable.ic_favourite);
                         }
                     }
-                }
+                });
 
-            });
+        db.collection("projects/" + projectId + "/likes")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if (!value.isEmpty()) {
+                            tvLike.setText(value.size() + "");
+                        } else {
+                            tvLike.setText(0 + "");
+                        }
+                    }
+                });
 
-        }
-    });
+        ivLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                likeStatus = true;
+                db.collection("projects/" + projectId + "/likes").document(userIdP)
+                        .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (likeStatus) {
+                            if (!task.getResult().exists()) {
+                                Map<String, Object> maps = new HashMap<>();
+                                maps.put("date", FieldValue.serverTimestamp());
+                                db.collection("projects/" + projectId + "/likes")
+                                        .document(userIdP).set(maps);
+                                likeStatus = false;
+                            } else {
+                                db.collection("projects/" + projectId + "/likes")
+                                        .document(userIdP).delete();
+                                likeStatus = true;
+                            }
+                        }
+                    }
+
+                });
+
+            }
+        });
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -322,14 +315,14 @@ public class DetailsProjectActivity extends AppCompatActivity {
     }
 
 
-    public void initComment(){
+    public void initComment() {
 
-        commentAdapter=new CommentAdapter(DetailsProjectActivity.this,comments,projectId);
-        commentRecyclerView.setLayoutManager(new LinearLayoutManager(DetailsProjectActivity.this,LinearLayoutManager.VERTICAL,false));
+        commentAdapter = new CommentAdapter(DetailsProjectActivity.this, comments, projectId);
+        commentRecyclerView.setLayoutManager(new LinearLayoutManager(DetailsProjectActivity.this, LinearLayoutManager.VERTICAL, false));
         commentRecyclerView.setHasFixedSize(true);
         commentRecyclerView.setAdapter(commentAdapter);
 
-        if (swipeRefreshLayout.isRefreshing()){
+        if (swipeRefreshLayout.isRefreshing()) {
             swipeRefreshLayout.setRefreshing(false);
         }
     }

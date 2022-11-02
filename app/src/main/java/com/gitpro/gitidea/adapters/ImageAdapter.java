@@ -16,8 +16,8 @@ import java.util.List;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageVh> {
 
-    private List<String> imageList;
-    private Context context;
+    private final List<String> imageList;
+    private final Context context;
 
 
     public ImageAdapter(List<String> imageList, Context context) {
@@ -28,12 +28,12 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageVh> {
     @NonNull
     @Override
     public ImageVh onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ImageVh(LayoutInflater.from(context).inflate(R.layout.image_items,parent,false));
+        return new ImageVh(LayoutInflater.from(context).inflate(R.layout.image_items, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ImageVh holder, int position) {
-       String url=imageList.get(position);
+        String url = imageList.get(position);
         Glide.with(holder.itemView).load(url).into(holder.imageView);
     }
 
@@ -48,7 +48,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageVh> {
 
         public ImageVh(@NonNull View itemView) {
             super(itemView);
-            imageView=itemView.findViewById(R.id.ivImage);
+            imageView = itemView.findViewById(R.id.ivImage);
         }
     }
 }

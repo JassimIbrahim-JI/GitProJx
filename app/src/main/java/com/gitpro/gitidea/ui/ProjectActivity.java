@@ -21,11 +21,11 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.appcompat.widget.Toolbar;
 
-import com.gitpro.gitidea.utils.FireStoreQueries;
 import com.gitpro.gitidea.R;
 import com.gitpro.gitidea.models.Comment;
 import com.gitpro.gitidea.models.Project;
 import com.gitpro.gitidea.models.User;
+import com.gitpro.gitidea.utils.FireStoreQueries;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -228,7 +228,6 @@ public class ProjectActivity extends AppCompatActivity {
     }
 
     public static boolean isValid(String url) {
-
         try {
             if (!url.contains("http")) {
                 url = "http://"+url;

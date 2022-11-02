@@ -2,12 +2,17 @@ package com.gitpro.gitidea.models;
 
 public class Gallery {
 
-    public String imageUri;
+    private String largeImageURL;
 
     public Gallery(){
 
     }
-    public Gallery(String imageUri){
-        this.imageUri=imageUri;
+
+    public String getLargeImageURL() {
+        return largeImageURL;
+    }
+
+    public void setLargeImageURL(String largeImageURL) {
+        this.largeImageURL = largeImageURL;
     }
 }
